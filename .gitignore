@@ -1,0 +1,10 @@
+# Build / temp assets (not deployed)
+_make_og.py
+_og_card.html
+*_raw.png
+스크린샷*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
