@@ -365,22 +365,22 @@
     <div class="sec-head reveal">
       <span class="eyebrow"><a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">FORGETTING IS ALL YOU NEED ↗</a></span>
       <h2>트랜스포머의 저주를<br><span class="grad">우회하도록 설계됐다.</span></h2>
-      <p>어텐션은 길이에 대해 O(n²)다.<br>대화가 길어질수록 비용과 부하가 제곱으로 불어나고, 결국 <code>/compact</code>·<code>/clear</code>로 기억을 버린다 — 트랜스포머의 저주.</p>
+      <p>어텐션은 길이에 대해 O(n²)입니다.<br>대화가 길어질수록 비용과 부하가 제곱으로 불어나고, 결국 <code>/compact</code>·<code>/clear</code>로 기억을 버립니다 — 트랜스포머의 저주.</p>
       <p style="font-size:clamp(17px,2.2vw,21px);color:var(--txt);font-weight:700;margin-top:20px;letter-spacing:-.01em">그것이 잊기에 — <span class="grad">당신은 잊지 않는다.</span></p>
     </div>
     <div class="thesis reveal">
-      <p class="curse">JLC 코덱은 기억을 컨텍스트에 <b>쌓는</b> 대신, 컨텍스트 <b>밖으로 들고 간다.</b><br>거대한 prefix를 끌지 않으니 비용 곡선이 제곱에서 선형으로 꺾인다.</p>
+      <p class="curse">JLC 코덱은 기억을 컨텍스트에 <b>쌓는</b> 대신, 컨텍스트 <b>밖으로 들고 갑니다.</b><br>거대한 prefix를 끌지 않으니 비용 곡선이 제곱에서 선형으로 꺾입니다.</p>
       <div class="arrow">↓ 그 코덱을 내장한 JARVIS CODE는 ↓</div>
       <p class="bridge">컨텍스트 윈도우에 갇혀 있던 것들이, 비로소 가능해진다.</p>
       <div class="enables">
-        <div class="enable"><div class="ec">Model&#8209;Agnostic</div><h4>모델에 묶이지 않는 기억</h4><p>기억이 모델이 아니라 코덱에 산다.<br>모델을 바꿔도, 더 작은 모델로 내려도 프로젝트 맥락은 그대로 남는다.</p></div>
-        <div class="enable"><div class="ec">Flat Cost</div><h4>길어져도 일정한 비용</h4><p>곡선이 O(n²)에서 O(n)으로.<br>끝없이 이어지는 긴 작업도 비용 폭발 없이 끝까지 간다.</p></div>
-        <div class="enable"><div class="ec">No Ceiling</div><h4>컨텍스트 천장의 소멸</h4><p>한 윈도우에 다 담을 필요가 없다.<br>작업의 규모가 모델 윈도우 크기에 갇히지 않는다.</p></div>
+        <div class="enable"><div class="ec">Model&#8209;Agnostic</div><h4>모델에 묶이지 않는 기억</h4><p>기억이 모델이 아니라 코덱에 삽니다.<br>모델을 바꿔도, 더 작은 모델로 내려도 프로젝트 맥락은 그대로 남습니다.</p></div>
+        <div class="enable"><div class="ec">Flat Cost</div><h4>길어져도 일정한 비용</h4><p>곡선이 O(n²)에서 O(n)으로.<br>끝없이 이어지는 긴 작업도 비용 폭발 없이 끝까지 갑니다.</p></div>
+        <div class="enable"><div class="ec">No Ceiling</div><h4>컨텍스트 천장의 소멸</h4><p>한 윈도우에 다 담을 필요가 없습니다.<br>작업의 규모가 모델 윈도우 크기에 갇히지 않습니다.</p></div>
       </div>
     </div>
     <div class="depth reveal">
       <h3>대화는 가볍게. <span class="grad">코딩은 딥다이브로.</span></h3>
-      <p>일상 대화엔 일반 추론으로.<br>코딩 작업에선 강한 추론으로 끝까지 밀어 <b>LLM의 최고 성능을 뽑아낸다.</b><br>JLC의 압도적 토큰 절약이 받쳐주니 — 컨텍스트가 닳을 걱정 없이, <b>마음 놓고 깊이 파고든다.</b></p>
+      <p>일상 대화엔 일반 추론으로.<br>코딩 작업에선 강한 추론으로 끝까지 밀어 <b>LLM의 최고 성능을 뽑아냅니다.</b><br>JLC의 압도적 토큰 절약이 받쳐주니 — 컨텍스트가 닳을 걱정 없이, <b>마음 놓고 깊이 파고듭니다.</b></p>
     </div>
   </div>
 </section>
@@ -389,12 +389,12 @@
   <div class="wrap">
     <div class="sec-head reveal"><span class="eyebrow">① JLC Core</span><h2><span class="grad">JARVIS LLM Codec</span></h2><p>긴 작업을 버티는 이유 — 왜 가능한가.</p></div>
     <div class="cards">
-      <div class="card reveal"><span class="idx">01</span><div class="kw">No&#8209;Prefix</div><h3>노프리픽스</h3><p>거대한 대화 prefix를 끌고 다니지 않는다.<br>대화당 비용이 O(n²)이 아니라 선형이다.</p><div class="edge grad">기존 방식 대비 압도적 토큰 절약</div></div>
-      <div class="card reveal"><span class="idx">02</span><div class="kw">Free KV</div><h3>KV 자유화</h3><p>KV 캐시가 비대해지면 메모리를 집어삼키다 결국 연산이 멈추고, 기록은 compact·clear로 버려진다.<br>기억을 밖으로 빼면 캐시가 가벼워져, 메모리 벽에 부딪히지 않고 모델이 멈춤 없이 추론을 이어간다.</p><div class="edge grad">메모리 벽 없음 · 멈추지 않는 추론</div></div>
-      <div class="card reveal"><span class="idx">03</span><div class="kw">Persistent Memory</div><h3>영속기억</h3><p>세션 종료·재시작·모델 교체를 넘어 맥락이 보존된다.</p><div class="edge grad">끊겨도 다시 이어간다</div></div>
-      <div class="card reveal"><span class="idx">04</span><div class="kw">Infinite&#8209;Session</div><h3>무한 세션</h3><p>노 컴팩트, 노 클리어 — 한 세션에서 무한 대화와 무한 코딩.<br>구조상 턴 천장이 없도록 설계했고, 만 턴 공개 실험으로 입증했다.</p><div class="edge grad"><code>/compact</code>·<code>/clear</code>로 끊을 때, 우리는 안 끊는다</div></div>
-      <div class="card reveal"><span class="idx">05</span><div class="kw">Unbounded</div><h3>무한확장</h3><p>정보를 상태와 메모리로 분산해 컨텍스트 천장이 없다.</p><div class="edge grad">트랜스포머의 한계를 우회한다</div></div>
-      <div class="card reveal"><span class="idx">06</span><div class="kw">Battle&#8209;Proven</div><h3>실증완료</h3><p>1만 턴 공개 실험과 산출물로 검증됐다.<br>Zenodo 발행 · arXiv endorsed · 심사 중.</p><div class="edge grad">주장이 아니라 증거다</div></div>
+      <div class="card reveal"><span class="idx">01</span><div class="kw">No&#8209;Prefix</div><h3>노프리픽스</h3><p>거대한 대화 prefix를 끌고 다니지 않습니다.<br>대화당 비용이 O(n²)이 아니라 선형입니다.</p><div class="edge grad">기존 방식 대비 압도적 토큰 절약</div></div>
+      <div class="card reveal"><span class="idx">02</span><div class="kw">Free KV</div><h3>KV 자유화</h3><p>KV 캐시가 비대해지면 메모리를 집어삼키다 결국 연산이 멈추고, 기록은 compact·clear로 버려집니다.<br>기억을 밖으로 빼면 캐시가 가벼워져, 메모리 벽에 부딪히지 않고 모델이 멈춤 없이 추론을 이어갑니다.</p><div class="edge grad">메모리 벽 없음 · 멈추지 않는 추론</div></div>
+      <div class="card reveal"><span class="idx">03</span><div class="kw">Persistent Memory</div><h3>영속기억</h3><p>세션 종료·재시작·모델 교체를 넘어 맥락이 보존됩니다.</p><div class="edge grad">끊겨도 다시 이어간다</div></div>
+      <div class="card reveal"><span class="idx">04</span><div class="kw">Infinite&#8209;Session</div><h3>무한 세션</h3><p>노 컴팩트, 노 클리어 — 한 세션에서 무한 대화와 무한 코딩.<br>구조상 턴 천장이 없도록 설계했고, 만 턴 공개 실험으로 입증했습니다.</p><div class="edge grad"><code>/compact</code>·<code>/clear</code>로 끊을 때, 우리는 안 끊는다</div></div>
+      <div class="card reveal"><span class="idx">05</span><div class="kw">Unbounded</div><h3>무한확장</h3><p>정보를 상태와 메모리로 분산해 컨텍스트 천장이 없습니다.</p><div class="edge grad">트랜스포머의 한계를 우회한다</div></div>
+      <div class="card reveal"><span class="idx">06</span><div class="kw">Battle&#8209;Proven</div><h3>실증완료</h3><p>1만 턴 공개 실험과 산출물로 검증됐습니다.<br>Zenodo 발행 · arXiv endorsed · 심사 중.</p><div class="edge grad">주장이 아니라 증거다</div></div>
     </div>
   </div>
 </section>
@@ -403,9 +403,9 @@
   <div class="wrap">
     <div class="sec-head reveal"><span class="eyebrow">② Zero Series</span><h2>사용자가 느끼는 약속</h2><p>엔진이 만들어내는 세 가지 — 제로.</p></div>
     <div class="zero-row">
-      <div class="zero reveal"><div class="z">ZERO HANDOFF</div><h3>제로 핸드오프</h3><p>작업 문맥을 끊김 없이 이어받는다.<br>세션·PC·모델·중단 이후에도.</p></div>
-      <div class="zero reveal"><div class="z">ZERO SWITCHING</div><h3>제로 스위칭</h3><p>프로젝트 사이를 즉시 이동한다.<br>경로 설명·재등록·맥락 재설명이 사라진다.</p></div>
-      <div class="zero reveal"><div class="z">ZERO ONBOARDING</div><h3>제로 온보딩</h3><p>새 프로젝트를 바로 이해한다.<br>처음 보는 코드베이스도 즉시 작업 시작.</p></div>
+      <div class="zero reveal"><div class="z">ZERO HANDOFF</div><h3>제로 핸드오프</h3><p>작업 문맥을 끊김 없이 이어받습니다.<br>세션·PC·모델·중단 이후에도.</p></div>
+      <div class="zero reveal"><div class="z">ZERO SWITCHING</div><h3>제로 스위칭</h3><p>프로젝트 사이를 즉시 이동합니다.<br>경로 설명·재등록·맥락 재설명이 사라집니다.</p></div>
+      <div class="zero reveal"><div class="z">ZERO ONBOARDING</div><h3>제로 온보딩</h3><p>새 프로젝트를 바로 이해합니다.<br>처음 보는 코드베이스도 즉시 작업 시작.</p></div>
     </div>
   </div>
 </section>
@@ -424,8 +424,8 @@
       </div>
       <div class="mem-copy reveal">
         <h3>쓸수록 똑똑해지는 메모리</h3>
-        <p class="scene">200개 파일을 리팩토링하던 3일째. 금요일 밤 노트북을 덮고, 월요일 아침 다시 켠다. JARVIS CODE는 멈춘 그 자리에서, <b>당신이 왜 approach X를 버렸는지까지 기억한 채</b> 이어간다.</p>
-        <p><b>OMM</b>은 한 번 저지른 실수를 스스로 기억한다.<br>당신이 일일이 지적하지 않아도 같은 실수는 두 번 반복되지 않고, 같은 프로젝트를 다룰수록 알아서 더 똑똑해진다.<br>흉내 낼 수 없는, 진짜 복리다.</p>
+        <p class="scene">200개 파일을 리팩토링하던 3일째. 금요일 밤 노트북을 덮고, 월요일 아침 다시 켭니다. JARVIS CODE는 멈춘 그 자리에서, <b>당신이 왜 approach X를 버렸는지까지 기억한 채</b> 이어갑니다.</p>
+        <p><b>OMM</b>은 한 번 저지른 실수를 스스로 기억합니다.<br>당신이 일일이 지적하지 않아도 같은 실수는 두 번 반복되지 않고, 같은 프로젝트를 다룰수록 알아서 더 똑똑해집니다.<br>흉내 낼 수 없는, 진짜 복리입니다.</p>
       </div>
     </div>
   </div>
@@ -434,7 +434,7 @@
 <section class="final" id="install">
   <div class="wrap"><div class="reveal">
     <h2>잊지 않는 코딩 컴패니언,<br><span class="grad">지금 시작하세요.</span></h2>
-    <p class="summary">이미 다른 에이전트를 쓰고 있을지 모른다. 그것도 처음엔 완벽하다.<br>대화가 길어지고 컨텍스트가 꽉 차는 순간, 그것은 당신을 두고 떠난다.<br><b style="color:var(--txt)">JARVIS CODE는, 바로 거기서 시작한다.</b></p>
+    <p class="summary">이미 다른 에이전트를 쓰고 있을지 모릅니다. 그것도 처음엔 완벽합니다.<br>대화가 길어지고 컨텍스트가 꽉 차는 순간, 그것은 당신을 두고 떠납니다.<br><b style="color:var(--txt)">JARVIS CODE는, 바로 거기서 시작합니다.</b></p>
     <div class="hero-cta" style="justify-content:center;flex-direction:column">
       <div class="installs">
         <div class="os-install">
