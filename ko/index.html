@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>JARVIS Code — 절대 잊지 않는 코딩 컴패니언</title>
+<title>JARVIS CODE — 절대 잊지 않는 코딩 컴패니언</title>
 <meta name="description" content="컨텍스트를 늘리지 않는다. 기억을 들고 간다. 노 컴팩트·노 클리어로 한 세션에서 무한 대화·무한 코딩 — 만 턴 공개 실험으로 입증한 오픈소스 코딩 에이전트." />
 <style>
   :root{
@@ -39,6 +39,7 @@
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
   .logo .wm{font-family:var(--mono);font-weight:700;letter-spacing:.04em}
   .logo .jc-j{color:var(--violet)} .logo .jc-c{color:var(--cyan)}
+  .logo .mark{height:1.15em;width:auto;flex:none}
   .nav-links{display:flex;gap:28px;margin-left:auto;font-size:14px;align-items:center}
   .nav-links a:not(.btn){color:var(--muted);transition:color .2s}
   .nav-links a:not(.btn):hover{color:var(--txt)}
@@ -81,10 +82,16 @@
   .lead{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:520px;margin-bottom:12px}
   .pain{font-size:14.5px;color:var(--muted-2);max-width:480px;margin-bottom:32px}
   .hero-cta{display:flex;gap:13px;flex-wrap:wrap;align-items:center}
-  .install{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;background:rgba(10,10,18,.5);border:1px solid var(--line);border-radius:12px;padding:12px 15px;backdrop-filter:var(--blur)}
+  .install{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;background:rgba(10,10,18,.5);border:1px solid var(--line);border-radius:12px;padding:12px 15px;backdrop-filter:var(--blur);max-width:100%;min-width:0}
   .install .pfx{color:var(--cyan)}
   .install .cpy{margin-left:4px;color:var(--muted);cursor:pointer;border:none;background:none;font-family:var(--mono);font-size:12px;transition:.2s}
   .install .cpy:hover{color:var(--cyan)}
+  .install .cmd{flex:1 1 auto;min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+  .install .cmd::-webkit-scrollbar{display:none}
+  .installs{display:flex;flex-direction:column;gap:14px;width:100%;max-width:660px;margin:0 auto}
+  .os-install{display:flex;flex-direction:column;gap:7px;align-items:stretch}
+  .os-label{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);font-family:var(--mono);text-align:left;padding-left:3px}
+  .os-install .install{width:100%}
 
   /* glass card base */
   .glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:var(--blur)}
@@ -197,6 +204,28 @@
   .depth p{font-size:15px;color:var(--muted);max-width:700px;margin:0 auto;line-height:1.62}
   .depth p b{color:var(--txt)}
 
+  /* STATELESS — live accumulation along x-axis (first layout, two panels) */
+  .proc-viz{max-width:760px;margin:14px auto 0}
+  .pv-turn{text-align:center;font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:var(--muted-2);margin-bottom:18px}
+  .pv-turn b{color:var(--cyan);font-size:17px;font-weight:700}
+  .pv-stage{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:680px){.pv-stage{grid-template-columns:1fr}}
+  .pv-panel{border-radius:var(--r);border:1px solid var(--line);background:var(--glass);backdrop-filter:var(--blur);padding:20px 20px 18px}
+  .pv-panel.old{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
+  .pv-panel.new{border-color:rgba(43,126,255,.30);background:linear-gradient(180deg,rgba(43,126,255,.06),rgba(255,255,255,.02))}
+  .pv-cap{font-size:12.5px;font-weight:700;margin-bottom:16px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .pv-cap span{font-size:12px;font-weight:600;font-family:var(--mono);color:var(--muted)}
+  .pv-cap span b{color:var(--cyan)}
+  .pv-panel.old .pv-cap{color:var(--muted)} .pv-panel.new .pv-cap{color:var(--cyan)}
+  .pv-bars{display:flex;align-items:flex-end;gap:1px;height:170px}
+  .pv-bars i{flex:1;min-height:4px;border-radius:3px 3px 0 0;transform-origin:bottom;animation:pvpop .4s cubic-bezier(.2,.9,.3,1.3) both}
+  .pv-panel.old .pv-bars i{background:linear-gradient(180deg,#7a7a86,#4a4a55)}
+  .pv-panel.new .pv-bars i{background:var(--grad)}
+  @keyframes pvpop{0%{transform:scaleY(0);opacity:0}100%{transform:scaleY(1);opacity:1}}
+  @media(prefers-reduced-motion:reduce){.pv-bars i{animation:none}}
+  .stateless-resolve{text-align:center;max-width:680px;margin:30px auto 0;font-size:clamp(15px,2vw,17.5px);color:var(--txt);line-height:1.62}
+  .stateless-resolve b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+
   /* FOOTER */
   footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted-2);font-size:13.5px}
   .foot-in{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
@@ -216,10 +245,10 @@
 <canvas id="bg"></canvas>
 
 <nav><div class="nav-in">
-  <a class="logo" href="#top"><span class="wm"><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a>
+  <a class="logo" href="#top"><svg class="mark" viewBox="0 0 200 80" fill="none" aria-hidden="true"><defs><linearGradient id="jcbridge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#jcbridge)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span class="wm"><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a>
   <div class="nav-links">
     <a href="#core">JLC</a><a href="#zero">워크플로우</a><a href="#memory">메모리</a>
-    <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a><a href="#">GitHub</a><a href="/">English</a><a class="btn btn-primary" href="#install">시작하기</a>
+    <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a><a href="/">English</a><a class="btn btn-primary" href="#install">시작하기</a>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div>
@@ -230,7 +259,7 @@
   <a href="/">English</a>
   <div class="mobile-icons">
     <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener" aria-label="YouTube"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.12-2.12C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.53A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.12 2.12c1.88.53 9.38.53 9.38.53s7.5 0 9.38-.53A3 3 0 0 0 23.5 17.8 31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12z"/></svg></a>
-    <a href="#" aria-label="GitHub"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.25.8-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.56-.3-5.25-1.28-5.25-5.7 0-1.26.45-2.3 1.18-3.1-.12-.3-.51-1.47.11-3.07 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.6.24 2.77.12 3.07.74.8 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.81.56A11.5 11.5 0 0 0 23.5 12C23.5 5.6 18.4.5 12 .5z"/></svg></a>
+    <a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener" aria-label="GitHub"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.6.5.5 5.6.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.25.8-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.56-.3-5.25-1.28-5.25-5.7 0-1.26.45-2.3 1.18-3.1-.12-.3-.51-1.47.11-3.07 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.6.24 2.77.12 3.07.74.8 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.81.56A11.5 11.5 0 0 0 23.5 12C23.5 5.6 18.4.5 12 .5z"/></svg></a>
   </div>
   <a class="btn btn-primary" href="#install">시작하기</a>
 </div></div></nav>
@@ -246,11 +275,8 @@
         <h1><span class="ln">어제 멈춘 그 곳에서,</span><span class="ln grad">어제보다 똑똑해진 채로.</span></h1>
         <p class="lead">한 세션에서 <b style="color:var(--txt)">무한 대화와 무한 코딩</b>을 지원하고, 당신의 어제를 전부 기억하는 <b style="color:var(--txt)">컴패니언 에이전트.</b></p>
         <div class="hero-cta">
-          <div class="install">
-            <span><span class="pfx">$</span> curl -fsSL jlc-codec.org/install.sh | sh</span>
-            <button class="cpy" onclick="navigator.clipboard&&navigator.clipboard.writeText('curl -fsSL jlc-codec.org/install.sh | sh');this.textContent='복사됨'">복사</button>
-          </div>
-          <a class="btn btn-ghost" href="#proof">증거 보기</a>
+          <a class="btn btn-primary" href="#install">시작하기 →</a>
+          <a class="btn btn-ghost" href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
       <div class="console">
@@ -277,10 +303,34 @@
   </div>
 </header>
 
+<section class="block stateless">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">알고 계셨나요?</span>
+      <h2>모든 에이전트는 사실<br><span class="grad">스테이트리스입니다.</span></h2>
+      <p>LLM은 턴과 턴 사이에 아무것도 기억하지 못합니다. 기존 에이전트는 매 턴 대화 전체를 다시 먹여 그 사실을 가립니다 — 자기 본성과 싸우다, 컨텍스트가 차는 순간 무너집니다.</p>
+    </div>
+    <div class="proc-viz reveal">
+      <div class="pv-turn">TURN <b id="pvTurn">0</b> / 100</div>
+      <div class="pv-stage">
+        <div class="pv-panel old">
+          <div class="pv-cap">기존 에이전트 <span>매 턴 누적 ↑</span></div>
+          <div class="pv-bars" id="pvOld"></div>
+        </div>
+        <div class="pv-panel new">
+          <div class="pv-cap"><b class="grad">JARVIS CODE</b> <span>턴마다 리셋</span></div>
+          <div class="pv-bars" id="pvNew"></div>
+        </div>
+      </div>
+    </div>
+    <p class="stateless-resolve reveal">JARVIS CODE는 스테이트리스에 <b>맞춰 설계됐습니다.</b> 본성을 거스르지 않기에 — 길어져도 느려지지 않고, 끝까지 잊지 않습니다.</p>
+  </div>
+</section>
+
 <section class="block">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Why JARVIS Code</span>
+      <span class="eyebrow">Why JARVIS CODE</span>
       <h2>당신은 AI를 키우고 있다고 생각한다.<br>하지만 매 세션마다,<br><span class="grad">새 AI를 만나고 있다.</span></h2>
     </div>
     <div class="manifesto reveal">
@@ -289,7 +339,7 @@
       <p class="pain-line">똑똑해지라고 만든 AI가, 대화가 길어질수록 멍청해진다.</p>
       <div class="dv"></div>
       <div class="turn">도구는 잊는다. <span class="grad">동반자는 기억한다.</span></div>
-      <p class="resolve">JARVIS Code는 어제를 기억한 채, 오늘을 시작한다.<br>당신의 시간은 이제, 설명이 아니라 <b>창조에 쓰인다.</b></p>
+      <p class="resolve">JARVIS CODE는 어제를 기억한 채, 오늘을 시작한다.<br>당신의 시간은 이제, 설명이 아니라 <b>창조에 쓰인다.</b></p>
     </div>
     <div class="contrast reveal">
       <div class="ct-card old">
@@ -300,7 +350,7 @@
         <div class="ct-li"><span class="mk">✕</span> 길어질수록 비용은 O(n²)로 폭증</div>
       </div>
       <div class="ct-card new">
-        <div class="ct-tag">JARVIS Code</div><h3>무한한 기억을 이어간다</h3>
+        <div class="ct-tag">JARVIS CODE</div><h3>무한한 기억을 이어간다</h3>
         <div class="ct-li"><span class="mk">✓</span> 노 컴팩트 · 노 클리어 — 한 세션에서 무한 지속(만 턴 입증)</div>
         <div class="ct-li"><span class="mk">✓</span> 세션·재시작·모델 교체를 넘어 맥락 보존</div>
         <div class="ct-li"><span class="mk">✓</span> 처음 보는 코드베이스도 바로 이해</div>
@@ -320,7 +370,7 @@
     </div>
     <div class="thesis reveal">
       <p class="curse">JLC 코덱은 기억을 컨텍스트에 <b>쌓는</b> 대신, 컨텍스트 <b>밖으로 들고 간다.</b><br>거대한 prefix를 끌지 않으니 비용 곡선이 제곱에서 선형으로 꺾인다.</p>
-      <div class="arrow">↓ 그 코덱을 내장한 JARVIS Code는 ↓</div>
+      <div class="arrow">↓ 그 코덱을 내장한 JARVIS CODE는 ↓</div>
       <p class="bridge">컨텍스트 윈도우에 갇혀 있던 것들이, 비로소 가능해진다.</p>
       <div class="enables">
         <div class="enable"><div class="ec">Model&#8209;Agnostic</div><h4>모델에 묶이지 않는 기억</h4><p>기억이 모델이 아니라 코덱에 산다.<br>모델을 바꿔도, 더 작은 모델로 내려도 프로젝트 맥락은 그대로 남는다.</p></div>
@@ -374,7 +424,7 @@
       </div>
       <div class="mem-copy reveal">
         <h3>쓸수록 똑똑해지는 메모리</h3>
-        <p class="scene">200개 파일을 리팩토링하던 3일째. 금요일 밤 노트북을 덮고, 월요일 아침 다시 켠다. JARVIS Code는 멈춘 그 자리에서, <b>당신이 왜 approach X를 버렸는지까지 기억한 채</b> 이어간다.</p>
+        <p class="scene">200개 파일을 리팩토링하던 3일째. 금요일 밤 노트북을 덮고, 월요일 아침 다시 켠다. JARVIS CODE는 멈춘 그 자리에서, <b>당신이 왜 approach X를 버렸는지까지 기억한 채</b> 이어간다.</p>
         <p><b>OMM</b>은 한 번 저지른 실수를 스스로 기억한다.<br>당신이 일일이 지적하지 않아도 같은 실수는 두 번 반복되지 않고, 같은 프로젝트를 다룰수록 알아서 더 똑똑해진다.<br>흉내 낼 수 없는, 진짜 복리다.</p>
       </div>
     </div>
@@ -384,20 +434,32 @@
 <section class="final" id="install">
   <div class="wrap"><div class="reveal">
     <h2>잊지 않는 코딩 컴패니언,<br><span class="grad">지금 시작하세요.</span></h2>
-    <p class="summary">이미 다른 에이전트를 쓰고 있을지 모른다. 그것도 처음엔 완벽하다.<br>대화가 길어지고 컨텍스트가 꽉 차는 순간, 그것은 당신을 두고 떠난다.<br><b style="color:var(--txt)">JARVIS Code는, 바로 거기서 시작한다.</b></p>
-    <div class="hero-cta" style="justify-content:center">
-      <div class="install">
-        <span><span class="pfx">$</span> curl -fsSL jlc-codec.org/install.sh | sh</span>
-        <button class="cpy" onclick="navigator.clipboard&&navigator.clipboard.writeText('curl -fsSL jlc-codec.org/install.sh | sh');this.textContent='복사됨'">복사</button>
+    <p class="summary">이미 다른 에이전트를 쓰고 있을지 모른다. 그것도 처음엔 완벽하다.<br>대화가 길어지고 컨텍스트가 꽉 차는 순간, 그것은 당신을 두고 떠난다.<br><b style="color:var(--txt)">JARVIS CODE는, 바로 거기서 시작한다.</b></p>
+    <div class="hero-cta" style="justify-content:center;flex-direction:column">
+      <div class="installs">
+        <div class="os-install">
+          <span class="os-label">Windows</span>
+          <div class="install">
+            <span class="cmd"><span class="pfx">&gt;</span> irm https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.ps1 | iex</span>
+            <button class="cpy" onclick="navigator.clipboard&&navigator.clipboard.writeText('irm https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.ps1 | iex');this.textContent='복사됨'">복사</button>
+          </div>
+        </div>
+        <div class="os-install">
+          <span class="os-label">macOS · Linux</span>
+          <div class="install">
+            <span class="cmd"><span class="pfx">$</span> curl -fsSL https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.sh | sh</span>
+            <button class="cpy" onclick="navigator.clipboard&&navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.sh | sh');this.textContent='복사됨'">복사</button>
+          </div>
+        </div>
       </div>
-      <a class="btn btn-primary" href="#">GitHub에서 보기</a>
+      <a class="btn btn-primary" href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub에서 보기</a>
     </div>
   </div></div>
 </section>
 
 <footer><div class="wrap foot-in">
-  <div><span class="logo" style="font-size:14px;padding:0;border:none;background:none;backdrop-filter:none"><span class="wm"><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></span> · Open Source · Apache&#8209;2.0 · jlc&#8209;codec.org</div>
-  <div class="foot-links"><a href="#">GitHub</a><a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a><a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener">논문 (Zenodo)</a><a href="#">arXiv</a><a href="#core">JLC</a><a href="/">English</a></div>
+  <div><span class="logo" style="font-size:14px;padding:0;border:none;background:none;backdrop-filter:none;display:inline-flex;vertical-align:middle;gap:7px"><svg class="mark" viewBox="0 0 200 80" fill="none" aria-hidden="true"><defs><linearGradient id="jcbridge2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#jcbridge2)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span class="wm"><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></span> · Open Source · Apache&#8209;2.0 · jlc&#8209;codec.org</div>
+  <div class="foot-links"><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a><a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a><a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener">논문 (Zenodo)</a><a href="#">arXiv</a><a href="#core">JLC</a><a href="/">English</a></div>
 </div>
 <div class="wrap foot-credit">Built on <a href="https://github.com/badlogic/pi-mono" target="_blank" rel="noopener">pi&#8209;agent</a> (MIT) by Mario Zechner · JLC core embedded &amp; tuned.</div>
 </footer>
@@ -465,7 +527,7 @@
     for(let i=0;i<nodes.length-1;i++){
       const a=nodes[i],b=nodes[i+1];
       const g=ctx.createLinearGradient(a.x,a.y,b.x,b.y);
-      g.addColorStop(0,'rgba(43,126,255,0.5)');g.addColorStop(1,'rgba(255,90,31,0.42)');
+      g.addColorStop(0,'rgba(255,90,31,0.5)');g.addColorStop(1,'rgba(43,126,255,0.42)');
       ctx.strokeStyle=g;ctx.shadowColor='rgba(43,126,255,0.5)';ctx.shadowBlur=12;
       ctx.beginPath();ctx.moveTo(a.x,a.y);
       ctx.bezierCurveTo(a.x+120,a.y-80,b.x-120,b.y+80,b.x,b.y);
@@ -496,6 +558,29 @@
   }
   document.addEventListener('visibilitychange',()=>{run=document.visibilityState==='visible';if(run)draw();else cancelAnimationFrame(raf);});
   draw();
+
+  // stateless — 50-turn process: left accumulates (cumulative), right is per-turn (resets), shared axis
+  (function(){
+    const oldC=document.getElementById('pvOld'),newC=document.getElementById('pvNew'),
+          turnEl=document.getElementById('pvTurn');
+    if(!oldC||!newC)return;
+    const TURNS=100,need=[];
+    for(let i=0;i<TURNS;i++){const big=(i%7===3)||(i%9===7);need.push(big?(3+(i%3)):1);}
+    const total=need.reduce((a,b)=>a+b,0);
+    let t=0,acc=0,started=false;
+    const mk=pct=>{const i=document.createElement('i');i.style.height=pct+'%';return i;};
+    function step(){
+      if(t>=TURNS){setTimeout(reset,1700);return;}
+      t++;acc+=need[t-1];
+      oldC.appendChild(mk(acc/total*100));
+      newC.appendChild(mk(need[t-1]/total*100));
+      turnEl.textContent=t;setTimeout(step,135);
+    }
+    function reset(){t=0;acc=0;oldC.innerHTML='';newC.innerHTML='';turnEl.textContent='0';setTimeout(step,650);}
+    new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting&&!started){started=true;step();}
+    }),{threshold:.3}).observe(oldC.closest('.proc-viz'));
+  })();
 </script>
 </body>
 </html>
