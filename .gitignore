@@ -8,3 +8,6 @@ _og_card.html
 .DS_Store
 Thumbs.db
 *.swp
+
+# Unused review screenshots (kept locally, not deployed)
+codex-review-*.png
