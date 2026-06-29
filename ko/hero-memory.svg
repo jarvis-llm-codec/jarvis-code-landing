@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 660" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', Roboto, sans-serif">
+  <defs>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6B7488"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34D399"/>
+    </marker>
+    <linearGradient id="paneOld" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#141C2E"/>
+      <stop offset="1" stop-color="#10131F"/>
+    </linearGradient>
+    <linearGradient id="paneNew" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1B24"/>
+      <stop offset="1" stop-color="#0B141A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1220" height="660" rx="20" fill="#0A0A12" fill-opacity="0.5"/>
+
+  <!-- title -->
+  <text x="610" y="50" text-anchor="middle" font-size="30" font-weight="700" fill="#E8EDF7">컨텍스트 창보다 오래 남는 기억</text>
+  <text x="610" y="80" text-anchor="middle" font-size="16" fill="#8B95A7">다른 에이전트는 처음부터. 자비스코드는 멈춘 곳 그대로 이어갑니다.</text>
+
+  <!-- divider + VS -->
+  <line x1="610" y1="122" x2="610" y2="600" stroke="#222A3C" stroke-width="1.5"/>
+  <circle cx="610" cy="360" r="22" fill="#161E2E" stroke="#2A3344"/>
+  <text x="610" y="366" text-anchor="middle" font-size="14" font-weight="700" fill="#8B95A7">VS</text>
+
+  <!-- ================= LEFT : 다른 에이전트 ================= -->
+  <text x="310" y="122" text-anchor="middle" font-size="20" font-weight="700" fill="#C7CDD9">다른 코딩 에이전트</text>
+
+  <!-- row1: overflowing window -->
+  <rect x="170" y="150" width="280" height="150" rx="10" fill="url(#paneOld)" stroke="#2A3550"/>
+  <text x="185" y="170" font-size="11" fill="#6E7689">컨텍스트 창</text>
+  <text x="462" y="196" text-anchor="start" font-size="12" fill="#E07A6E">↑ 턴마다</text>
+  <text x="462" y="212" text-anchor="start" font-size="12" fill="#E07A6E">쌓인다</text>
+  <!-- overflow bars (outside the top edge) -->
+  <rect x="200" y="128" width="220" height="13" rx="3" fill="#D9655B" opacity="0.55"/>
+  <rect x="200" y="143" width="220" height="13" rx="3" fill="#D9655B"/>
+  <!-- bars inside, filling to the brim -->
+  <rect x="200" y="172" width="220" height="18" rx="3" fill="#9C5E5E"/>
+  <rect x="200" y="196" width="220" height="18" rx="3" fill="#6E5E6A"/>
+  <rect x="200" y="220" width="220" height="18" rx="3" fill="#475679"/>
+  <rect x="200" y="244" width="220" height="18" rx="3" fill="#364463"/>
+  <rect x="200" y="268" width="220" height="18" rx="3" fill="#2E3A52"/>
+
+  <!-- arrow to row2 -->
+  <line x1="310" y1="312" x2="310" y2="346" stroke="#6B7488" stroke-width="2" marker-end="url(#arrowGray)"/>
+
+  <!-- row2: the cut -->
+  <line x1="190" y1="372" x2="430" y2="372" stroke="#E0857A" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="310" y="379" text-anchor="middle" font-size="24" fill="#FFFFFF">&#x2702;&#xFE0E;</text>
+  <text x="310" y="408" text-anchor="middle" font-size="13" fill="#C7CDD9">세션 종료 → 컨텍스트 압축</text>
+
+  <!-- arrow to row3 -->
+  <line x1="310" y1="420" x2="310" y2="454" stroke="#6B7488" stroke-width="2" marker-end="url(#arrowGray)"/>
+
+  <!-- row3: outcome -->
+  <rect x="180" y="464" width="260" height="108" rx="12" fill="#160F12" stroke="#5A2E2E"/>
+  <text x="310" y="506" text-anchor="middle" font-size="26">🧠💭</text>
+  <text x="310" y="536" text-anchor="middle" font-size="16" font-weight="700" fill="#E2A0A0">처음부터 다시</text>
+  <text x="310" y="558" text-anchor="middle" font-size="13" fill="#9AA0AC">“전부 다시 설명”</text>
+
+  <!-- ================= RIGHT : JARVIS CODE ================= -->
+  <text x="900" y="122" text-anchor="middle" font-size="20" font-weight="700" fill="#5EEAD4">JARVIS CODE</text>
+
+  <!-- row1: light window + memory out -->
+  <rect x="760" y="150" width="280" height="150" rx="10" fill="url(#paneNew)" stroke="#1F4D52"/>
+  <text x="775" y="170" font-size="11" fill="#5C8C86">컨텍스트 창 — 가볍게 유지</text>
+  <rect x="790" y="268" width="220" height="18" rx="3" fill="#1E8E86"/>
+  <rect x="790" y="244" width="220" height="18" rx="3" fill="#2BB8A8"/>
+  <text x="1052" y="232" text-anchor="end" font-size="12" fill="#5EEAD4">창 밖으로 ↓</text>
+
+  <!-- arrow window -> codec -->
+  <line x1="900" y1="304" x2="900" y2="332" stroke="#34D399" stroke-width="2" marker-end="url(#arrowCyan)"/>
+
+  <!-- row2: codec store (cylinder, OUTSIDE the window) -->
+  <g>
+    <path d="M805,348 a95,12 0 0 0 190,0 v52 a95,12 0 0 1 -190,0 z" fill="#103038" stroke="#2DB8A8" stroke-width="1.5"/>
+    <ellipse cx="900" cy="348" rx="95" ry="12" fill="#15414A" stroke="#2DB8A8" stroke-width="1.5"/>
+    <text x="900" y="374" text-anchor="middle" font-size="14" font-weight="700" fill="#9FE8DD">JLC 코덱</text>
+    <text x="900" y="392" text-anchor="middle" font-size="10.5" fill="#6FB6AC">JHB.md · JARVIS.md · 한도 내</text>
+  </g>
+
+  <!-- arrow codec -> outcome -->
+  <line x1="900" y1="414" x2="900" y2="454" stroke="#34D399" stroke-width="2" marker-end="url(#arrowCyan)"/>
+  <text x="912" y="440" text-anchor="start" font-size="11" fill="#5EEAD4">재주입 (한도 내)</text>
+
+  <!-- row3: outcome -->
+  <rect x="770" y="464" width="260" height="108" rx="12" fill="#0C1A16" stroke="#2E5A4E"/>
+  <path d="M884,494 l24,14 l-24,14 z" fill="#5EEAD4"/>
+  <text x="900" y="540" text-anchor="middle" font-size="16" font-weight="700" fill="#8FE8C8">즉시 이어감</text>
+  <text x="900" y="562" text-anchor="middle" font-size="13" fill="#8FB6A8">멈춘 그곳부터 — 더 날카롭게</text>
+</svg>
