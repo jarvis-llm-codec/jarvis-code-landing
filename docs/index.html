@@ -329,6 +329,35 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 </ol>
 <p>Recommended encoder: a ~24B-class model such as <code>ollama-cloud/devstral-small-2:24b</code>. You set it in <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a> — see <a href="#configure-it">Configure it</a> below.</p>
 <hr />
+<h2>Which encoder to use</h2>
+<p>Rule of thumb: <strong>use the fastest, cheapest model your existing plan already gives you.</strong> You don't need a second provider or a separate budget for the encoder — whatever lightweight tier you already pay for is the right seat for it. Match it to the subscription you have:</p>
+<table>
+<thead>
+<tr>
+<th>You already have</th>
+<th>chat + subagent</th>
+<th>encoder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenAI / GPT</strong></td>
+<td>GPT-5.5</td>
+<td>GPT-5.4 mini</td>
+</tr>
+<tr>
+<td><strong>Claude (Anthropic)</strong></td>
+<td>Opus 4.8</td>
+<td>Haiku</td>
+</tr>
+<tr>
+<td><strong>Ollama Cloud</strong></td>
+<td>a frontier model (e.g. GLM-5.2)</td>
+<td>Devstral Small 24B</td>
+</tr>
+</tbody>
+</table>
+<p><strong>One caveat on size.</strong> The encoder compresses, it doesn't reason — but it still has to hold the memory faithfully. An ~8B model isn't enough; quality drops. Aim for a <strong>fast, smart model of ~20B and up</strong> — that's the floor.</p>
 <h2>The honest numbers</h2>
 <p>All measured, all recomputable from the public artifacts at <a href="https://jlc-codec.org/evidence">jlc-codec.org/evidence</a>.</p>
 <table>

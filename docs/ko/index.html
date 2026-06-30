@@ -329,6 +329,35 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 </ol>
 <p>권장 인코더: <code>ollama-cloud/devstral-small-2:24b</code> 같은 ~24B급 모델. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a>에서 설정 — 아래 <a href="#설정하기">설정하기</a> 참고.</p>
 <hr />
+<h2>어떤 인코더를 쓸까</h2>
+<p>원칙: <strong>이미 쓰는 플랜이 주는 가장 빠르고 싼 모델을 쓰세요.</strong> 인코더 때문에 두 번째 프로바이더나 별도 예산이 필요 없습니다 — 이미 결제 중인 경량 티어가 바로 그 자리입니다. 가진 구독에 맞추세요:</p>
+<table>
+<thead>
+<tr>
+<th>이미 가진 것</th>
+<th>chat + subagent</th>
+<th>encoder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenAI / GPT</strong></td>
+<td>GPT-5.5</td>
+<td>GPT-5.4 mini</td>
+</tr>
+<tr>
+<td><strong>Claude (Anthropic)</strong></td>
+<td>Opus 4.8</td>
+<td>Haiku</td>
+</tr>
+<tr>
+<td><strong>Ollama Cloud</strong></td>
+<td>프론티어 모델 (예: GLM-5.2)</td>
+<td>Devstral Small 24B</td>
+</tr>
+</tbody>
+</table>
+<p><strong>크기 주의 한 가지.</strong> 인코더는 추론이 아니라 압축이지만, 기억은 충실히 담아야 합니다. ~8B 모델은 부족 — 품질이 떨어집니다. <strong>~20B 이상의 빠르고 똑똑한 모델</strong>을 목표로 하세요. 그게 바닥선입니다.</p>
 <h2>정직한 숫자</h2>
 <p>전부 측정값이고, <a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a> 의 공개 아티팩트로 재계산 가능합니다.</p>
 <table>
