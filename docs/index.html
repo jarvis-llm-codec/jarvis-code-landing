@@ -32,7 +32,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.02)}
 hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 @media(max-width:720px){#sidebar{position:static;width:100%;height:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}main{margin-left:0;padding:24px 20px 80px}}
 </style></head><body><nav id="sidebar"><a class="brand" href="/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a><div class="tag">Docs</div><div class="top"><a href="/">← Home</a><a href="/docs/ko/">한국어</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div><a class="doc" href="#README">Index</a><a class="doc" href="#overview">Overview</a><a class="doc" href="#quickstart">Quickstart</a><a class="doc" href="#concepts">Concepts</a><a class="doc" href="#cost-model">Cost model</a><a class="doc" href="#faq">FAQ</a></nav><main><section id="README"><h1>JARVIS CODE — Documentation</h1>
-<p>A terminal coding agent that doesn't forget. One continuous conversation across turns, restarts, and model swaps — no <code>/compact</code>, no <code>/clear</code>. Open source, Apache-2.0.</p>
+<p>A terminal coding agent that doesn't lose the thread. One continuous conversation across turns, restarts, and model swaps — no <code>/compact</code>, no <code>/clear</code>. Open source, Apache-2.0.</p>
 <blockquote>
 <p>🤖 <strong>Evaluating it with an AI?</strong> Paste these docs into your assistant and ask whether the cost claims hold up. The raw proof — public 10,000-turn run, logs, hashes — is at <strong><a href="https://jlc-codec.org/evidence">jlc-codec.org/evidence</a></strong>.</p>
 </blockquote>
@@ -63,7 +63,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 </ul>
 <hr />
 <p><em>Built on <a href="https://github.com/earendil-works/pi">pi-agent</a> (MIT) by Mario Zechner · JLC core embedded &amp; tuned.</em></p></section><section id="overview"><h1>Overview — what JARVIS CODE is, and why it's different</h1>
-<p><strong>JARVIS CODE is a terminal coding agent that doesn't forget.</strong> It holds one continuous conversation — across turns, restarts, and model swaps — without ever running <code>/compact</code> or <code>/clear</code>. It does this by carrying memory <strong>outside</strong> the context window instead of replaying a transcript that grows every turn.</p>
+<p><strong>JARVIS CODE is a terminal coding agent that doesn't lose the thread.</strong> It holds one continuous conversation — across turns, restarts, and model swaps — without ever running <code>/compact</code> or <code>/clear</code>. It does this by carrying a <strong>compressed</strong> memory <strong>outside</strong> the context window instead of replaying a transcript that grows every turn — forgetting the noise on purpose, keeping the thread.</p>
 <p>It's open source (Apache-2.0), built on the <a href="https://github.com/earendil-works/pi">pi-agent</a> harness (MIT) with the JLC — <strong>JARVIS LLM Codec</strong> — embedded.</p>
 <blockquote>
 <p>🤖 <strong>Skeptical? Have your AI check us.</strong> This whole site is designed to survive an audit. Paste these docs (or the raw logs at <strong><a href="https://jlc-codec.org/evidence">jlc-codec.org/evidence</a></strong>) into your AI and ask: <em>"Do these cost claims hold up? Should I use this?"</em> Every load-bearing number is recomputable from a public 10,000-turn run.</p>
@@ -291,7 +291,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <ul>
 <li><strong>Sidecar</strong> — the local background process that <em>is</em> the JLC engine. The terminal front-end talks to it; it does the encoding, memory, and routing. It runs on your machine.</li>
 <li><strong>Pair</strong> — one paired session: the terminal UI front-end joined to its sidecar. (You normally never think about this; it matters when running multiple windows.)</li>
-<li><strong>Ultracode</strong> — fan-out mode: for a big task, the agent spins up <strong>N parallel subagent workers</strong> on fresh contexts, then verifies and synthesizes their results. The same "split the context to beat the long-context curse" idea as JLC, applied across <em>space</em> (many small contexts) instead of <em>time</em> (one session split across turns).</li>
+<li><strong>Ultracode</strong> — fan-out mode: for a big task, the agent spins up <strong>N parallel subagent workers</strong> on fresh contexts, then verifies and synthesizes their results. The same "split the context to beat the long-context curse" idea as JLC, applied across <em>space</em> (many small contexts) instead of <em>time</em> (one session split across turns). Note the trade: unlike JLC, ultracode <strong>spends</strong> tokens rather than saving them — N fresh contexts cost more, in exchange for higher quality on hard tasks. It's a quality lever, not a cost one.</li>
 <li><strong>JLC</strong> — <em>JARVIS LLM Codec</em>, the core that carries memory outside the context window. The thing the whole project is built around.</li>
 </ul>
 <hr />
@@ -318,6 +318,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 [ the current user message ]
 </code></pre>
 <p>That input is <strong>flat (O(1)) in the length of the session</strong> — bounded by the JHB cap, not by the turn number. The <strong>encoder</strong> is what makes this possible: after each turn it compresses what just happened into the JHB (a small Markdown document), so the next turn inherits the memory without inheriting the transcript.</p>
+<p><strong>And the encoder's own input is bounded too</strong> — this is the part that's easy to miss. The encoder never reads the conversation history either. Each turn it sees only <em>the turn that just happened</em> plus <em>the current JHB</em>, and folds them into the next JHB. So its call is O(1) in session length, exactly like the chat call — both capped by the JHB, neither growing with the turn count. That's the line between this and transcript replay: nothing in the loop ever re-reads the history. The memory is <strong>rewritten forward</strong>, not retrieved from the past.</p>
 <p>See <a href="#concepts">concepts.md</a> for what the JHB is, and <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/architecture.md">architecture.md</a> for how the pieces fit.</p>
 <hr />
 <h2>Why the encoder is — and should be — a <em>cheap</em> model</h2>
@@ -327,7 +328,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <li><strong>It runs on every single turn.</strong> A frontier model in this seat would burn your rate limit and your budget doing clerical work, every turn, forever.</li>
 <li><strong>So you spend intelligence where it matters.</strong> The expensive model is reserved for the coding and the conversation. The mechanical memory work goes to a small, fast model.</li>
 </ol>
-<p>Recommended encoder: a ~24B-class model such as <code>ollama-cloud/devstral-small-2:24b</code>. You set it in <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a> — see <a href="#configure-it">Configure it</a> below.</p>
+<p>Recommended encoder: a fast <strong>~14–24B-class</strong> model — the cheapest capable tier on your plan (see <a href="#which-encoder-to-use">Which encoder to use</a> below). You set it in <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a> — see <a href="#configure-it">Configure it</a> below.</p>
 <hr />
 <h2>Which encoder to use</h2>
 <p>Rule of thumb: <strong>use the fastest, cheapest model your existing plan already gives you.</strong> You don't need a second provider or a separate budget for the encoder — whatever lightweight tier you already pay for is the right seat for it. Match it to the subscription you have:</p>
@@ -357,8 +358,9 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 </tr>
 </tbody>
 </table>
-<p><strong>One caveat on size.</strong> The encoder compresses, it doesn't reason — but it still has to hold the memory faithfully. An ~8B model isn't enough; quality drops. Aim for a <strong>fast, smart model of ~20B and up</strong> — that's the floor.</p>
+<p><strong>One caveat on size.</strong> The encoder compresses, it doesn't reason — but it still has to hold the memory faithfully, and that has a floor. Across a lot of runs, <strong>8B is not enough</strong> — memory quality gets shaky. Aim for <strong>~14B and up</strong> (≈14–24B is the sweet spot). On a subscription the lowest tier is usually fine; but where a provider <em>also</em> offers very small models (e.g. Ollama Cloud), don't bottom out — pick a <strong>14B+</strong> model that can still exercise some judgment.</p>
 <h2>The honest numbers</h2>
+<p><strong>The honest comparison isn't "cheaper" — it's "cheaper at the same memory."</strong> Every other agent's cost knob (<code>/compact</code>, <code>/clear</code>, a sliding window) is also a <em>forgetting</em> knob: it gets cheaper by dropping context. JLC is the one architecture where you cap the cost without proportionally capping what you remember — the forgetting is curated by the encoder, not blind truncation. The numbers below are against a <strong>naive full-replay baseline</strong>; a real agent mitigates with cache and compaction, but only by losing the continuity JLC keeps.</p>
 <p>All measured, all recomputable from the public artifacts at <a href="https://jlc-codec.org/evidence">jlc-codec.org/evidence</a>.</p>
 <table>
 <thead>
@@ -371,7 +373,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <tbody>
 <tr>
 <td>Cumulative prefill, 1,000-turn run</td>
-<td><strong>653K</strong> tokens (JLC) vs <strong>86.6M</strong> (full-replay baseline) = <strong>99.25% fewer</strong></td>
+<td><strong>653K</strong> tokens (JLC) vs <strong>86.6M</strong> (full-replay baseline) = <strong>~99.2% fewer</strong></td>
 <td><code>1k-run/</code> + Zenodo transcript (recompute with tiktoken)</td>
 </tr>
 <tr>
@@ -401,19 +403,22 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <p>Honesty is the point; an overclaim that your own AI can disprove is worse than no claim.</p>
 <ul>
 <li><strong>Short sessions are roughly break-even.</strong> For a ~10-turn chat with a warm prompt cache, a standard agent can be <strong>~15% cheaper</strong> than JLC (you're paying for an encoder call you didn't need yet). The crossover is around <strong>15–20 turns</strong> (a modeled estimate, not a controlled A/B). JLC's advantage is for work that <strong>runs long</strong>.</li>
-<li><strong>The big ratios are raw compute, not dollars.</strong> "4,346:1" and "99.25%" are <em>tokens fed to the model</em>. A legacy agent gets prompt-cache discounts that shrink the <strong>money</strong> gap. The real-money figure is the provider meter: ~41% of a week for the whole 10k run.</li>
+<li><strong>The big ratios are raw compute, not dollars.</strong> "4,346:1" and "~99%" are <em>tokens fed to the model</em>. A legacy agent gets prompt-cache discounts that shrink the <strong>money</strong> gap. The real-money figure is the provider meter: ~41% of a week for the whole 10k run.</li>
 <li><strong>The encoder is not free — just cheap.</strong> You add one small model call per turn.</li>
 <li><strong>JLC's O(n) is for conversation turns.</strong> It does not shrink the context an agentic tool-loop accumulates <em>inside</em> a single turn.</li>
 <li>For the full economic picture (cache math, long vs short), this is deliberately conservative — a floor, not a ceiling.</li>
 </ul>
+<blockquote>
+<p><strong>Rule of thumb.</strong> Under ~15 turns with a warm cache, just use a normal chat — JLC won't save you money there. Past <strong>~15–20 turns</strong> it pulls ahead, and the longer the session runs the wider the gap. Reach for it on work that <strong>runs long</strong> — big refactors, multi-day features, anything you'd otherwise have to <code>/compact</code> or <code>/clear</code>.</p>
+</blockquote>
 <hr />
 <h2>Configure it</h2>
 <p>Model roles live in <code>~/.jarvis-code/config.yaml</code> (the single active config — see <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a>):</p>
 <pre><code class="language-yaml">roles:
-  chat:     anthropic-agent-sdk/claude-opus-4-8   # smart + expensive — coding &amp; conversation
-  subagent: anthropic-agent-sdk/claude-opus-4-8   # tool-running subtasks (defaults to chat)
-  encoder:  ollama-cloud/devstral-small-2:24b     # cheap + fast — memory compression, every turn
-  router:   ollama-cloud/devstral-small-2:24b     # lightweight intent classifier (mirrors encoder)
+  chat:     openai/gpt-5.5          # smart + expensive — coding &amp; conversation
+  subagent: openai/gpt-5.5          # tool-running subtasks (defaults to chat)
+  encoder:  openai/gpt-5.4-mini     # cheap + fast — memory compression, every turn
+  router:   openai/gpt-5.4-mini     # lightweight intent classifier (mirrors encoder)
 </code></pre>
 <p>Or set them interactively inside the agent with <strong><code>/model-setting</code></strong> (chat / subagent / encoder; router follows the encoder automatically). Any provider with an OpenAI-compatible endpoint works — see <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a>.</p>
 <hr />
@@ -431,7 +436,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <h3>Is my code or conversation sent anywhere I don't control?</h3>
 <p>Your memory (JHB and JARVIS.md) lives <strong>on your machine</strong>. Model calls go to whatever provider you configure — same as any agent. The sidecar that does the encoding runs locally (<a href="#concepts">concepts.md</a>).</p>
 <h3>What encoder model should I use?</h3>
-<p>A ~24B-class model is the sweet spot — e.g. <code>ollama-cloud/devstral-small-2:24b</code>. The encoder does bounded compression, not reasoning, so a small fast model is <em>correct</em>, not a compromise. Going too small (under ~10B active) can degrade memory quality; see <a href="#cost-model">cost-model.md</a>.</p>
+<p>A <strong>~14–24B class model is the sweet spot</strong> — e.g. <code>ollama-cloud/devstral-small-2:24b</code>. The encoder does bounded compression, not reasoning, so a small fast model is <em>correct</em>, not a compromise. But don't go too small: <strong>8B isn't enough</strong> (memory quality gets shaky) — aim for ~14B and up. See <a href="#cost-model">cost-model.md</a>.</p>
 <h3>Does it work offline?</h3>
 <p>The agent and its memory are local, but model inference needs whatever provider you point it at. With a local model server (e.g. Ollama running locally), you can run fully offline.</p>
 <h3>Is the 10,000-turn run real?</h3>

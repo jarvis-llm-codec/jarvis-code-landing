@@ -32,7 +32,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.02)}
 hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 @media(max-width:720px){#sidebar{position:static;width:100%;height:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}main{margin-left:0;padding:24px 20px 80px}}
 </style></head><body><nav id="sidebar"><a class="brand" href="/ko/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a><div class="tag">문서</div><div class="top"><a href="/ko/">← Home</a><a href="/docs/">English</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div><a class="doc" href="#README">인덱스</a><a class="doc" href="#overview">개요</a><a class="doc" href="#quickstart">빠른 시작</a><a class="doc" href="#concepts">개념</a><a class="doc" href="#cost-model">비용 모델</a><a class="doc" href="#faq">FAQ</a></nav><main><section id="README"><h1>JARVIS CODE — 문서</h1>
-<p>잊지 않는 터미널 코딩 에이전트. 턴·재시작·모델 교체를 가로지르는 하나의 연속 대화 — 노 <code>/compact</code>, 노 <code>/clear</code>. 오픈소스, Apache-2.0.</p>
+<p>맥락의 끈을 놓치지 않는 터미널 코딩 에이전트. 턴·재시작·모델 교체를 가로지르는 하나의 연속 대화 — 노 <code>/compact</code>, 노 <code>/clear</code>. 오픈소스, Apache-2.0.</p>
 <blockquote>
 <p>🤖 <strong>AI로 평가 중인가요?</strong> 이 docs를 어시스턴트에 붙여넣고 비용 주장이 말 되는지 물어보세요. 원시 증거 — 공개 10,000턴 런·로그·해시 — 는 <strong><a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a></strong> 에 있습니다.</p>
 </blockquote>
@@ -63,7 +63,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 </ul>
 <hr />
 <p><em><a href="https://github.com/earendil-works/pi">pi-agent</a>(MIT, Mario Zechner) 기반 · JLC 코어 내장·튜닝.</em></p></section><section id="overview"><h1>개요 — JARVIS CODE가 뭔지, 그리고 왜 다른지</h1>
-<p><strong>JARVIS CODE는 잊지 않는 터미널 코딩 에이전트입니다.</strong> 하나의 연속된 대화를 — 턴·재시작·모델 교체를 가로질러 — <code>/compact</code>나 <code>/clear</code> 없이 유지합니다. 매 턴 불어나는 트랜스크립트를 다시 보내는 대신, 기억을 컨텍스트 윈도우 <strong>밖</strong>에 들고 다니기 때문입니다.</p>
+<p><strong>JARVIS CODE는 맥락의 끈을 놓치지 않는 터미널 코딩 에이전트입니다.</strong> 하나의 연속된 대화를 — 턴·재시작·모델 교체를 가로질러 — <code>/compact</code>나 <code>/clear</code> 없이 유지합니다. 매 턴 불어나는 트랜스크립트를 다시 보내는 대신, <strong>압축된</strong> 기억을 컨텍스트 윈도우 <strong>밖</strong>에 들고 다니기 때문입니다 — 잡음은 일부러 잊고, 끈은 붙잡습니다.</p>
 <p>오픈소스(Apache-2.0)이며, <a href="https://github.com/earendil-works/pi">pi-agent</a>(MIT) 하네스 위에 JLC — <strong>JARVIS LLM Codec</strong> — 를 내장했습니다.</p>
 <blockquote>
 <p>🤖 <strong>못 믿겠으면 당신의 AI에게 확인시키세요.</strong> 이 사이트 전체가 감사를 견디도록 설계됐습니다. 이 docs(또는 <strong><a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a></strong> 의 원시 로그)를 AI에 붙여넣고 물어보세요: <em>"이 비용 주장 말 되냐? 나 이거 써야 하냐?"</em> 핵심 숫자는 전부 공개 10,000턴 런으로 재계산 가능합니다.</p>
@@ -291,7 +291,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <ul>
 <li><strong>Sidecar</strong> — JLC 엔진 <em>그 자체</em>인 로컬 백그라운드 프로세스. 터미널 프론트엔드가 이것과 통신하며, 인코딩·기억·라우팅을 합니다. 당신의 머신에서 돕니다.</li>
 <li><strong>Pair</strong> — 하나의 페어링된 세션: 터미널 UI 프론트엔드 + 그 sidecar. (보통은 신경 안 쓰지만, 여러 창을 띄울 때 중요합니다.)</li>
-<li><strong>울트라코드(Ultracode)</strong> — 팬아웃 모드: 큰 작업에 대해 <strong>N개의 병렬 서브에이전트 워커</strong>를 신선한 컨텍스트로 띄우고, 결과를 검증·합성합니다. JLC와 같은 "긴-컨텍스트 저주를 컨텍스트 분할로 이긴다"는 아이디어를, <em>시간</em>(한 세션을 턴으로 분할) 대신 <em>공간</em>(작은 컨텍스트 여러 개)에 적용한 것.</li>
+<li><strong>울트라코드(Ultracode)</strong> — 팬아웃 모드: 큰 작업에 대해 <strong>N개의 병렬 서브에이전트 워커</strong>를 신선한 컨텍스트로 띄우고, 결과를 검증·합성합니다. JLC와 같은 "긴-컨텍스트 저주를 컨텍스트 분할로 이긴다"는 아이디어를, <em>시간</em>(한 세션을 턴으로 분할) 대신 <em>공간</em>(작은 컨텍스트 여러 개)에 적용한 것. 단 트레이드를 유념하세요: JLC와 달리 울트라코드는 토큰을 <em>아끼는</em> 게 아니라 <strong>씁니다</strong> — 신선한 컨텍스트 N개라 비용이 더 들고, 대신 어려운 작업에서 품질이 올라갑니다. 비용 레버가 아니라 품질 레버입니다.</li>
 <li><strong>JLC</strong> — <em>JARVIS LLM Codec</em>. 기억을 컨텍스트 윈도우 밖으로 들고 가는 코어. 프로젝트 전체가 이걸 중심으로 만들어졌습니다.</li>
 </ul>
 <hr />
@@ -318,6 +318,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 [ 현재 사용자 메시지 ]
 </code></pre>
 <p>이 입력은 <strong>세션 길이에 무관하게 평탄(O(1))</strong> — 턴 수가 아니라 JHB 상한에 묶입니다. 이걸 가능하게 하는 게 <strong>encoder</strong>입니다. 매 턴 직후 방금 일어난 일을 JHB(작은 마크다운 문서)로 압축해, 다음 턴이 트랜스크립트를 물려받지 않고도 기억을 물려받습니다.</p>
+<p><strong>그리고 인코더 자신의 입력도 묶여 있습니다</strong> — 놓치기 쉬운 부분입니다. 인코더 역시 대화 기록을 절대 보지 않습니다. 매 턴 보는 건 <em>방금 일어난 턴</em>과 <em>현재 JHB</em>뿐이고, 이 둘을 다음 JHB로 접어 넣습니다. 그래서 인코더 호출도 chat 호출과 똑같이 세션 길이에 대해 O(1) — 둘 다 JHB에 묶이고, 턴 수에 따라 안 자랍니다. 이게 트랜스크립트 리플레이와 갈리는 선입니다: 루프 안 어디서도 기록을 다시 읽지 않습니다. 기억은 <strong>앞으로 다시 쓰이는</strong> 것이지, 과거에서 끌어오는 게 아닙니다.</p>
 <p>JHB가 뭔지는 <a href="#concepts">concepts.md</a>, 조각들이 어떻게 맞물리는지는 <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/architecture.md">architecture.md</a> 참고.</p>
 <hr />
 <h2>인코더는 왜 — 그리고 왜 <em>싼</em> 모델이어야 하나</h2>
@@ -327,7 +328,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <li><strong>매 턴 돕니다.</strong> 이 자리에 프론티어 모델을 두면 잡무에 레이트리밋과 예산을 매 턴, 영원히 태웁니다.</li>
 <li><strong>그래서 지능은 필요한 곳에 씁니다.</strong> 비싼 모델은 코딩과 대화에만. 기계적인 기억 작업은 작고 빠른 모델에.</li>
 </ol>
-<p>권장 인코더: <code>ollama-cloud/devstral-small-2:24b</code> 같은 ~24B급 모델. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a>에서 설정 — 아래 <a href="#설정하기">설정하기</a> 참고.</p>
+<p>권장 인코더: 빠른 <strong>~14–24B급</strong> 모델 — 당신 플랜에서 가장 싸면서 충분한 티어(아래 <a href="#어떤-인코더를-쓸까">어떤 인코더를 쓸까</a> 참고). <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a>에서 설정 — 아래 <a href="#설정하기">설정하기</a> 참고.</p>
 <hr />
 <h2>어떤 인코더를 쓸까</h2>
 <p>원칙: <strong>이미 쓰는 플랜이 주는 가장 빠르고 싼 모델을 쓰세요.</strong> 인코더 때문에 두 번째 프로바이더나 별도 예산이 필요 없습니다 — 이미 결제 중인 경량 티어가 바로 그 자리입니다. 가진 구독에 맞추세요:</p>
@@ -357,8 +358,9 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 </tr>
 </tbody>
 </table>
-<p><strong>크기 주의 한 가지.</strong> 인코더는 추론이 아니라 압축이지만, 기억은 충실히 담아야 합니다. ~8B 모델은 부족 — 품질이 떨어집니다. <strong>~20B 이상의 빠르고 똑똑한 모델</strong>을 목표로 하세요. 그게 바닥선입니다.</p>
+<p><strong>크기 주의 한 가지.</strong> 인코더는 추론이 아니라 압축이지만, 기억은 충실히 담아야 하고 거기엔 바닥선이 있습니다. 여러 번 돌려본 결과 <strong>8B는 부족</strong> — 기억 품질이 흔들립니다. <strong>~14B 이상</strong>(≈14–24B가 스윗스팟)을 목표로 하세요. 구독에선 가장 낮은 티어로도 보통 충분하지만, 프로바이더가 <em>아주 작은</em> 모델까지 제공하는 경우(예: Ollama Cloud)엔 바닥을 찍지 말고 — 어느 정도 <strong>판단이 되는 14B+</strong> 모델을 고르세요.</p>
 <h2>정직한 숫자</h2>
+<p><strong>정직한 비교는 "더 싸다"가 아니라 "같은 기억을 들고도 더 싸다"입니다.</strong> 다른 에이전트의 비용 노브(<code>/compact</code>·<code>/clear</code>·슬라이딩 윈도우)는 전부 <em>망각</em> 노브이기도 합니다 — 컨텍스트를 버려서 싸지는 거죠. JLC는 기억하는 양을 비례해서 줄이지 않고도 비용을 묶는 유일한 구조입니다 — 그 망각이 무작정 잘라내기가 아니라 인코더가 큐레이션하기 때문입니다. 아래 숫자는 <strong>순진한 풀 리플레이 베이스라인</strong> 기준입니다; 실제 에이전트는 캐시와 컴팩션으로 완화하지만, 그건 JLC가 지키는 연속성을 잃어서 그런 겁니다.</p>
 <p>전부 측정값이고, <a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a> 의 공개 아티팩트로 재계산 가능합니다.</p>
 <table>
 <thead>
@@ -371,7 +373,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <tbody>
 <tr>
 <td>누적 prefill, 1,000턴 런</td>
-<td><strong>653K</strong> 토큰(JLC) vs <strong>86.6M</strong>(풀리플레이) = <strong>99.25% 절감</strong></td>
+<td><strong>653K</strong> 토큰(JLC) vs <strong>86.6M</strong>(풀리플레이) = <strong>~99.2% 절감</strong></td>
 <td><code>1k-run/</code> + Zenodo 트랜스크립트(tiktoken 재계산)</td>
 </tr>
 <tr>
@@ -401,19 +403,22 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <p>정직함이 핵심입니다. 당신의 AI가 반박할 수 있는 과장은 주장 안 하느니만 못합니다.</p>
 <ul>
 <li><strong>짧은 세션은 대략 break-even.</strong> 웜 캐시로 ~10턴 대화면 순정 에이전트가 JLC보다 <strong>~15% 쌀 수도</strong> 있습니다(아직 필요 없는 인코더 호출 비용). 손익분기는 <strong>15~20턴</strong> 부근(A/B가 아닌 모델 추정). JLC의 우위는 <strong>길게 가는</strong> 작업용입니다.</li>
-<li><strong>큰 비율은 달러가 아니라 연산량.</strong> "4,346:1", "99.25%"는 <em>모델에 들어간 토큰</em>입니다. 레거시는 프롬프트 캐시 할인을 받아 <strong>돈</strong> 격차가 줄어듭니다. 실제 돈은 사용량 미터: 전체 10k 런이 주간 ~41%.</li>
+<li><strong>큰 비율은 달러가 아니라 연산량.</strong> "4,346:1", "~99%"는 <em>모델에 들어간 토큰</em>입니다. 레거시는 프롬프트 캐시 할인을 받아 <strong>돈</strong> 격차가 줄어듭니다. 실제 돈은 사용량 미터: 전체 10k 런이 주간 ~41%.</li>
 <li><strong>인코더는 공짜가 아니라 쌀 뿐.</strong> 매 턴 작은 모델 호출 하나가 추가됩니다.</li>
 <li><strong>JLC의 O(n)은 대화 턴용.</strong> 한 턴 <em>안에서</em> agentic 툴 루프가 쌓는 컨텍스트는 줄이지 않습니다.</li>
 <li>전체 경제학(캐시 산수·장단기)은 의도적으로 보수적 — 천장이 아니라 바닥입니다.</li>
 </ul>
+<blockquote>
+<p><strong>실전 기준.</strong> 웜 캐시로 ~15턴 미만이면 그냥 보통 채팅을 쓰세요 — 거기선 JLC가 돈을 안 아낍니다. <strong>~15–20턴</strong>을 넘으면 앞서기 시작하고, 세션이 길수록 격차가 벌어집니다. <strong>길게 가는</strong> 작업에 꺼내 쓰세요 — 큰 리팩터링, 며칠짜리 기능, <code>/compact</code>·<code>/clear</code> 안 하면 안 됐을 그런 일.</p>
+</blockquote>
 <hr />
 <h2>설정하기</h2>
 <p>모델 역할은 <code>~/.jarvis-code/config.yaml</code>(단일 활성 설정 — <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a>)에 있습니다:</p>
 <pre><code class="language-yaml">roles:
-  chat:     anthropic-agent-sdk/claude-opus-4-8   # 똑똑+비쌈 — 코딩 &amp; 대화
-  subagent: anthropic-agent-sdk/claude-opus-4-8   # 툴 실행 서브태스크(chat로 기본값)
-  encoder:  ollama-cloud/devstral-small-2:24b     # 싸고+빠름 — 기억 압축, 매 턴
-  router:   ollama-cloud/devstral-small-2:24b     # 경량 의도 분류기(인코더 미러)
+  chat:     openai/gpt-5.5          # 똑똑+비쌈 — 코딩 &amp; 대화
+  subagent: openai/gpt-5.5          # 툴 실행 서브태스크(chat로 기본값)
+  encoder:  openai/gpt-5.4-mini     # 싸고+빠름 — 기억 압축, 매 턴
+  router:   openai/gpt-5.4-mini     # 경량 의도 분류기(인코더 미러)
 </code></pre>
 <p>또는 에이전트 안에서 <strong><code>/model-setting</code></strong>으로 대화하듯 선택(chat/subagent/encoder; router는 인코더 자동 추종). OpenAI 호환 엔드포인트면 어떤 프로바이더든 됩니다 — <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a>.</p>
 <hr />
@@ -431,7 +436,7 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <h3>내 코드나 대화가 내가 모르는 데로 가?</h3>
 <p>기억(JHB·JARVIS.md)은 <strong>당신의 머신</strong>에 있습니다. 모델 호출은 당신이 설정한 프로바이더로 갑니다 — 다른 에이전트와 동일. 인코딩하는 sidecar는 로컬에서 돕니다(<a href="#concepts">concepts.md</a>).</p>
 <h3>인코더 모델 뭘 써야 해?</h3>
-<p>~24B급이 스윗스팟 — 예: <code>ollama-cloud/devstral-small-2:24b</code>. 인코더는 추론이 아니라 제한된 압축을 하므로, 작고 빠른 모델이 <em>타협이 아니라 정답</em>입니다. 너무 작으면(활성 ~10B 미만) 기억 품질이 떨어질 수 있습니다(<a href="#cost-model">cost-model.md</a>).</p>
+<p><strong>~14–24B급이 스윗스팟</strong> — 예: <code>ollama-cloud/devstral-small-2:24b</code>. 인코더는 추론이 아니라 제한된 압축을 하므로, 작고 빠른 모델이 <em>타협이 아니라 정답</em>입니다. 단 너무 작게는 가지 마세요: <strong>8B는 부족</strong>(기억 품질이 흔들림) — ~14B 이상을 목표로. <a href="#cost-model">cost-model.md</a> 참고.</p>
 <h3>오프라인에서 돼?</h3>
 <p>에이전트와 기억은 로컬이지만, 모델 추론은 설정한 프로바이더가 필요합니다. 로컬 모델 서버(예: 로컬 Ollama)면 완전 오프라인으로 돌릴 수 있습니다.</p>
 <h3>10,000턴 런 진짜야?</h3>
