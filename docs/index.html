@@ -206,7 +206,7 @@ main{position:relative;z-index:1}
 <td>~1.3 GB</td>
 </tr>
 <tr>
-<td><code>bge-m3</code> embedding model — <em>optional</em></td>
+<td><code>bge-m3</code> embedding model — <strong>powers recall (required)</strong></td>
 <td>~2.3 GB download · ~4.3 GB on disk</td>
 </tr>
 <tr>
@@ -215,7 +215,7 @@ main{position:relative;z-index:1}
 </tr>
 </tbody>
 </table>
-<p><strong>≈ 2 GB without the model, ≈ 6 GB with it</strong> (plus prerequisites if you don't already have them). The model powers local recall and is optional — skip it with <code>JARVIS_CODE_NO_MODEL_PRELOAD=1</code>. Memory data under <code>~/.jarvis-code</code> starts small and grows slowly.</p>
+<p><strong>≈ 6 GB total</strong> (plus prerequisites if missing). Recall is a <strong>BM25 + bge-m3</strong> hybrid — keyword + semantic — so the model is core, not optional; <code>JARVIS_CODE_NO_MODEL_PRELOAD=1</code> only defers its download to first use. Memory data under <code>~/.jarvis-code</code> starts small and grows slowly.</p>
 <hr />
 <h2>2. Launch</h2>
 <pre><code>jarvis
