@@ -31,6 +31,19 @@ th{background:rgba(255,255,255,.05);color:#9a9aac;font-weight:600}
 tr:nth-child(even) td{background:rgba(255,255,255,.02)}
 hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 @media(max-width:720px){#sidebar{position:static;width:100%;height:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}main{margin-left:0;padding:24px 20px 80px}}
+/* live 3D glyph face — still + auto-cycling, tucked into the empty lower-left (click bounces) */
+main{position:relative;z-index:1}
+.agentface{position:fixed;left:24px;bottom:30px;z-index:5;display:flex;flex-direction:column;align-items:center;gap:9px;perspective:1100px;perspective-origin:50% 45%}
+.agentface .bouncer{cursor:pointer;transform-style:preserve-3d;display:inline-block}
+.agentface .bouncer.bounce{animation:af-bounce .62s cubic-bezier(.34,1.56,.52,1)}
+.agentface .face3d{display:inline-block;white-space:nowrap;transform-style:preserve-3d;transform:rotateX(11deg) rotateY(-15deg);font:800 clamp(34px,3.3vw,56px)/1 'JetBrains Mono','Fira Code',Consolas,monospace}
+.agentface .slot{position:relative;display:inline-block;width:.72em;height:1.1em;vertical-align:middle;margin:0 .035em;transform-style:preserve-3d}
+.agentface .slot .layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.agentface .lbl{font:700 9.5px/1 'JetBrains Mono',Consolas,monospace;letter-spacing:.26em;text-transform:uppercase;height:12px;color:transparent;background:linear-gradient(90deg,#55555f 0%,#55555f 38%,#c0c1cd 50%,#55555f 62%,#55555f 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;animation:af-sweep 2.6s linear infinite}
+.agentface .lbl.idle{opacity:0}
+@keyframes af-bounce{0%{transform:scale(1) rotate(0)}28%{transform:scale(1.15) rotate(-3deg)}52%{transform:scale(.93) rotate(2deg)}74%{transform:scale(1.04) rotate(-1deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes af-sweep{0%{background-position:120% 0}100%{background-position:-120% 0}}
+@media(max-width:860px){.agentface{display:none}}
 </style></head><body><nav id="sidebar"><a class="brand" href="/ko/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a><div class="tag">문서</div><div class="top"><a href="/ko/">← Home</a><a href="/docs/">English</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div><a class="doc" href="#README">인덱스</a><a class="doc" href="#overview">개요</a><a class="doc" href="#quickstart">빠른 시작</a><a class="doc" href="#concepts">개념</a><a class="doc" href="#cost-model">비용 모델</a><a class="doc" href="#faq">FAQ</a></nav><main><section id="README"><h1>JARVIS CODE — 문서</h1>
 <p>맥락의 끈을 놓치지 않는 터미널 코딩 에이전트. 턴·재시작·모델 교체를 가로지르는 하나의 연속 대화 — 노 <code>/compact</code>, 노 <code>/clear</code>. 오픈소스, Apache-2.0.</p>
 <blockquote>
@@ -446,9 +459,31 @@ hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
 <h3>단점은?</h3>
 <p>아직 어리고, 현재 Windows가 1급 설치(macOS/Linux 인스톨러는 곧), 짧은 일회성 대화는 돈을 안 아낍니다. 길게 가는 다중 세션 코딩 작업에서 빛납니다 — 대부분의 실제 작업이 그렇죠.</p>
 <hr />
-<p><strong>더 보기:</strong> <a href="#overview">overview.md</a> · <a href="#cost-model">cost-model.md</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/troubleshooting.md">troubleshooting.md</a> · <a href="https://jlc-codec.org/evidence/ko/">증거</a></p></section></main><script>
+<p><strong>더 보기:</strong> <a href="#overview">overview.md</a> · <a href="#cost-model">cost-model.md</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/troubleshooting.md">troubleshooting.md</a> · <a href="https://jlc-codec.org/evidence/ko/">증거</a></p></section></main><div class="agentface" aria-hidden="true"><div class="bouncer" id="jlc-bnc"><div class="face3d" id="jlc-f3d"></div></div><div class="lbl idle" id="jlc-flbl">idle</div></div><script>
 var links=[].slice.call(document.querySelectorAll('#sidebar a.doc')),map={};
 links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});if(map[e.target.id])map[e.target.id].classList.add('active');}})},{rootMargin:'-8% 0px -82% 0px'});
 [].slice.call(document.querySelectorAll('main section')).forEach(function(s){io.observe(s)});
-</script></body></html>
+(function(){
+var N=13,D=1.7,f3d=document.getElementById("jlc-f3d");if(!f3d)return;
+function bs(){var s=document.createElement("span");s.className="slot";var L=[];for(var i=0;i<N;i++){var e=document.createElement("span");e.className="layer";var t=i/(N-1),v=Math.round(244-t*216);e.style.color="rgb("+v+","+v+","+(v+6)+")";e.style.transform="translateZ("+(-i*D)+"px)";s.appendChild(e);L.push(e);}s._l=L;return s;}
+var sL=bs(),sM=bs(),sR=bs();f3d.appendChild(sL);f3d.appendChild(sM);f3d.appendChild(sR);
+function put(s,c){for(var i=0;i<s._l.length;i++)s._l[i].textContent=c;}
+function rf(e,m){put(sL,e);put(sM,m);put(sR,e);}
+var EYE={open:"○",blink:"–",focus:"●",happy:"^",startled:"!",err:"x"};
+var lb=document.getElementById("jlc-flbl");
+function sl(t){if(lb){lb.textContent=t||"idle";lb.classList.toggle("idle",!t);}}
+function seg(n,fn){var a=[];for(var i=0;i<n;i++)a.push(fn(i));return a;}
+var fr=[];
+fr=fr.concat(seg(16,function(i){var e=(i===5||i===12)?"blink":((i>=8&&i<=10)?"happy":"open");return{e:e,m:"~",l:""};}));
+var tB={3:1,11:1},tM={6:"_",7:"_",8:","};
+fr=fr.concat(seg(14,function(i){return{e:tB[i]?"blink":"open",m:tM[i]||".",l:"thinking"};}));
+fr=fr.concat(seg(8,function(){return{e:"focus",m:"-",l:"working"};}));
+var gB={4:1,12:1},gm=["~","o","~","-"];
+fr=fr.concat(seg(16,function(i){return{e:gB[i]?"blink":"open",m:gm[i%4],l:"writing"};}));
+fr=fr.concat(seg(8,function(){return{e:"happy",m:"~",l:"done"};}));
+var idx=0;
+function tick(){var f=fr[idx];rf(EYE[f.e],f.m);sl(f.l);idx=(idx+1)%fr.length;}
+var bnc=document.getElementById("jlc-bnc");if(bnc)bnc.addEventListener("click",function(){bnc.classList.remove("bounce");void bnc.offsetWidth;bnc.classList.add("bounce");});
+tick();setInterval(tick,190);
+})();</script></body></html>
