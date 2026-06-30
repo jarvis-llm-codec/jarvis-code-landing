@@ -1,6 +1,7 @@
 # Build / temp assets (not deployed)
 _make_og.py
 _og_card.html
+_render_docs.py
 *_raw.png
 스크린샷*.png
 
