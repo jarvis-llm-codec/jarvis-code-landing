@@ -187,6 +187,35 @@ main{position:relative;z-index:1}
 <pre><code class="language-powershell">irm https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.ps1 | iex
 </code></pre>
 <p><strong>macOS · Linux</strong> — 인스톨러 마무리 중 (<strong>곧 지원 예정</strong>). 그 전까지는 소스에서 설치 — <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/install.md">install.md</a> 참고.</p>
+<h3>뭐가 설치되고 얼마나 큰가</h3>
+<p>전부 <code>%LOCALAPPDATA%\JARVIS-Code</code> 아래 설치. 새 머신 기준 대략 용량:</p>
+<table>
+<thead>
+<tr>
+<th>구성</th>
+<th>크기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>앱 + Node 의존성</td>
+<td>~580 MB</td>
+</tr>
+<tr>
+<td>Python 사이드카 (PyTorch CPU 포함)</td>
+<td>~1.3 GB</td>
+</tr>
+<tr>
+<td><code>bge-m3</code> 임베딩 모델 — <em>선택</em></td>
+<td>~2.3 GB 다운로드 · 디스크 ~4.3 GB</td>
+</tr>
+<tr>
+<td>전제조건 (Node 20+, Python 3.10+, Git, MSVC) — <em>없을 때만</em></td>
+<td>~0.5 GB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>모델 없이 ≈ 2 GB, 모델 포함 ≈ 6 GB</strong> (전제조건은 없을 때만 추가). 모델은 로컬 회상용이고 선택 — <code>JARVIS_CODE_NO_MODEL_PRELOAD=1</code>로 생략. 메모리 데이터(<code>~/.jarvis-code</code>)는 작게 시작해 천천히 늘어남.</p>
 <hr />
 <h2>2. 실행</h2>
 <pre><code>jarvis
