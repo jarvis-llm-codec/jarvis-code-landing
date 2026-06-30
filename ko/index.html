@@ -339,6 +339,10 @@
         <p class="m-close"><span class="grad">JLC는 그 메모를 늘 또렷하게 유지해주는 하네스다</span> — 레너드가 엉뚱한 방향으로 빠지지 않게.</p>
       </figcaption>
     </figure>
+    <div class="depth reveal" style="margin-top:6px">
+      <h3>평소엔 노트로. <span class="grad">과거를 들출 땐 레너드의 일기장을.</span></h3>
+      <p>JHB는 레너드의 노트입니다 — 매 턴 함께 갑니다. 메시지가 과거로 손을 뻗으면, JLC는 레너드가 일기장을 다시 펼치게 해줍니다: 맞는 원문 페이지를 즉석에서 재구성하죠 — <b>BM25</b>로 좁히고, <b>bge&#8209;m3 코사인</b>으로 다시 정렬해, 상위 몇 개만. 전체 기록을 통째로 넣는 게 아니라. 노트가 이해를 들고 가고, 일기장이 중요할 때 정확한 표현으로 뒷받침합니다. <a href="/docs/ko/#concepts">어떻게 만들었나 →</a></p>
+    </div>
   </div>
 </section>
 
@@ -419,10 +423,6 @@
       <div class="card reveal"><span class="idx">01</span><div class="kw">Linear&#8209;Cost</div><h3>길어져도 선형 비용</h3><p>거대한 대화 prefix를 끌지 않습니다.<br>대화당 비용이 O(n²)이 아니라 선형(O(n)) — 긴 작업도 비용 폭발 없이 끝까지 갑니다.</p><div class="edge grad">아무리 길어져도 컨텍스트 안 터짐</div></div>
       <div class="card reveal"><span class="idx">02</span><div class="kw">Model&#8209;Agnostic</div><h3>모델에 묶이지 않는 기억</h3><p>기억이 모델이 아니라 코덱에 삽니다.<br>재시작·모델 교체·더 작은 모델로 내려도 프로젝트 맥락은 그대로 남습니다.</p><div class="edge grad">끊겨도 다시 이어간다</div></div>
       <div class="card reveal"><span class="idx">03</span><div class="kw">No&#8209;Ceiling</div><h3>컨텍스트 천장이 없다</h3><p>노 컴팩트, 노 클리어. 정보를 상태와 메모리로 분산해 채울 윈도우 자체가 없습니다 — 한 세션에서 무한 대화와 무한 코딩.</p><div class="edge grad">만 턴 공개 실험 입증 · Zenodo 인용 가능</div></div>
-    </div>
-    <div class="depth reveal">
-      <h3>평소엔 노트로. <span class="grad">과거를 들출 땐 레너드의 일기장을.</span></h3>
-      <p>JHB는 레너드의 노트입니다 — 매 턴 함께 갑니다. 메시지가 과거로 손을 뻗으면, JLC는 레너드가 일기장을 다시 펼치게 해줍니다: 맞는 원문 페이지를 즉석에서 재구성하죠 — <b>BM25</b>로 좁히고, <b>bge&#8209;m3 코사인</b>으로 다시 정렬해, 상위 몇 개만. 전체 기록을 통째로 넣는 게 아니라. 노트가 이해를 들고 가고, 일기장이 정확한 표현으로 뒷받침합니다. 그리고 JLC가 그 둘을 늘 또렷하게 유지하는 하네스죠 — <b style="color:var(--txt)">레너드가 엉뚱한 방향으로 빠지지 않게.</b> <a href="/docs/ko/#concepts">어떻게 만들었나 →</a></p>
     </div>
     <div class="depth reveal">
       <h3>대화는 가볍게. <span class="grad">코딩은 딥다이브로.</span></h3>

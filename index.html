@@ -359,6 +359,10 @@
         <p class="m-close"><span class="grad">JLC is the harness that keeps those notes sharp</span> — so Leonard never walks off in the wrong direction.</p>
       </figcaption>
     </figure>
+    <div class="depth reveal" style="margin-top:6px">
+      <h3>Notes by default. <span class="grad">The diary when Leonard reaches back.</span></h3>
+      <p>The JHB is Leonard's notes — it rides every turn. When your message reaches into the past, JLC also lets him flip back through the diary: it reconstructs the relevant raw pages on the fly — <b>BM25</b> to narrow, <b>bge&#8209;m3 cosine</b> to rerank, the top few handed over — never the whole history dumped back in. The notes carry the understanding; the diary backs them with the exact words, only when you reach for them. <a href="/docs/#concepts">How it's built →</a></p>
+    </div>
   </div>
 </section>
 
@@ -439,10 +443,6 @@
       <div class="card reveal"><span class="idx">01</span><div class="kw">Linear&#8209;Cost</div><h3>Linear cost, however long</h3><p>No giant conversation prefix dragged along.<br>Cost per turn stays linear — O(n), not O(n²) — so long runs finish without a blowup.</p><div class="edge grad">No context blowup, however far it runs</div></div>
       <div class="card reveal"><span class="idx">02</span><div class="kw">Model&#8209;Agnostic</div><h3>Memory, not tied to a model</h3><p>It lives in the codec, not the model.<br>Restart, swap models, or drop to a smaller one — your project context stays put.</p><div class="edge grad">Cut off? Pick right back up</div></div>
       <div class="card reveal"><span class="idx">03</span><div class="kw">No&#8209;Ceiling</div><h3>No context ceiling</h3><p>No compact, no clear. Spread across state and memory, there's no window left to fill — infinite conversation and coding in one session.</p><div class="edge grad">Proven over 10,000 public turns · citable on Zenodo</div></div>
-    </div>
-    <div class="depth reveal">
-      <h3>Notes by default. <span class="grad">The diary when Leonard reaches back.</span></h3>
-      <p>The JHB is Leonard's notes — it rides every turn. When your message reaches into the past, JLC also lets him flip back through the diary: it reconstructs the relevant raw pages on the fly — <b>BM25</b> to narrow, <b>bge&#8209;m3 cosine</b> to rerank, the top few handed over — never the whole history dumped back in. The notes carry the understanding; the diary backs them with the exact words. And JLC is the harness that keeps both sharp — <b style="color:var(--txt)">so Leonard never walks off in the wrong direction.</b> <a href="/docs/#concepts">How it's built →</a></p>
     </div>
     <div class="depth reveal">
       <h3>Light on chat. <span class="grad">Deep on code.</span></h3>
