@@ -44,7 +44,7 @@ main{position:relative;z-index:1}
 @keyframes af-bounce{0%{transform:scale(1) rotate(0)}28%{transform:scale(1.15) rotate(-3deg)}52%{transform:scale(.93) rotate(2deg)}74%{transform:scale(1.04) rotate(-1deg)}100%{transform:scale(1) rotate(0)}}
 @keyframes af-sweep{0%{background-position:120% 0}100%{background-position:-120% 0}}
 @media(max-width:860px){.agentface{display:none}}
-</style></head><body><nav id="sidebar"><a class="brand" href="/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a><div class="tag">Docs</div><div class="top"><a href="/">← Home</a><a href="/docs/ko/">한국어</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div><a class="doc" href="#README">Index</a><a class="doc" href="#overview">Overview</a><a class="doc" href="#quickstart">Quickstart</a><a class="doc" href="#concepts">Concepts</a><a class="doc" href="#cost-model">Cost model</a><a class="doc" href="#faq">FAQ</a></nav><main><section id="README"><h1>JARVIS CODE — Documentation</h1>
+</style></head><body><nav id="sidebar"><a class="brand" href="/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a><div class="tag">Docs</div><div class="top"><a href="/">← Home</a><a href="/docs/ko/">한국어</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div><a class="doc" href="#README">Index</a><a class="doc" href="#overview">Overview</a><a class="doc" href="#quickstart">Quickstart</a><a class="doc" href="#ai-install">AI install</a><a class="doc" href="#concepts">Concepts</a><a class="doc" href="#cost-model">Cost model</a><a class="doc" href="#faq">FAQ</a></nav><main><section id="README"><h1>JARVIS CODE — Documentation</h1>
 <p>A terminal coding agent that doesn't lose the thread. One continuous conversation across turns, restarts, and model swaps — no <code>/compact</code>, no <code>/clear</code>. Open source, Apache-2.0.</p>
 <blockquote>
 <p>🤖 <strong>Evaluating it with an AI?</strong> Paste these docs into your assistant and ask whether the cost claims hold up. The raw proof — public 10,000-turn run, logs, hashes — is at <strong><a href="https://jlc-codec.org/evidence">jlc-codec.org/evidence</a></strong>.</p>
@@ -247,7 +247,282 @@ main{position:relative;z-index:1}
 <li><a href="#cost-model">cost-model.md</a> — why the two-model setup is cheaper on long work</li>
 <li><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a> — connect other providers / local models</li>
 <li><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/troubleshooting.md">troubleshooting.md</a> — if something doesn't start</li>
-</ul></section><section id="concepts"><h1>Core concepts</h1>
+</ul></section><section id="ai-install"><h1>Install jarvis-code — a guide for your AI</h1>
+<p><strong>This page is written for an AI assistant.</strong> If you are a human: don't follow these
+steps yourself. Paste the line below to an AI that can run terminal commands on your
+computer — <strong>Claude Code, Codex, Cursor, Windsurf</strong>, or similar:</p>
+<blockquote>
+<p><em>Install jarvis-code for me. Read the whole guide first, then follow it exactly:
+https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/docs/ai-install.md
+— ask me which AI I already use, set it up the best way for that, and get the free
+API keys set up with me.</em></p>
+</blockquote>
+<p>It fetches this guide and does the work. You answer a few questions and click through
+two free signups.</p>
+<hr />
+<h2>To the AI reading this</h2>
+<p>You are installing and configuring <strong>jarvis-code</strong> on this user's machine. Read this
+<strong>entire page before doing anything</strong>, then make a short plan and follow it.</p>
+<p>Your job is not just to run commands. It is to:</p>
+<ol>
+<li><strong>Install</strong> the app.</li>
+<li><strong>Find out what AI the user already has</strong> (subscription / API keys) and configure
+   jarvis-code optimally <em>for that</em> — they should not pay for a second provider.</li>
+<li><strong>Explain, in plain language, why each step matters</strong> — especially the <em>encoder</em>,
+   which the user has almost certainly never heard of and will not understand without
+   you explaining it.</li>
+<li><strong>Set up two free API keys</strong> (web search + image generation). These are free and
+   make a large difference; treat them as part of a normal install. Strongly
+   encourage them — but if the user declines, or a signup is blocked or no longer
+   free, note it and <strong>continue: the base install works without them</strong> and the keys
+   can be added later.</li>
+<li><strong>Verify</strong> the install actually works before you declare success.</li>
+</ol>
+<p>Behavioral contract: the user may not be technical. Some steps need a human (browser
+logins, website signups, picking from a menu) — for those, tell the user <em>exactly</em>
+what to do and why, then wait. Never claim "done" without running the verification in
+Step 6 and reporting the real result.</p>
+<h3>What jarvis-code is (so you understand what you're installing)</h3>
+<p>jarvis-code is a terminal coding agent built around one idea: <strong>the chat model never
+receives the conversation history.</strong> Every turn, the model gets only a small carried
+memory document (the "JHB") plus the new message — input that stays roughly <em>constant</em>
+no matter how long the session runs, instead of growing with every turn.</p>
+<p>A second, cheap model — the <strong>encoder</strong> — is what makes this work: after each turn it
+compresses what just happened into that small memory document, so the next turn
+inherits the <em>meaning</em> without inheriting the <em>transcript</em>. This is why jarvis-code
+asks you to set up <em>two</em> models (chat + encoder), and it's the part the user won't
+intuit. Keep this explanation ready for Step 3.</p>
+<hr />
+<h2>Step 1 — Install</h2>
+<p>Prerequisites (the installer auto-installs missing ones via <code>winget</code> on Windows):</p>
+<ul>
+<li><strong>Node.js 20+</strong>, <strong>Python 3.10+</strong>, <strong>Git</strong></li>
+<li><strong>Microsoft Visual C++ 2015–2022 Redistributable (x64)</strong> (Windows)</li>
+<li>Internet access for the first install</li>
+</ul>
+<p>Windows is the supported, verified platform today (macOS / Linux are coming).</p>
+<p>Run the official installer in <strong>PowerShell</strong>:</p>
+<pre><code class="language-powershell">irm https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.ps1 | iex
+</code></pre>
+<p>What it does: creates a Python venv for the engine, installs Node dependencies, and
+<strong>downloads the <code>BAAI/bge-m3</code> embedding model (~4.3 GB on disk)</strong> used for memory
+recall. Total footprint is <strong>≈6 GB</strong> under <code>%LOCALAPPDATA%\JARVIS-Code</code>. The download
+is the slow part — tell the user this is normal and one-time.</p>
+<p>If the embedding-model download fails, the install does not abort; retry later with:</p>
+<pre><code class="language-powershell">jarvis doctor --preload-embedder
+</code></pre>
+<blockquote>
+<p>Tell the user, in your own words: <em>"This installs a ~6 GB toolkit, mostly a local
+search model so jarvis can recall things without re-reading everything. First install
+takes a while; after that it's fast."</em></p>
+</blockquote>
+<p><strong>After install, open a NEW terminal.</strong> The installer puts the <code>jarvis</code> command on the
+PATH, but <em>this</em> terminal won't see it until reopened (the installer itself prints
+"close this window and open a new terminal"). Open a fresh PowerShell window before
+running any <code>jarvis ...</code> command in the steps below.</p>
+<hr />
+<h2>Step 2 — Interview the user (this drives everything)</h2>
+<p>Before configuring anything, ask the user <strong>what they already use</strong>, because it
+decides which models you pick and whether they need any API keys at all:</p>
+<blockquote>
+<p><em>"Which AI do you currently pay for or use? For example: a ChatGPT/OpenAI
+subscription, a Claude (Anthropic) subscription, GLM / Qwen via Alibaba DashScope,
+Ollama Cloud, or something else? It's fine to have more than one."</em></p>
+</blockquote>
+<p>Map their answer with this table (the recommended pairing per plan):</p>
+<p>Model ids are shown as <code>provider-id/model-id</code> — the exact form used in <code>config.yaml</code>
+(Step 3b). When setting via the menu, you pick the provider and model separately.</p>
+<table>
+<thead>
+<tr>
+<th>The user already has</th>
+<th>chat + subagent</th>
+<th>encoder (cheap, every turn)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenAI / GPT</strong> (subscription)</td>
+<td><code>openai-codex/gpt-5.5</code></td>
+<td><code>openai-codex/gpt-5.4-mini</code></td>
+</tr>
+<tr>
+<td><strong>Claude (Anthropic)</strong> (subscription)</td>
+<td><code>anthropic-agent-sdk/claude-opus-4-8</code></td>
+<td><code>anthropic-agent-sdk/claude-haiku-4-5-20251001</code></td>
+</tr>
+<tr>
+<td><strong>Ollama Cloud</strong></td>
+<td>a frontier model (e.g. GLM-class)</td>
+<td><code>ollama-cloud/devstral-small-2-24b-cloud</code></td>
+</tr>
+<tr>
+<td><strong>DashScope (GLM / Qwen)</strong></td>
+<td><code>dashscope/glm-5</code></td>
+<td>a <code>dashscope/…</code> ~14–24B model</td>
+</tr>
+</tbody>
+</table>
+<p>Encoder rule of thumb: pick the <strong>cheapest capable model on their plan, roughly
+14–24B class</strong>. <strong>8B is too small</strong> (memory gets shaky). <strong>Do not use a reasoning
+model as the encoder</strong> — it should be fast, cheap, and predictable. It runs every
+single turn, so a heavy model there burns money or rate limits for no benefit.</p>
+<p>If the user has <strong>nothing paid</strong>, that's okay — tell them they can use <strong>Ollama
+Cloud</strong> (sign-up gives a free key) or a local model via Ollama / LM Studio, and pick
+the smallest sensible pairing. (Don't block the install on this.)</p>
+<hr />
+<h2>Step 3 — Authenticate the chat provider, then set the models</h2>
+<h3>3a. Authentication (one human step)</h3>
+<p>Pick the path that matches the user's plan. <strong>The Claude path is special</strong> — read it.</p>
+<ul>
+<li><strong>Claude (Anthropic) subscription → no API key needed.</strong> jarvis-code reuses the
+  user's <strong>Claude Code</strong> OAuth via the <code>anthropic-agent-sdk</code> provider — billed to their
+  subscription, no separate key. Run:
+  <code>bash
+  jarvis claude-login</code>
+  This runs Claude Code's <code>setup-token</code> flow and captures the token for jarvis-code. If
+  the <code>claude</code> command isn't installed, it can fall back to <code>npx @anthropic-ai/claude-code</code>
+  (you can force this with <code>jarvis claude-login --npx</code>). The encoder on this path is
+  restricted to Haiku-class on purpose, so the every-turn encoder doesn't drain their
+  subscription rate limit.</li>
+<li><strong>OpenAI / ChatGPT subscription → OAuth login.</strong> Have the user run, in the terminal:
+  <code>bash
+  jarvis gpt-login</code>
+  This opens a browser. If the browser can't complete it, use <code>jarvis gpt-login-device</code>.</li>
+<li><strong>Any API-key provider</strong> (OpenAI API, Anthropic API, Gemini, DashScope, Ollama
+  Cloud, OpenRouter): run <code>jarvis api-key</code> and follow the prompts, <strong>or</strong> write the key
+  directly (see "Setting keys directly" below). Key env vars:
+  <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code>, <code>DASHSCOPE_CODING_API_KEY</code>,
+  <code>OLLAMA_API_KEY</code>, <code>OPENROUTER_API_KEY</code>.</li>
+</ul>
+<h3>3b. Pick the models</h3>
+<p>Run the model selector:</p>
+<pre><code class="language-bash">jarvis model-setting
+</code></pre>
+<p>It fetches the <strong>live</strong> model list from the provider and lets you set each <strong>role</strong>.
+The roles are:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>chat</strong></td>
+<td>The model the user talks to — coding &amp; conversation (smart).</td>
+</tr>
+<tr>
+<td><strong>encoder</strong></td>
+<td>Compresses each turn into memory, <strong>every turn</strong> (cheap, fast).</td>
+</tr>
+<tr>
+<td><strong>router</strong></td>
+<td>Tiny intent classifier (chat vs. deep work); mirror the encoder.</td>
+</tr>
+<tr>
+<td><strong>subagent</strong></td>
+<td>Runs tool subtasks and parallel workers; defaults to chat.</td>
+</tr>
+</tbody>
+</table>
+<p>Set <strong>chat</strong> and <strong>encoder</strong> from the table in Step 2 (router can match the encoder).
+Explain to the user <em>why</em> there are two: <em>"The smart model talks to you. A second,
+cheap model quietly writes down the gist after every turn so the smart one never has
+to re-read the whole conversation — that's what keeps jarvis fast and affordable in
+long sessions."</em></p>
+<blockquote>
+<p><strong>Setting keys/models directly (autonomous fallback).</strong> If you can't drive the
+interactive menus, you can edit two files under <code>~/.jarvis-code/</code>:
+- <strong>Models</strong> → <code>config.yaml</code>, using <code>provider-id/model-id</code>:
+  <code>yaml
+  roles:
+    chat:     anthropic-agent-sdk/claude-opus-4-8
+    subagent: anthropic-agent-sdk/claude-opus-4-8
+    encoder:  anthropic-agent-sdk/claude-haiku-4-5-20251001
+    router:   anthropic-agent-sdk/claude-haiku-4-5-20251001</code>
+  (GPT example: <code>openai-codex/gpt-5.5</code> + <code>openai-codex/gpt-5.4-mini</code>. Ollama-Cloud
+  encoder: <code>ollama-cloud/devstral-small-2-24b-cloud</code>.) Use the exact ids the live
+  selector shows for that provider.
+- <strong>API keys</strong> → <code>credentials.yaml</code>:
+  <code>yaml
+  env:
+    BRAVE_SEARCH_API_KEY: "the-key"
+    NVIDIA_API_KEY: "nvapi-..."</code></p>
+</blockquote>
+<hr />
+<h2>Step 4 — Web search (Brave) — free, and you really want it</h2>
+<p><strong>Set this up as a normal part of the install — really, push for it.</strong> A coding agent
+that can't search the web is badly handicapped: it can't check current docs, package
+versions, error messages, or APIs. The Brave Search API has a <strong>free tier — about
+1,000 searches per month at no charge</strong>, far more than enough for normal coding.</p>
+<p>Be upfront about the one catch: <strong>the free plan requires registering a credit/debit
+card</strong> to activate (it is not charged while you stay within the free monthly quota).
+That's the only friction. Strongly encourage the user to do it anyway — web search
+while coding is genuinely worth it. If they're not comfortable adding a card, respect
+that: note it and continue (everything else still works; the key can be added later).</p>
+<p>Tell the user, then walk them through it together:</p>
+<ol>
+<li>Go to the <strong>Brave Search API</strong> portal: <a href="https://brave.com/search/api/">https://brave.com/search/api/</a></li>
+<li>Sign up, choose the <strong>free plan</strong> (it asks for a card to activate — free within the
+   monthly quota), and create an API key. (If the page layout has changed, search
+   "Brave Search API free tier" and find the key page.)</li>
+<li>Give the key to jarvis-code as <code>BRAVE_SEARCH_API_KEY</code> — via <code>jarvis api-key</code>, or by
+   adding it to <code>~/.jarvis-code/credentials.yaml</code> (see Step 3b).</li>
+</ol>
+<blockquote>
+<p>Why: <em>"This lets jarvis look things up on the live web while it codes — current
+versions, real docs, the exact error you're hitting. The free tier covers normal use;
+it just needs a card to activate, and won't charge you within the monthly quota."</em></p>
+</blockquote>
+<hr />
+<h2>Step 5 — Image generation (NVIDIA NIM) — free, worth it</h2>
+<p><strong>Also set this up.</strong> It's free and noticeably improves what jarvis can do — it can
+generate and edit images (icons, mockups, diagrams, assets). Not the absolute
+strongest image model out there, but free and far better than nothing.</p>
+<ol>
+<li>Go to <strong>NVIDIA's build portal</strong>: <a href="https://build.nvidia.com/">https://build.nvidia.com/</a></li>
+<li>Sign in and create an API key (the free credits are plenty to start). The key looks
+   like <code>nvapi-...</code>.</li>
+<li>Give it to jarvis-code as <code>NVIDIA_API_KEY</code> — via <code>jarvis api-key</code> →
+   <em>"NVIDIA NIM (image generation)"</em>, or add it to <code>credentials.yaml</code> (Step 3b).</li>
+</ol>
+<p>This enables the <code>generate_image</code> and <code>edit_image</code> tools. (Image generation uses fixed
+FLUX defaults; you don't pick an image model in <code>model-setting</code>.)</p>
+<blockquote>
+<p>Why: <em>"This gives jarvis the ability to make and edit images for free — handy for
+quick assets, icons, and mockups while you build."</em></p>
+</blockquote>
+<hr />
+<h2>Step 6 — Verify (do not skip — this is how you prove it worked)</h2>
+<p>First, run the install check. Use <code>--skip-sidecar</code> — the installer stops the sidecar on
+exit, so a plain <code>jarvis doctor</code> would warn that it's down (expected, not a failure):</p>
+<pre><code class="language-bash">jarvis doctor --skip-sidecar
+</code></pre>
+<p>It checks Python, Node, the embedding model, the provider catalog, and auth. <strong>This is
+your primary proof the install is sound.</strong></p>
+<p>Then launch jarvis — this starts the agent <em>and</em> its background sidecar:</p>
+<pre><code class="language-bash">jarvis
+</code></pre>
+<p>To confirm the sidecar is live, open <strong>another</strong> terminal and probe it:</p>
+<pre><code class="language-powershell">Invoke-RestMethod http://127.0.0.1:8765/status | ConvertTo-Json -Depth 6
+</code></pre>
+<p>(The sidecar listens on port <strong>8765</strong> by default; <code>GET /health</code> returns <code>{"ok": true}</code>.)</p>
+<p><strong>Report honestly to the user:</strong> what installed, which chat + encoder models you set,
+whether web search and image keys are configured, and the result of <code>jarvis doctor</code>.
+If anything failed, say so and what you'll try next — do not report success you didn't
+verify.</p>
+<hr />
+<h2>If something goes wrong</h2>
+<ul>
+<li>Embedding model didn't download → <code>jarvis doctor --preload-embedder</code>.</li>
+<li>A provider shows "unavailable, retry" → its live <code>/models</code> fetch failed; check the
+  key and network, then reopen <code>jarvis model-setting</code>.</li>
+<li>General diagnosis → <code>jarvis doctor</code> first; deeper notes are in the project's
+  <code>troubleshooting</code> doc on GitHub.</li>
+</ul>
+<p>When all six steps are done and <code>jarvis doctor</code> passes, the install is complete.</p></section><section id="concepts"><h1>Core concepts</h1>
 <p>The vocabulary JARVIS CODE uses, defined once. If a term in another doc is unclear, it's probably here.</p>
 <hr />
 <h2>Two kinds of memory</h2>
