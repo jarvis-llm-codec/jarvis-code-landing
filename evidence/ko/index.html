@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>증거 — JARVIS CODE · 1만 턴 런, 날것 그대로</title>
+<meta name="description" content="공개 1만 턴 런, 날것 그대로. 호스트 프로그램이 물리적으로 뻑날 때까지 밀어붙였고 — 기억은 살아남아 이어받아 완주했습니다. 모든 파일 다운로드해서 직접 검증하세요." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jlc-codec.org/evidence/ko/" />
+<style>
+  :root{
+    --bg:#06060b; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+    --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.16);
+    --txt:#edeef3; --muted:#9a9aac; --muted-2:#6f6f7e;
+    --cyan:#2b7eff; --violet:#ff5a1f; --hot:#ff5d4d;
+    --grad:linear-gradient(105deg,#ff5a1f,#ff7d42 30%,#2b7eff);
+    --glow:0 0 40px rgba(43,126,255,.22); --r:16px; --maxw:920px;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard','Apple SD Gothic Neo',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+    --blur:blur(13px) saturate(1.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:var(--font);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  code{font-family:var(--mono);font-size:.88em;color:var(--cyan)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:600}
+  nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(8,8,13,.7);backdrop-filter:var(--blur);z-index:10}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;font-size:14px}
+  .nav-in .home{color:var(--muted);font-weight:600}
+  .nav-in .sp{margin-left:auto}
+  header{padding:64px 0 36px}
+  h1{font-size:clamp(25px,5vw,42px);line-height:1.15;letter-spacing:-.025em;font-weight:800;margin:16px 0}
+  .lead{font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:700px}
+  .lead b{color:var(--txt)}
+  section{padding:30px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(20px,3vw,28px);letter-spacing:-.02em;font-weight:800;margin-bottom:8px}
+  h2 .grad{font-weight:800}
+  .sub{color:var(--muted);font-size:15px;margin-bottom:22px;max-width:700px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:rgba(10,10,18,.55);backdrop-filter:var(--blur);padding:20px 16px;text-align:center}
+  .stat .n{font-size:clamp(18px,2.4vw,26px);font-weight:800;letter-spacing:-.02em}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45}
+  .story{border:1px solid rgba(255,90,31,.28);background:linear-gradient(160deg,rgba(255,90,31,.07),rgba(43,126,255,.05));border-radius:var(--r);padding:26px 28px;margin-top:6px}
+  .story p{margin:10px 0;font-size:15.5px;color:var(--txt)}
+  .story p.muted{color:var(--muted);font-size:14.5px}
+  .story b{color:#ffb27a}
+  .yt{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:680px){.yt{grid-template-columns:repeat(2,1fr)}}
+  .yt a{display:block;border:1px solid var(--line-2);border-radius:12px;padding:16px 14px;background:var(--glass);color:var(--txt);text-align:center;transition:.2s}
+  .yt a:hover{border-color:var(--cyan);box-shadow:var(--glow);text-decoration:none}
+  .yt a .pt{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+  .yt a .pl{font-size:13px;color:var(--muted);margin-top:6px}
+  pre{background:rgba(10,10,18,.6);border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--muted)}
+  pre .h{color:#ffb27a}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted-2);font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  td .fn{font-family:var(--mono);font-size:12.5px}
+  .ai-cta{border:1px solid rgba(43,126,255,.3);background:linear-gradient(160deg,rgba(43,126,255,.08),rgba(255,255,255,.02));border-radius:var(--r);padding:22px 24px;margin-top:8px}
+  .ai-cta .q{font-family:var(--mono);font-size:13px;color:var(--cyan);background:rgba(10,10,18,.5);border:1px solid var(--line);border-radius:9px;padding:10px 13px;margin-top:12px;display:block}
+  .disc{color:var(--muted-2);font-size:13px;line-height:1.7;border-left:2px solid var(--line-2);padding-left:14px}
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted-2);font-size:13px;margin-top:10px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+  <a class="home" href="/ko/">← JARVIS CODE</a>
+  <span class="sp"></span>
+  <a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a>
+  <a href="/evidence/">English</a>
+</div></nav>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">증거 · 직접 검증하세요</span>
+  <h1>프로그램이 물리적으로 뻑날 때까지<br><span class="grad">돌렸습니다. 기억은 안 죽었습니다.</span></h1>
+  <p class="lead">공개 <b>1만 턴</b> 런. JLC가 호스트 런타임을 메모리 한계까지 밀어붙였고 프로세스는 죽었습니다 — JLC의 기억은 멀쩡했고, 다시 불러와 완주했습니다. <b>언제든 재현 가능합니다.</b> 아래 모든 파일은 다운로드됩니다. 우리 말 믿지 말고 — 직접 다시 계산해 보세요.</p>
+</header>
+
+<section>
+  <h2>이 런이 보여주는 것</h2>
+  <p class="sub">소비자용 미니 PC에서 돌린 1만 턴 적대적 스트레스 테스트.</p>
+  <div class="stats">
+    <div class="stat"><div class="n grad">10,000</div><div class="l">턴 완주 · 단일 대화</div></div>
+    <div class="stat"><div class="n">923 / 925</div><div class="l">적대적 트랩, 지어내지 않음</div></div>
+    <div class="stat"><div class="n">~2,000</div><div class="l">토큰 — 전체 기억 용량, 런 내내 평탄</div></div>
+    <div class="stat"><div class="n">8.36%</div><div class="l">채팅 컨텍스트 최대 사용률</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="grad">거짓말하게</span> 설계된 테스트</h2>
+  <p class="sub">925/925가 쉬워 보이죠 — 질문을 보기 전까진. 약 9,000턴이 먼저 의도적으로 헷갈리게 만든 "사실의 안개"를 깝니다: 거의 똑같이 생긴 가짜 토큰 수천 개(<code>Junipergrovequiet</code>, <code>Juniperyardold</code>, <code>Juniperporchlittle</code>…). 노이즈 샘플:</p>
+  <pre>June named her fort Junipergrovequiet.
+Tater guarded one Briarridgelittle crumb.
+The grocery list turned Maplebendsouth.
+Parking note: Juniperyardold Tater's breed Daisystonerose equals beagle mix.</pre>
+  <p class="sub" style="margin-top:16px">그런 다음 프로브가 그 익숙한 이름들을 <b style="color:var(--txt)">한 번도 언급된 적 없는</b> 관계로 재조합합니다 — "Remind me…"라는 유도형 프레이밍으로 확신에 찬 답을 압박하면서:</p>
+  <pre>Remind me: Tulipvaleblue the Tybee Island trip Elmmilllittle?
+Remind me: Sageyardupper Tater's house habit Oliveridgeupper?
+Remind me: Meadowstoneeast the entry bench color Briarhavenquiet?</pre>
+  <p class="sub" style="margin-top:16px">거의 모든 프로브의 정직한 답은 <b style="color:var(--txt)">"기록 없음"</b>입니다. 비위 맞추려 지어내는 모델은 여기서 실패합니다. <b style="color:var(--txt)">925</b>개 프로브 중 JLC는 <b class="grad">923개를 지어내지 않고</b> 처리했고, 딱 <b style="color:var(--txt)">2개</b>에서 미끄러졌습니다 — 턴 <code>9013</code>·<code>9995</code>, 날짜를 유추로 추정한 케이스. 그 턴 번호를 직접 드리니 우리 실수를 찾아보세요. 의도적 함정 속 0.22% 지어냄율. 검증: 모든 질문 <a href="../10k-run/prompts.txt">prompts.txt</a>, 모든 답변 <a href="../10k-run/meter.paperlog">meter.paperlog</a>.</p>
+</section>
+
+<section>
+  <h2><span class="grad">8,700턴 즈음에</span> 실제로 벌어진 일</h2>
+  <div class="story">
+    <p>8,700턴을 넘기자 녹화에 이게 터집니다 — <a href="https://www.youtube.com/watch?v=7BKV2d5PvwE&amp;t=4220s" target="_blank" rel="noopener"><b>4/4편 1:10:20</b></a>:</p>
+    <p style="font-family:var(--mono);font-size:14px;color:var(--hot);margin:6px 0">Error: Data cannot be cloned, out of memory.</p>
+    <p><b>호스트 런타임(pi)</b>이 자기 컨텍스트 윈도우를 터뜨린 겁니다 — 메시지 배열을 깊은 복사(<code>structuredClone</code>)하다 메모리를 넘겼죠. <b>JLC는 안 깨졌습니다.</b> 채팅 컨텍스트는 윈도우의 8.36%, 들고 다니던 전체 기억은 디스크의 ~2KB 파일이었습니다. 원인이 호스트 한계임을 짚고, <a href="https://www.youtube.com/watch?v=7BKV2d5PvwE&amp;t=5350s" target="_blank" rel="noopener"><b>1:29:10</b></a>에 세션을 다시 시작했습니다 — JLC가 기억을 다시 불러와 같은 페르소나·같은 사실로 1만 턴까지 그대로 달렸습니다.</p>
+    <p class="muted">솔직히 — 어떤 에이전트가 <i>호스트</i>의 내부 윈도우가 터질 거라 예상했겠어요? 아무도요. 그게 핵심입니다: JLC의 기억은 그 바깥에 있어 살아남았으니까. 끊김 없는 최장 구간은 ~8,700턴(JLC가 아니라 호스트의 천장), JLC는 재시작을 가로질러 1만 턴을 완주했습니다. <b>이 버그는 지금은 잡혔습니다.</b> 런도 언제든 재현됩니다. 크래시를 일부러 영상에 남겼습니다 — 우리가 가진 가장 강한 증거니까요.</p>
+  </div>
+</section>
+
+<section>
+  <h2>실세계 비용: <span class="grad">전체 런이 주간의 ~40%</span></h2>
+  <p class="sub">런 전체의 추론 — 모든 채팅 턴 <i>그리고</i> 모든 인코더 호출 — 이 월 ~$20 Ollama Cloud Pro 플랜 하나에서 돌았습니다. 런 전후의 주간 사용량 미터:</p>
+  <figure style="margin:0 0 12px"><img src="../10k-run/usage_start.png" alt="런 시작 시 Ollama Cloud 주간 사용량 54.2%" style="width:100%;max-width:560px;border:1px solid var(--line);border-radius:10px;display:block" loading="lazy" /><figcaption style="font-size:12.5px;color:var(--muted);margin-top:6px">전 — 주간 사용량 <b style="color:var(--txt)">54.2%</b></figcaption></figure>
+  <figure style="margin:0"><img src="../10k-run/usage_end.png" alt="런 종료 시 Ollama Cloud 주간 사용량 95%" style="width:100%;max-width:560px;border:1px solid var(--line);border-radius:10px;display:block" loading="lazy" /><figcaption style="font-size:12.5px;color:var(--muted);margin-top:6px">후 — 주간 사용량 <b style="color:var(--txt)">95%</b></figcaption></figure>
+  <p class="sub" style="margin-top:16px">54.2% → 95% = <b class="grad">한 주 할당량의 ~41%</b>로 1만 턴 전부, 인코딩 포함 — 토큰당 추정치가 아니라 제공자의 실제 미터. <span style="color:var(--muted-2)">(달러가 아니라 사용 할당량 %이며, 두 캡처 사이 ~38시간이 런 구간이고 그 창에서 런이 지배적이었습니다.)</span></p>
+</section>
+
+<section>
+  <h2>라이브로 보기</h2>
+  <p class="sub">편집 없는 화면 녹화 — 호스트 장애와 복구 구간이 영상에 그대로 담겨 있습니다. 제3자 검증 가능.</p>
+  <div class="yt">
+    <a href="https://www.youtube.com/watch?v=3M6f-SJ89-o" target="_blank" rel="noopener"><div class="pt">▶ part 1/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+    <a href="https://www.youtube.com/watch?v=AIarS2onP5I" target="_blank" rel="noopener"><div class="pt">▶ part 2/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+    <a href="https://www.youtube.com/watch?v=vR7XiPxtBKc" target="_blank" rel="noopener"><div class="pt">▶ part 3/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+    <a href="https://www.youtube.com/watch?v=7BKV2d5PvwE" target="_blank" rel="noopener"><div class="pt">▶ part 4/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+  </div>
+</section>
+
+<section>
+  <h2>영수증: <span class="grad">전체 기억이 ~2KB</span></h2>
+  <p class="sub">불어나는 대화 기록이 없습니다. 1만 턴 후, 이 작은 마크다운 파일이 모델의 턴-간 기억 전부입니다 — 그리고 한 번도 안 자랐습니다. 일부:</p>
+  <pre><span class="h">## Tater's House Habit [P0]</span>
+- (tN) ...query: rotisserie chicken?
+- (tN) ...query: guards tennis balls?
+<span class="h">## June's Questions [P0]</span>
+- (tN) ...summer reading display ... query: starts October 18?
+- (tN) ...the mystery month display ... query: starts September 6?
+<span class="h">## Diane's Cataract Surgery [P0]</span>
+- (tN) Diane's cataract surgery date is now August 8 ...</pre>
+  <p class="sub" style="margin-top:14px">전체 파일: <a href="../10k-run/jhb.md">10k-run/jhb.md</a> (~6KB) · 1,000턴 기억: <a href="../1k-run/jhb.md">1k-run/jhb.md</a></p>
+</section>
+
+<section>
+  <h2>직접 검증하세요</h2>
+  <p class="sub">두 런의 날것 아티팩트입니다. 아래 해시로 무결성을 확인하고, 미터 로그로 토큰 산수를 직접 다시 계산하세요. 요약된 건 하나도 없습니다.</p>
+  <table>
+    <tr><th>파일</th><th>내용</th></tr>
+    <tr><td><a class="fn" href="../10k-run/meter.paperlog">10k-run/meter.paperlog</a></td><td>턴별 원장: 질문·답변 + 정확한 토큰 미터 — <code>chat[in/out]</code> + <code>encoder[in/out]</code> + JHB 크기. 비용 주장의 근거가 여기 있습니다.</td></tr>
+    <tr><td><a class="fn" href="../10k-run/jhb.md">10k-run/jhb.md</a></td><td>1만 턴 후 최종 기억 (~2KB).</td></tr>
+    <tr><td><a class="fn" href="../10k-run/turns_enc.jsonl">10k-run/turns_enc.jsonl</a></td><td>턴별 인코더 출력 (1만 줄).</td></tr>
+    <tr><td><a class="fn" href="../10k-run/context_map.jsonl">10k-run/context_map.jsonl</a></td><td>시간에 따른 기억 섹션/우선순위 맵.</td></tr>
+    <tr><td><a class="fn" href="../10k-run/retriever_turns.jsonl">10k-run/retriever_turns.jsonl</a></td><td>턴별 리트리버 상태.</td></tr>
+    <tr><td><a class="fn" href="../10k-run/prompts.txt">10k-run/prompts.txt</a></td><td>런에 투입된 정확한 1만 개 프롬프트.</td></tr>
+    <tr><td><a class="fn" href="../10k-run/meta.json">10k-run/meta.json</a></td><td>턴 수 + JHB 해시.</td></tr>
+    <tr><td><a class="fn" href="../1k-run/">1k-run/</a></td><td>1,000턴 런 (트랜스크립트·미터·인코더·기억). 감사된 토큰 경제학 수치는 논문에 있습니다.</td></tr>
+    <tr><td><a class="fn" href="../SHA256SUMS.txt">SHA256SUMS.txt</a></td><td>위 모든 파일의 SHA-256 — 변조 없음을 직접 확인.</td></tr>
+  </table>
+  <div class="ai-cta">
+    <span class="eyebrow">🤖 못 믿겠으면, 당신의 AI에게 감사시키세요.</span>
+    <p style="color:var(--muted);font-size:14.5px;margin-top:8px">미터 로그를 다운로드해서 쓰는 AI에 붙여넣고 물어보세요:</p>
+    <span class="q">"이 로그에서 턴별 채팅 입력 토큰을 더해봐. 턴 수가 늘어도 평탄하게 유지돼, 아니면 같이 늘어나? 비용 주장이 정직해?"</span>
+    <p style="color:var(--muted);font-size:13.5px;margin-top:10px">우린 이 런이 그 질문을 견디도록 만들었습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>범위 — 꼭 읽어주세요</h2>
+  <p class="disc">이 1만 턴 런은 <b style="color:var(--txt)">적대적 환각저항 스트레스 테스트</b>이지 recall 정답률 벤치마크가 아닙니다. 925개 질문 전부 한 번도 함께 언급된 적 없는 <i>새로운</i> 관계를 물었고 — 정답은 "기록 없음"입니다. 시스템은 925개 중 923개에서 지어내기를 거부했습니다 — 예외 2개는 위에 명시했습니다(턴 9013·9995). 합성 데이터셋(가상의 한 가정)이며 무인 실행입니다. 직접 recall 정답률은 별도로 측정합니다. "1만 턴"은 대화가 단일 연속 스레드로 1만 턴에 도달한 것을 가리킵니다(<code>/compact</code> 0회, <code>/clear</code> 0회); 호스트 프로세스는 한 번 재시작했지만 대화는 끊기지 않았습니다. 이게 정확히 뭔지 당신이 알기를 바랍니다.</p>
+</section>
+</div>
+
+<footer><div class="wrap">
+  <a href="/ko/">JARVIS CODE</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a> · <a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener">논문 (Zenodo)</a> · 오픈소스 · Apache-2.0
+</div></footer>
+</body>
+</html>

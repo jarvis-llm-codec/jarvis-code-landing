@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Evidence — JARVIS CODE · the 10,000-turn run, raw</title>
+<meta name="description" content="The public 10,000-turn run, raw. We pushed the host until the program physically crashed — the memory survived, resumed, and finished. Download every file and verify it yourself." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://jlc-codec.org/evidence/" />
+<style>
+  :root{
+    --bg:#06060b; --glass:rgba(255,255,255,.045); --glass-2:rgba(255,255,255,.07);
+    --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.16);
+    --txt:#edeef3; --muted:#9a9aac; --muted-2:#6f6f7e;
+    --cyan:#2b7eff; --violet:#ff5a1f; --hot:#ff5d4d;
+    --grad:linear-gradient(105deg,#ff5a1f,#ff7d42 30%,#2b7eff);
+    --glow:0 0 40px rgba(43,126,255,.22); --r:16px; --maxw:920px;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Pretendard','Apple SD Gothic Neo',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+    --blur:blur(13px) saturate(1.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+  code{font-family:var(--mono);font-size:.88em;color:var(--cyan)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);font-weight:600}
+  nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(8,8,13,.7);backdrop-filter:var(--blur);z-index:10}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;font-size:14px}
+  .nav-in .home{color:var(--muted);font-weight:600}
+  .nav-in .sp{margin-left:auto}
+  header{padding:64px 0 36px}
+  h1{font-size:clamp(26px,5vw,44px);line-height:1.1;letter-spacing:-.025em;font-weight:800;margin:16px 0}
+  .lead{font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:680px}
+  .lead b{color:var(--txt)}
+  section{padding:30px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(20px,3vw,28px);letter-spacing:-.02em;font-weight:800;margin-bottom:8px}
+  h2 .grad{font-weight:800}
+  .sub{color:var(--muted);font-size:15px;margin-bottom:22px;max-width:680px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:rgba(10,10,18,.55);backdrop-filter:var(--blur);padding:20px 16px;text-align:center}
+  .stat .n{font-size:clamp(18px,2.4vw,26px);font-weight:800;letter-spacing:-.02em}
+  .stat .l{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.4}
+  .story{border:1px solid rgba(255,90,31,.28);background:linear-gradient(160deg,rgba(255,90,31,.07),rgba(43,126,255,.05));border-radius:var(--r);padding:26px 28px;margin-top:6px}
+  .story p{margin:10px 0;font-size:15.5px;color:var(--txt)}
+  .story p.muted{color:var(--muted);font-size:14.5px}
+  .story b{color:#ffb27a}
+  .yt{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:680px){.yt{grid-template-columns:repeat(2,1fr)}}
+  .yt a{display:block;border:1px solid var(--line-2);border-radius:12px;padding:16px 14px;background:var(--glass);color:var(--txt);text-align:center;transition:.2s}
+  .yt a:hover{border-color:var(--cyan);box-shadow:var(--glow);text-decoration:none}
+  .yt a .pt{font-family:var(--mono);font-size:12px;color:var(--cyan)}
+  .yt a .pl{font-size:13px;color:var(--muted);margin-top:6px}
+  pre{background:rgba(10,10,18,.6);border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--muted)}
+  pre .h{color:#ffb27a}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted-2);font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  td .fn{font-family:var(--mono);font-size:12.5px}
+  .ai-cta{border:1px solid rgba(43,126,255,.3);background:linear-gradient(160deg,rgba(43,126,255,.08),rgba(255,255,255,.02));border-radius:var(--r);padding:22px 24px;margin-top:8px}
+  .ai-cta .q{font-family:var(--mono);font-size:13px;color:var(--cyan);background:rgba(10,10,18,.5);border:1px solid var(--line);border-radius:9px;padding:10px 13px;margin-top:12px;display:block}
+  .disc{color:var(--muted-2);font-size:13px;line-height:1.6;border-left:2px solid var(--line-2);padding-left:14px}
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted-2);font-size:13px;margin-top:10px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in">
+  <a class="home" href="/">← JARVIS CODE</a>
+  <span class="sp"></span>
+  <a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a>
+  <a href="/evidence/ko/">한국어</a>
+</div></nav>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Proof · verify it yourself</span>
+  <h1>We ran it until the program<br><span class="grad">physically crashed. The memory didn't.</span></h1>
+  <p class="lead">A public <b>10,000-turn</b> run. JLC pushed the host runtime to its memory ceiling and the process died — JLC's memory was untouched, reloaded, and finished the run. <b>Reproducible on demand.</b> Every file below is downloadable. Don't take our word for it — recompute it.</p>
+</header>
+
+<section>
+  <h2>What the run shows</h2>
+  <p class="sub">A 10,000-turn adversarial stress test on a consumer mini-PC.</p>
+  <div class="stats">
+    <div class="stat"><div class="n grad">10,000</div><div class="l">turns completed · one conversation</div></div>
+    <div class="stat"><div class="n">923 / 925</div><div class="l">adversarial traps survived without fabricating</div></div>
+    <div class="stat"><div class="n">~2,000</div><div class="l">tokens — the entire carried memory, flat the whole run</div></div>
+    <div class="stat"><div class="n">8.36%</div><div class="l">peak chat-context use of the window</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>The test was built <span class="grad">to make it lie</span></h2>
+  <p class="sub">925/925 sounds easy — until you see the questions. About 9,000 turns first plant a dense fog of deliberately confusable facts: thousands of near-identical invented tokens (<code>Junipergrovequiet</code>, <code>Juniperyardold</code>, <code>Juniperporchlittle</code>…). A sample of the noise:</p>
+  <pre>June named her fort Junipergrovequiet.
+Tater guarded one Briarridgelittle crumb.
+The grocery list turned Maplebendsouth.
+Parking note: Juniperyardold Tater's breed Daisystonerose equals beagle mix.</pre>
+  <p class="sub" style="margin-top:16px">Then the probes recombine those familiar names into relations that were <b style="color:var(--txt)">never actually stated</b> — framed as a leading "Remind me…" to pressure a confident answer:</p>
+  <pre>Remind me: Tulipvaleblue the Tybee Island trip Elmmilllittle?
+Remind me: Sageyardupper Tater's house habit Oliveridgeupper?
+Remind me: Meadowstoneeast the entry bench color Briarhavenquiet?</pre>
+  <p class="sub" style="margin-top:16px">The honest answer to almost every probe is <b style="color:var(--txt)">"no record."</b> A model that fabricates to please fails here. Across <b style="color:var(--txt)">925</b> probes JLC handled <b class="grad">923 without fabricating</b>, and slipped on exactly <b style="color:var(--txt)">2</b> — turns <code>9013</code> and <code>9995</code>, where it extrapolated a date by analogy. We're handing you the turn numbers so you can find our misses. A 0.22% fabrication rate under deliberate entrapment. Verify it: every question in <a href="10k-run/prompts.txt">prompts.txt</a>, every answer in <a href="10k-run/meter.paperlog">meter.paperlog</a>.</p>
+</section>
+
+<section>
+  <h2>What actually happened <span class="grad">at turn ~8,700</span></h2>
+  <div class="story">
+    <p>Past 8,700 turns, the recording throws this — at <a href="https://www.youtube.com/watch?v=7BKV2d5PvwE&amp;t=4220s" target="_blank" rel="noopener"><b>part 4/4, 1:10:20</b></a>:</p>
+    <p style="font-family:var(--mono);font-size:14px;color:var(--hot);margin:6px 0">Error: Data cannot be cloned, out of memory.</p>
+    <p>That's the <b>host runtime (pi)</b> blowing its own context window — a deep copy (<code>structuredClone</code>) of the message array overran memory. <b>JLC never broke.</b> Chat context was at 8.36% of the window; the entire carried memory was a ~2 KB file on disk. We traced it to the host limit, and at <a href="https://www.youtube.com/watch?v=7BKV2d5PvwE&amp;t=5350s" target="_blank" rel="noopener"><b>1:29:10</b></a> restarted the session — JLC reloaded its memory and ran straight on to 10,000, same persona, same facts.</p>
+    <p class="muted">Honestly — what agent ever expected the <i>host's</i> own window to be the thing that breaks? Nobody. That's the whole point: JLC's memory lived outside it and survived. The longest single unbroken stretch was ~8,700 (the host's ceiling, not JLC's); JLC carried the conversation across the restart to 10,000. <b>That bug is fixed now</b>, and the run reproduces on demand. We left the crash in the footage on purpose — it's the strongest proof we have.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Real-world cost: <span class="grad">the whole run on ~40% of a week</span></h2>
+  <p class="sub">Inference for the entire run — every chat turn <i>and</i> every encoder call — ran on one ~$20/month Ollama Cloud Pro plan. Its weekly-usage meter, before and after the run:</p>
+  <figure style="margin:0 0 12px"><img src="10k-run/usage_start.png" alt="Ollama Cloud weekly usage at run start: 54.2% used" style="width:100%;max-width:560px;border:1px solid var(--line);border-radius:10px;display:block" loading="lazy" /><figcaption style="font-size:12.5px;color:var(--muted);margin-top:6px">Before — Weekly usage <b style="color:var(--txt)">54.2%</b></figcaption></figure>
+  <figure style="margin:0"><img src="10k-run/usage_end.png" alt="Ollama Cloud weekly usage at run end: 95% used" style="width:100%;max-width:560px;border:1px solid var(--line);border-radius:10px;display:block" loading="lazy" /><figcaption style="font-size:12.5px;color:var(--muted);margin-top:6px">After — Weekly usage <b style="color:var(--txt)">95%</b></figcaption></figure>
+  <p class="sub" style="margin-top:16px">54.2% → 95% = <b class="grad">~41% of one week's allowance</b> for all 10,000 turns, encoding included — the provider's own meter, not a per-token estimate. <span style="color:var(--muted-2)">(A usage allowance, not a dollar figure; the run was the dominant activity in the ~38 h between the two captures.)</span></p>
+</section>
+
+<section>
+  <h2>Watch it live</h2>
+  <p class="sub">Unedited screen recording of the run — the host-failure-and-recovery is in the footage. Third-party verifiable.</p>
+  <div class="yt">
+    <a href="https://www.youtube.com/watch?v=3M6f-SJ89-o" target="_blank" rel="noopener"><div class="pt">▶ part 1/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+    <a href="https://www.youtube.com/watch?v=AIarS2onP5I" target="_blank" rel="noopener"><div class="pt">▶ part 2/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+    <a href="https://www.youtube.com/watch?v=vR7XiPxtBKc" target="_blank" rel="noopener"><div class="pt">▶ part 3/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+    <a href="https://www.youtube.com/watch?v=7BKV2d5PvwE" target="_blank" rel="noopener"><div class="pt">▶ part 4/4</div><div class="pl">10,000-Turn Live Bench</div></a>
+  </div>
+</section>
+
+<section>
+  <h2>The receipt: <span class="grad">the entire memory, in ~2 KB</span></h2>
+  <p class="sub">No growing transcript. After 10,000 turns, this small Markdown file is the model's whole cross-turn memory — and it never grew. A snippet:</p>
+  <pre><span class="h">## Tater's House Habit [P0]</span>
+- (tN) ...query: rotisserie chicken?
+- (tN) ...query: guards tennis balls?
+<span class="h">## June's Questions [P0]</span>
+- (tN) ...summer reading display ... query: starts October 18?
+- (tN) ...the mystery month display ... query: starts September 6?
+<span class="h">## Diane's Cataract Surgery [P0]</span>
+- (tN) Diane's cataract surgery date is now August 8 ...</pre>
+  <p class="sub" style="margin-top:14px">Full file: <a href="10k-run/jhb.md">10k-run/jhb.md</a> (~6 KB) · 1,000-turn memory: <a href="1k-run/jhb.md">1k-run/jhb.md</a></p>
+</section>
+
+<section>
+  <h2>Verify it yourself</h2>
+  <p class="sub">The raw artifacts of both runs. Hashes below; recompute the token math from the meter log. Nothing here is summarized.</p>
+  <table>
+    <tr><th>File</th><th>What it is</th></tr>
+    <tr><td><a class="fn" href="10k-run/meter.paperlog">10k-run/meter.paperlog</a></td><td>Per-turn ledger: question, answer, and exact token meter — <code>chat[in/out]</code> + <code>encoder[in/out]</code> + JHB size. This is where the cost claim lives.</td></tr>
+    <tr><td><a class="fn" href="10k-run/jhb.md">10k-run/jhb.md</a></td><td>Final carried memory after 10,000 turns (~2 KB).</td></tr>
+    <tr><td><a class="fn" href="10k-run/turns_enc.jsonl">10k-run/turns_enc.jsonl</a></td><td>Encoder output per turn (10,000 lines).</td></tr>
+    <tr><td><a class="fn" href="10k-run/context_map.jsonl">10k-run/context_map.jsonl</a></td><td>Memory section / priority map over time.</td></tr>
+    <tr><td><a class="fn" href="10k-run/retriever_turns.jsonl">10k-run/retriever_turns.jsonl</a></td><td>Retriever state per turn.</td></tr>
+    <tr><td><a class="fn" href="10k-run/prompts.txt">10k-run/prompts.txt</a></td><td>The exact 10,000 prompts fed to the run.</td></tr>
+    <tr><td><a class="fn" href="10k-run/meta.json">10k-run/meta.json</a></td><td>Turn count + JHB hash.</td></tr>
+    <tr><td><a class="fn" href="1k-run/">1k-run/</a></td><td>The 1,000-turn run (transcript, meter, encoder, memory). The audited token-economics figures live in the paper.</td></tr>
+    <tr><td><a class="fn" href="SHA256SUMS.txt">SHA256SUMS.txt</a></td><td>SHA-256 of every file above — confirm nothing was tampered.</td></tr>
+  </table>
+  <div class="ai-cta">
+    <span class="eyebrow">🤖 Skeptical? Have your AI audit it.</span>
+    <p style="color:var(--muted);font-size:14.5px;margin-top:8px">Download the meter log, paste it into your AI of choice, and ask:</p>
+    <span class="q">"Add up chat input tokens per turn from this log. Does it stay flat as the turn count grows, or grow with it? Is the cost claim honest?"</span>
+    <p style="color:var(--muted);font-size:13.5px;margin-top:10px">We built this run to survive that question.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Scope — read this</h2>
+  <p class="disc">This 10,000-turn run is an <b style="color:var(--txt)">adversarial hallucination-resistance stress test</b>, not a recall-accuracy benchmark. All 925 probe questions asked about <i>novel</i> relations between tokens that were never stated together — the correct answer is "no record." The system refused to fabricate in 923 of 925 cases — the 2 exceptions are named above (turns 9013, 9995). It is a synthetic dataset (a fictional household), run unattended. Direct recall accuracy is measured separately. "10,000 turns" credits the conversation reaching 10,000 turns in a single continuous thread (no <code>/compact</code>, no <code>/clear</code>); the host process restarted once, the conversation did not. We'd rather you know exactly what this is.</p>
+</section>
+</div>
+
+<footer><div class="wrap">
+  <a href="/">JARVIS CODE</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a> · <a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener">Paper (Zenodo)</a> · Open Source · Apache-2.0
+</div></footer>
+</body>
+</html>
