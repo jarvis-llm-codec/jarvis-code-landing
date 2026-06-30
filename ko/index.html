@@ -447,6 +447,27 @@
   </div>
 </section>
 
+<section class="block" id="privacy">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">③ 프라이버시 &amp; BYOK</span><h2>당신의 코드는 <span class="grad">당신의 것.</span></h2></div>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:10px">
+      <div>
+        <h3>서버 없음. 텔레메트리 없음.</h3>
+        <p>jarvis-code엔 백엔드가 없습니다. 아무것도 phone-home 하지 않습니다 — 애널리틱스도, 사용량 추적도, 업데이트 핑도 없습니다. 임베딩 모델 자체의 텔레메트리까지 꺼버립니다.</p>
+      </div>
+      <div>
+        <h3>네 키를 가져와. 마크업 0.</h3>
+        <p>개인 개발자는 프록시 서버를 못 돌립니다 — 그래서 안 돌립니다. 당신의 프로바이더(Anthropic, OpenAI, Ollama…)를 직접 연결하고 벤더에 직접 지불합니다. jarvis-code는 코덱과 메모리 하네스만 제공합니다.</p>
+      </div>
+      <div>
+        <h3>로컬, 읽을 수 있는 메모리.</h3>
+        <p>당신의 메모리는 디스크에 평문 <b>JSONL</b>로 있습니다 — 잠긴 바이너리 DB가 아니라. 임베딩은 로컬에서 돕니다(bge-m3). 당신의 코드는 오직 <i>당신이 고른</i> LLM 프로바이더로만 나갑니다.</p>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:12.5px;color:var(--muted);margin-top:18px">첫 설치 때 임베딩 모델(~2.3GB)을 HuggingFace에서 한 번 받습니다. 웹 검색을 켜면 Brave를 씁니다. 그게 전부입니다.</p>
+  </div>
+</section>
+
 <section class="final" id="install">
   <div class="wrap"><div class="reveal">
     <h2>잊지 않는 코딩 컴패니언,<br><span class="grad">지금 시작하세요.</span></h2>

@@ -467,6 +467,27 @@
   </div>
 </section>
 
+<section class="block" id="privacy">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">③ Privacy &amp; BYOK</span><h2>Your code is <span class="grad">yours.</span></h2></div>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:10px">
+      <div>
+        <h3>No servers. No telemetry.</h3>
+        <p>jarvis-code has no backend. Nothing phones home — no analytics, no usage tracking, no update pings. It even disables the embedding model's own telemetry.</p>
+      </div>
+      <div>
+        <h3>Bring your own key. Zero markup.</h3>
+        <p>A solo dev can't run proxy servers — so it doesn't. You connect your own provider (Anthropic, OpenAI, Ollama…) and pay the vendor directly. jarvis-code just provides the codec and the memory harness.</p>
+      </div>
+      <div>
+        <h3>Local, readable memory.</h3>
+        <p>Your memory lives on your disk as plain-text <b>JSONL</b> — not a locked binary DB. Embeddings run locally (bge-m3). Your code only leaves for the LLM provider <i>you</i> choose.</p>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:12.5px;color:var(--muted);margin-top:18px">First install downloads the ~2.3 GB embedding model once from HuggingFace; web search, if you enable it, uses Brave. That's the full list.</p>
+  </div>
+</section>
+
 <section class="final" id="install">
   <div class="wrap"><div class="reveal">
     <h2>The coding companion that never forgets.<br><span class="grad">Get started now.</span></h2>
