@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>JARVIS CODE — Docs</title><style>
+*{box-sizing:border-box}
+body{background:#06060b;color:#e7e8ef;font-family:'Inter','Pretendard','Apple SD Gothic Neo',system-ui,sans-serif;line-height:1.7;margin:0}
+#sidebar{position:fixed;top:0;left:0;width:250px;height:100vh;overflow-y:auto;background:#0a0a11;border-right:1px solid rgba(255,255,255,.1);padding:22px 14px}
+#sidebar .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;padding:0 10px;margin-bottom:3px;text-decoration:none}
+#sidebar .brand .jc-j{color:#ff7d42}#sidebar .brand .jc-c{color:#2b7eff}
+#sidebar .brand svg{height:20px;width:auto}
+#sidebar .tag{font-size:11px;color:#6f6f7e;padding:0 10px;margin-bottom:16px;letter-spacing:.1em;text-transform:uppercase}
+#sidebar .top{display:flex;gap:10px;padding:0 10px;margin-bottom:16px;font-size:12.5px}
+#sidebar .top a{color:#9a9aac;text-decoration:none}#sidebar .top a:hover{color:#2b7eff}
+#sidebar a.doc{display:block;padding:8px 12px;border-radius:8px;color:#9a9aac;font-size:14px;text-decoration:none;margin-bottom:2px;border-left:2px solid transparent}
+#sidebar a.doc:hover{background:rgba(255,255,255,.05);color:#e7e8ef}
+#sidebar a.doc.active{background:rgba(43,126,255,.12);color:#7fb0ff;border-left-color:#2b7eff}
+main{margin-left:250px;max-width:800px;padding:34px 44px 160px}
+section{scroll-margin-top:20px;border-top:1px dashed rgba(255,255,255,.12);padding-top:14px;margin-top:34px}
+section:first-child{border-top:none;margin-top:0}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:6px 0 16px;background:linear-gradient(105deg,#ff5a1f,#ff7d42 30%,#2b7eff);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:30px 0 10px;color:#fff}
+h3{font-size:17px;font-weight:700;margin:22px 0 8px;color:#cfd2e0}
+p,li{font-size:15px;color:#c3c4d2}
+a{color:#2b7eff;text-decoration:none}a:hover{text-decoration:underline}
+strong,b{color:#edeef3}
+em{color:#ffb27a;font-style:italic}
+code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.88em;color:#7fb0ff;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:5px}
+pre{background:rgba(10,10,18,.7);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:#b9c0d4;padding:0}
+blockquote{border-left:3px solid #2b7eff;background:rgba(43,126,255,.06);margin:16px 0;padding:10px 16px;border-radius:0 8px 8px 0;color:#cdd0de}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+th,td{border:1px solid rgba(255,255,255,.12);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:rgba(255,255,255,.05);color:#9a9aac;font-weight:600}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+hr{border:none;border-top:1px solid rgba(255,255,255,.12);margin:24px 0}
+@media(max-width:720px){#sidebar{position:static;width:100%;height:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}main{margin-left:0;padding:24px 20px 80px}}
+</style></head><body><nav id="sidebar"><a class="brand" href="/ko/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a><div class="tag">문서</div><div class="top"><a href="/ko/">← Home</a><a href="/docs/">English</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div><a class="doc" href="#README">인덱스</a><a class="doc" href="#overview">개요</a><a class="doc" href="#quickstart">빠른 시작</a><a class="doc" href="#concepts">개념</a><a class="doc" href="#cost-model">비용 모델</a><a class="doc" href="#faq">FAQ</a></nav><main><section id="README"><h1>JARVIS CODE — 문서</h1>
+<p>잊지 않는 터미널 코딩 에이전트. 턴·재시작·모델 교체를 가로지르는 하나의 연속 대화 — 노 <code>/compact</code>, 노 <code>/clear</code>. 오픈소스, Apache-2.0.</p>
+<blockquote>
+<p>🤖 <strong>AI로 평가 중인가요?</strong> 이 docs를 어시스턴트에 붙여넣고 비용 주장이 말 되는지 물어보세요. 원시 증거 — 공개 10,000턴 런·로그·해시 — 는 <strong><a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a></strong> 에 있습니다.</p>
+</blockquote>
+<hr />
+<h2>읽는 순서</h2>
+<p><strong>여기서 시작</strong>
+1. <a href="#overview">overview.md</a> — 뭐고 왜 다른가 (시작점)
+2. <a href="#quickstart">quickstart.md</a> — 설치하고 첫 세션
+3. <a href="#concepts">concepts.md</a> — 용어: 채팅 vs 딥다이브, JARVIS.md, JHB, encoder, pair, sidecar, 울트라코드</p>
+<p><strong>이해하기</strong>
+4. <a href="#cost-model">cost-model.md</a> — ⭐ 왜 두 모델, 인코더는 왜 싼가 (정직한 숫자)
+5. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/architecture.md">architecture.md</a> — 엔진 + 코덱 + 확장, 그리고 모델 컨텍스트에 뭐가 들어가나
+6. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/memory-and-projects.md">memory-and-projects.md</a> — 프로젝트 기억, 딥다이브 모드, 런타임 노브</p>
+<p><strong>레퍼런스</strong>
+7. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a> — 역할별 모델 선택, 커스텀 프로바이더(YAML/UI)
+8. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/install.md">install.md</a> — 전체 설치 레퍼런스, 요구사항, 제거
+9. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/troubleshooting.md">troubleshooting.md</a> — 흔한 실패와 해결
+10. <a href="#faq">faq.md</a> — 회의론자가 진짜 묻는 것들</p>
+<p><strong>증거</strong>
+- <a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a> — 원시 1k/10k 아티팩트, 무결성 해시, 라이브 녹화
+- 논문: <em>"Forgetting Is All You Need"</em> — <a href="https://doi.org/10.5281/zenodo.20266424">Zenodo</a></p>
+<hr />
+<h2>유지보수/기여자용 (내부)</h2>
+<p>유저용이 아닌 엔지니어링 노트입니다:</p>
+<ul>
+<li><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/cross-platform-porting.md">cross-platform-porting.md</a> — 포팅 감사, 서브시스템 결합도</li>
+<li><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/release-packaging.md">release-packaging.md</a> — 릴리스 빌드·발행 방법</li>
+</ul>
+<hr />
+<p><em><a href="https://github.com/earendil-works/pi">pi-agent</a>(MIT, Mario Zechner) 기반 · JLC 코어 내장·튜닝.</em></p></section><section id="overview"><h1>개요 — JARVIS CODE가 뭔지, 그리고 왜 다른지</h1>
+<p><strong>JARVIS CODE는 잊지 않는 터미널 코딩 에이전트입니다.</strong> 하나의 연속된 대화를 — 턴·재시작·모델 교체를 가로질러 — <code>/compact</code>나 <code>/clear</code> 없이 유지합니다. 매 턴 불어나는 트랜스크립트를 다시 보내는 대신, 기억을 컨텍스트 윈도우 <strong>밖</strong>에 들고 다니기 때문입니다.</p>
+<p>오픈소스(Apache-2.0)이며, <a href="https://github.com/earendil-works/pi">pi-agent</a>(MIT) 하네스 위에 JLC — <strong>JARVIS LLM Codec</strong> — 를 내장했습니다.</p>
+<blockquote>
+<p>🤖 <strong>못 믿겠으면 당신의 AI에게 확인시키세요.</strong> 이 사이트 전체가 감사를 견디도록 설계됐습니다. 이 docs(또는 <strong><a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a></strong> 의 원시 로그)를 AI에 붙여넣고 물어보세요: <em>"이 비용 주장 말 되냐? 나 이거 써야 하냐?"</em> 핵심 숫자는 전부 공개 10,000턴 런으로 재계산 가능합니다.</p>
+</blockquote>
+<hr />
+<h2>왜 다른가</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>보통의 코딩 에이전트</th>
+<th>JARVIS CODE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>기억</strong></td>
+<td>매 턴 대화 전체 재전송</td>
+<td>작은 압축 기억(JHB)을 윈도우 밖에 들고 다님</td>
+</tr>
+<tr>
+<td><strong>긴 세션</strong></td>
+<td>꽉 차면 <code>/compact</code>·<code>/clear</code> → 맥락 손실</td>
+<td>노 컴팩트·노 클리어 — 끊김 없는 한 세션</td>
+</tr>
+<tr>
+<td><strong>비용 곡선</strong></td>
+<td>턴 수 따라 증가 — O(n²)</td>
+<td>턴당 평탄 — O(n)</td>
+</tr>
+<tr>
+<td><strong>재시작/모델 교체</strong></td>
+<td>처음부터</td>
+<td>멈춘 그 자리에서 그대로</td>
+</tr>
+<tr>
+<td><strong>새 코드베이스</strong></td>
+<td>세션마다 다시 설명</td>
+<td>영속 프로젝트 기억으로 바로 이해</td>
+</tr>
+</tbody>
+</table>
+<p>메커니즘과 정직한 숫자(안 이기는 경우 포함): <strong><a href="#cost-model">cost-model.md</a></strong>.</p>
+<hr />
+<h2>네 가지 모델 역할</h2>
+<p>"AI 하나"가 아니라, <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a>에서 고르는 네 개의 명명된 역할을 씁니다:</p>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>일</th>
+<th>보통 모델</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>chat</strong></td>
+<td>당신과 대화하는 모델 — 코딩과 대화</td>
+<td>똑똑/비쌈</td>
+</tr>
+<tr>
+<td><strong>encoder</strong></td>
+<td>매 턴을 기억(JHB)으로 압축, 매 턴</td>
+<td>싸고/빠름 (예: 24B 모델)</td>
+</tr>
+<tr>
+<td><strong>router</strong></td>
+<td>경량 의도 분류기(딥다이브 vs 채팅 vs 빌드)</td>
+<td>인코더 미러</td>
+</tr>
+<tr>
+<td><strong>subagent</strong></td>
+<td>툴 실행 서브태스크 + 울트라코드 팬아웃 워커</td>
+<td>chat로 기본값</td>
+</tr>
+</tbody>
+</table>
+<p>chat/encoder 분리가 비용 이야기의 핵심입니다 — <em>더 싼 두 번째</em> 모델을 돌리는 게 왜 긴 작업의 총비용을 낮추는지는 <strong><a href="#cost-model">cost-model.md</a></strong>.</p>
+<hr />
+<h2>한 줄 thesis</h2>
+<blockquote>
+<p>컨텍스트를 늘리지 마라. 기억을 들고 가라.</p>
+</blockquote>
+<p>LLM은 stateless이고 어텐션은 길이에 대해 O(n²) — 대화가 길수록 비용도 늘고 성능도 떨어지다, 결국 뭔가를 버려야 합니다. JLC는 잊기를 받아들이고 기억을 윈도우 밖에 적습니다. 비용 곡선이 제곱에서 선형으로 꺾이고, 대화에 천장이 사라집니다.</p>
+<p>논문: <em>"Forgetting Is All You Need"</em> — <a href="https://doi.org/10.5281/zenodo.20266424">Zenodo DOI</a>.</p>
+<hr />
+<h2>주장이 아니라 증거</h2>
+<ul>
+<li>소비자 미니 PC에서 돌린 공개 <strong>10,000턴</strong> 런 — 원시 로그·무결성 해시·라이브 녹화가 <strong><a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a></strong> 에.</li>
+<li>925개 적대적 유도 함정 중 <strong>923개</strong>에서 정직 유지(그리고 놓친 2개를 턴 번호로 공개).</li>
+<li>전체 런 — chat <em>과</em> encoder — 이 ~$20/월 플랜의 <strong>주간 ~41%</strong> 에 들어감.</li>
+</ul>
+<hr />
+<h2>다음으로</h2>
+<ol>
+<li><strong><a href="#quickstart">quickstart.md</a></strong> — 설치하고 첫 세션 (5분)</li>
+<li><strong><a href="#concepts">concepts.md</a></strong> — 용어: 딥다이브 vs 채팅, JARVIS.md, JHB, pair, sidecar, 울트라코드</li>
+<li><strong><a href="#cost-model">cost-model.md</a></strong> — 왜 두 모델, 인코더는 왜 싼가</li>
+<li><strong><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a></strong> — 모델·프로바이더 고르기</li>
+<li><strong><a href="#faq">faq.md</a></strong> — 회의론자가 진짜 묻는 것들</li>
+<li><strong><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/architecture.md">architecture.md</a></strong> — 엔진·코덱·확장이 어떻게 맞물리나</li>
+</ol>
+<p>레퍼런스: <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/install.md">install.md</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/memory-and-projects.md">memory-and-projects.md</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/troubleshooting.md">troubleshooting.md</a></p></section><section id="quickstart"><h1>빠른 시작 — 5분 안에 첫 세션</h1>
+<p>제로에서 작동하는 코딩 세션까지. 전체 설치 레퍼런스(요구사항·제거·폴더 위치)는 <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/install.md">install.md</a>, 보고 있는 게 뭔지는 <a href="#concepts">concepts.md</a>.</p>
+<hr />
+<h2>1. 설치</h2>
+<p><strong>Windows</strong> (현재 지원) — PowerShell에서:</p>
+<pre><code class="language-powershell">irm https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.ps1 | iex
+</code></pre>
+<p><strong>macOS · Linux</strong> — 인스톨러 마무리 중 (<strong>곧 지원 예정</strong>). 그 전까지는 소스에서 설치 — <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/install.md">install.md</a> 참고.</p>
+<hr />
+<h2>2. 실행</h2>
+<pre><code>jarvis
+</code></pre>
+<p>첫 실행 시 안내해줍니다:</p>
+<ol>
+<li><strong>프로바이더 로그인</strong> — 모델 프로바이더 연결(예: Claude 구독, 또는 Ollama Cloud 키). 손으로 편집할 설정 파일 없음.</li>
+<li><strong>모델 역할</strong> — 역할별 모델 선택. 중요한 둘:
+   - <strong>chat</strong> — 코딩하는 똑똑하고 비싼 모델
+   - <strong>encoder</strong> — 기억을 담당하는 싸고 빠른 모델 (매 턴 동작)</li>
+</ol>
+<p>좋은 시작 조합: <strong>chat</strong>에 프론티어 모델, <strong>encoder</strong>에 ~24B 모델(예: <code>ollama-cloud/devstral-small-2:24b</code>). 이 분리가 왜 돈을 아끼는지: <a href="#cost-model">cost-model.md</a>. 나중에 바꾸려면: <code>/model-setting</code>.</p>
+<p>이후 실행은 전부 건너뜁니다 — 기억하니까요.</p>
+<hr />
+<h2>3. 프로젝트 열기</h2>
+<p>코드 저장소 <em>안에서</em> <code>jarvis</code>를 실행하세요. 에이전트는 프로젝트별 기억 파일(<strong>JARVIS.md</strong>)을 유지해, 작업하며 당신의 코드베이스를 배우고 — 다음 세션에도 기억합니다. 프로젝트 전환에 재설정·재설명이 필요 없습니다(<a href="#concepts">concepts.md</a>).</p>
+<hr />
+<h2>4. 작업 — 그리고 계속</h2>
+<p>그냥 대화하세요: 묻고, 변경을 설명하고, 빌드시키세요. 다른 에이전트가 안 하는 두 가지를 보게 됩니다:</p>
+<ul>
+<li><strong><code>/compact</code>나 <code>/clear</code>로 멈추지 않습니다.</strong> 대화가 계속됩니다 — 10,000턴으로 입증(<a href="https://jlc-codec.org/evidence/ko/">증거</a>).</li>
+<li><strong>닫고 내일 다시 와도</strong> — 멈춘 그 자리에서, <em>왜</em> approach X를 버렸는지까지 기억한 채 이어갑니다.</li>
+</ul>
+<p>일상 대화엔 가벼운 추론을, 코딩엔 추론을 끝까지 — 컨텍스트 태울 걱정 없이(기억이 윈도우 밖에 사니까).</p>
+<hr />
+<h2>다음 단계</h2>
+<ul>
+<li><a href="#concepts">concepts.md</a> — JARVIS.md·JHB·"pair"·sidecar가 실제로 뭔지</li>
+<li><a href="#cost-model">cost-model.md</a> — 두 모델 구성이 긴 작업에서 왜 더 싼지</li>
+<li><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a> — 다른 프로바이더/로컬 모델 연결</li>
+<li><a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/troubleshooting.md">troubleshooting.md</a> — 시작이 안 될 때</li>
+</ul></section><section id="concepts"><h1>핵심 개념</h1>
+<p>JARVIS CODE가 쓰는 용어를 한 번에 정의합니다. 다른 문서의 용어가 헷갈리면 여기 있을 겁니다.</p>
+<hr />
+<h2>두 종류의 기억</h2>
+<p>JARVIS CODE는 기억을 두 곳에 두고, 각자 다른 일을 합니다.</p>
+<h3>JHB — 들고 다니는 대화 기억</h3>
+<p><strong>JHB</strong>(<em>JARVIS Handbook</em>)는 <strong>현재 대화</strong>의 진행 기억입니다. ~<strong>2,000토큰</strong> 근처로 상한이 걸린 작은 마크다운 문서로, <a href="#네-가지-역할">encoder</a>가 매 턴 다시 씁니다. chat 모델은 원본 트랜스크립트를 보지 않고 JHB를 봅니다. 그래서 컨텍스트가 안 불어나고 대화가 영원히 이어집니다. JHB는 턴 10이든 턴 10,000이든 대략 같은 크기를 유지합니다.</p>
+<h3>JARVIS.md — 프로젝트별 기억</h3>
+<p><strong>JARVIS.md</strong>는 <strong>프로젝트별</strong>(저장소별)로 유지되는 파일입니다. 에이전트가 <em>당신의 코드베이스</em>에 대해 배운 걸 기록해 다음 세션에도 남깁니다. 명명된 섹션:</p>
+<table>
+<thead>
+<tr>
+<th>섹션</th>
+<th>담는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NOW</strong></td>
+<td>현재 작업 상태</td>
+</tr>
+<tr>
+<td><strong>MAP</strong></td>
+<td>파일·심볼 지도</td>
+</tr>
+<tr>
+<td><strong>LAW</strong></td>
+<td>반복되는 규칙</td>
+</tr>
+<tr>
+<td><strong>BAN</strong></td>
+<td>하면 안 되는 것</td>
+</tr>
+<tr>
+<td><strong>OMM</strong></td>
+<td>실수 → 다음 실행의 방어선 (자기 실수에서 배움)</td>
+</tr>
+<tr>
+<td><strong>RAW</strong></td>
+<td>검증 가능한 증거 포인터</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OMM</strong>이 복리 부분입니다. 한 번 저지른 실수가 방어선이 되어, 당신이 지적하지 않아도 같은 실수가 반복되지 않습니다.</p>
+<hr />
+<h2>모드</h2>
+<ul>
+<li><strong>채팅 모드</strong> — 일상 대화와 빠른 질문. 평이한 추론, 빠름.</li>
+<li><strong>딥다이브 모드</strong> — 코딩과 다단계 작업. 추론을 끝까지 밀어 모델의 최고를 뽑되, 컨텍스트 태울 걱정 없이(기억이 윈도우 밖에 삶).</li>
+</ul>
+<p>어떤 모드가 필요한지는 <a href="#네-가지-역할">router</a>가 결정합니다.</p>
+<hr />
+<h2>네 가지 역할</h2>
+<p>JARVIS CODE는 "AI 하나"가 아니라 <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a>에서 배정하는 네 역할입니다:</p>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>chat</strong></td>
+<td>당신과 대화하는 모델 — 코딩과 대화 (똑똑/비쌈)</td>
+</tr>
+<tr>
+<td><strong>encoder</strong></td>
+<td>매 턴을 JHB로 압축, 매 턴 (싸고/빠름)</td>
+</tr>
+<tr>
+<td><strong>router</strong></td>
+<td>의도 분류(채팅 vs 딥다이브 vs 빌드); 인코더 미러</td>
+</tr>
+<tr>
+<td><strong>subagent</strong></td>
+<td>툴 실행 서브태스크 + 울트라코드 팬아웃 워커; chat로 기본값</td>
+</tr>
+</tbody>
+</table>
+<p>chat/encoder 분리가 왜 총비용을 낮추는지: <strong><a href="#cost-model">cost-model.md</a></strong>.</p>
+<hr />
+<h2>다른 용어</h2>
+<ul>
+<li><strong>Sidecar</strong> — JLC 엔진 <em>그 자체</em>인 로컬 백그라운드 프로세스. 터미널 프론트엔드가 이것과 통신하며, 인코딩·기억·라우팅을 합니다. 당신의 머신에서 돕니다.</li>
+<li><strong>Pair</strong> — 하나의 페어링된 세션: 터미널 UI 프론트엔드 + 그 sidecar. (보통은 신경 안 쓰지만, 여러 창을 띄울 때 중요합니다.)</li>
+<li><strong>울트라코드(Ultracode)</strong> — 팬아웃 모드: 큰 작업에 대해 <strong>N개의 병렬 서브에이전트 워커</strong>를 신선한 컨텍스트로 띄우고, 결과를 검증·합성합니다. JLC와 같은 "긴-컨텍스트 저주를 컨텍스트 분할로 이긴다"는 아이디어를, <em>시간</em>(한 세션을 턴으로 분할) 대신 <em>공간</em>(작은 컨텍스트 여러 개)에 적용한 것.</li>
+<li><strong>JLC</strong> — <em>JARVIS LLM Codec</em>. 기억을 컨텍스트 윈도우 밖으로 들고 가는 코어. 프로젝트 전체가 이걸 중심으로 만들어졌습니다.</li>
+</ul>
+<hr />
+<p><strong>다음:</strong> <a href="#cost-model">cost-model.md</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/architecture.md">architecture.md</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/memory-and-projects.md">memory-and-projects.md</a></p></section><section id="cost-model"><h1>비용 모델 — 왜 두 모델인가, 그리고 인코더는 왜 싼가</h1>
+<p>JARVIS CODE의 가장 특이한 점은 <strong>매 턴마다 두 개의 모델</strong>을 돌린다는 것입니다.</p>
+<ul>
+<li><strong>chat</strong> 모델 — 비싸고 똑똑함. 실제 코딩과 대화를 담당</li>
+<li><strong>encoder</strong> — 싸고 빠름. 매 턴을 기억으로 압축</li>
+</ul>
+<p>흔한 반응은 <em>"두 모델 = 비용 두 배"</em> 입니다. 짧은 대화보다 길어지는 순간, 정반대가 됩니다. 이 문서는 그 메커니즘과 <strong>정직한 숫자</strong>를 — 안 이기는 경우까지 — 설명합니다.</p>
+<blockquote>
+<p>🤖 <strong>산문을 믿지 말고 데이터를 감사하세요.</strong> 아래 모든 숫자는 <strong><a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a></strong> 의 원시 로그(공개 1,000·10,000턴 런 + SHA-256 해시)로 뒷받침됩니다. 로그를 당신의 AI에 붙여넣고 계산을 검증시켜 보세요.</p>
+</blockquote>
+<hr />
+<h2>한 모델의 문제</h2>
+<p>LLM은 <strong>턴 사이에 stateless</strong> — 스스로는 아무것도 기억하지 못합니다. 보통의 코딩 에이전트는 이걸 <strong>매 턴 대화 전체를 다시 보내서</strong> 가립니다. 그래서 8,000번째 턴의 25토큰짜리 질문은 25토큰이 아니라, <em>그 앞 7,999턴 전부 + 25</em> 입니다.</p>
+<p>비용이 <strong>질문 크기</strong>가 아니라 <strong>턴 수</strong>에 비례해 늘어 — <strong>O(n²)</strong> 입니다. 결국 윈도우가 차면 <code>/compact</code>(압축하고 손실)나 <code>/clear</code>(기억 폐기)를 해야 합니다.</p>
+<p>사람들은 이걸 심하게 과소평가합니다. "짧은 질문 8,000개, 얼마나 되겠어?" 순진한 계산: <code>8,000 × 25 ≈ 20만 토큰</code>. 실측(10,000턴 런 크래시 지점, 턴 8,757): 풀 리플레이 에이전트라면 <strong>~2,519억 토큰</strong>을 모델에 넣었을 겁니다. (참고: <code>/evidence</code> → <em>"짧은 대화는 싸다 고들 하지"</em>)</p>
+<hr />
+<h2>JARVIS CODE는 대신 이렇게</h2>
+<p>chat 모델은 <strong>대화 기록을 절대 받지 않습니다.</strong> 매 턴 받는 건 이것뿐입니다:</p>
+<pre><code>[ 시스템 지시문  ~500 토큰 ]
+[ JHB (들고 다니는 기억)  ~2,000 토큰 ]   ← 압축된 세션
+[ 현재 사용자 메시지 ]
+</code></pre>
+<p>이 입력은 <strong>세션 길이에 무관하게 평탄(O(1))</strong> — 턴 수가 아니라 JHB 상한에 묶입니다. 이걸 가능하게 하는 게 <strong>encoder</strong>입니다. 매 턴 직후 방금 일어난 일을 JHB(작은 마크다운 문서)로 압축해, 다음 턴이 트랜스크립트를 물려받지 않고도 기억을 물려받습니다.</p>
+<p>JHB가 뭔지는 <a href="#concepts">concepts.md</a>, 조각들이 어떻게 맞물리는지는 <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/architecture.md">architecture.md</a> 참고.</p>
+<hr />
+<h2>인코더는 왜 — 그리고 왜 <em>싼</em> 모델이어야 하나</h2>
+<p>사람들이 반발하는 지점이라 명확히 말합니다:</p>
+<ol>
+<li><strong>인코더의 일은 천재가 필요 없습니다.</strong> ~2,000토큰 문서에 대한 제한된 압축·패턴매칭을 합니다. 추론은 의도적으로 캡(사실상 꺼짐 — 예산 ~200토큰)됩니다. 문제를 푸는 게 아니라 메모를 하는 겁니다.</li>
+<li><strong>매 턴 돕니다.</strong> 이 자리에 프론티어 모델을 두면 잡무에 레이트리밋과 예산을 매 턴, 영원히 태웁니다.</li>
+<li><strong>그래서 지능은 필요한 곳에 씁니다.</strong> 비싼 모델은 코딩과 대화에만. 기계적인 기억 작업은 작고 빠른 모델에.</li>
+</ol>
+<p>권장 인코더: <code>ollama-cloud/devstral-small-2:24b</code> 같은 ~24B급 모델. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md"><code>/model-setting</code></a>에서 설정 — 아래 <a href="#설정하기">설정하기</a> 참고.</p>
+<hr />
+<h2>정직한 숫자</h2>
+<p>전부 측정값이고, <a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a> 의 공개 아티팩트로 재계산 가능합니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>숫자</th>
+<th>출처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>누적 prefill, 1,000턴 런</td>
+<td><strong>653K</strong> 토큰(JLC) vs <strong>86.6M</strong>(풀리플레이) = <strong>99.25% 절감</strong></td>
+<td><code>1k-run/</code> + Zenodo 트랜스크립트(tiktoken 재계산)</td>
+</tr>
+<tr>
+<td>들고 다니는 기억 크기</td>
+<td>JHB ~<strong>2,000 토큰</strong> 평탄 유지(턴 늘어도 안 자람)</td>
+<td><code>meta.json</code>, <code>meter.paperlog</code></td>
+</tr>
+<tr>
+<td>턴 8,757 연산 격차(10k 런)</td>
+<td>chat <strong>58M</strong> vs <strong>251,950M</strong> 풀리플레이 = <strong>~4,346 : 1</strong></td>
+<td><code>/evidence</code> HUD + <code>meter.paperlog</code></td>
+</tr>
+<tr>
+<td>전체 10k 런 실비(chat <strong>+</strong> encoder)</td>
+<td>~$20/월 Ollama Cloud Pro 플랜의 <strong>주간 ~41%</strong></td>
+<td><code>/evidence</code> 사용량 미터</td>
+</tr>
+<tr>
+<td>프롬프트 캐시 적중(JLC static head)</td>
+<td>입력의 ~<strong>90%</strong> 캐시에서</td>
+<td><code>chat_in_trace</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>안 이기는 경우 — 꼭 읽으세요</h2>
+<p>정직함이 핵심입니다. 당신의 AI가 반박할 수 있는 과장은 주장 안 하느니만 못합니다.</p>
+<ul>
+<li><strong>짧은 세션은 대략 break-even.</strong> 웜 캐시로 ~10턴 대화면 순정 에이전트가 JLC보다 <strong>~15% 쌀 수도</strong> 있습니다(아직 필요 없는 인코더 호출 비용). 손익분기는 <strong>15~20턴</strong> 부근(A/B가 아닌 모델 추정). JLC의 우위는 <strong>길게 가는</strong> 작업용입니다.</li>
+<li><strong>큰 비율은 달러가 아니라 연산량.</strong> "4,346:1", "99.25%"는 <em>모델에 들어간 토큰</em>입니다. 레거시는 프롬프트 캐시 할인을 받아 <strong>돈</strong> 격차가 줄어듭니다. 실제 돈은 사용량 미터: 전체 10k 런이 주간 ~41%.</li>
+<li><strong>인코더는 공짜가 아니라 쌀 뿐.</strong> 매 턴 작은 모델 호출 하나가 추가됩니다.</li>
+<li><strong>JLC의 O(n)은 대화 턴용.</strong> 한 턴 <em>안에서</em> agentic 툴 루프가 쌓는 컨텍스트는 줄이지 않습니다.</li>
+<li>전체 경제학(캐시 산수·장단기)은 의도적으로 보수적 — 천장이 아니라 바닥입니다.</li>
+</ul>
+<hr />
+<h2>설정하기</h2>
+<p>모델 역할은 <code>~/.jarvis-code/config.yaml</code>(단일 활성 설정 — <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a>)에 있습니다:</p>
+<pre><code class="language-yaml">roles:
+  chat:     anthropic-agent-sdk/claude-opus-4-8   # 똑똑+비쌈 — 코딩 &amp; 대화
+  subagent: anthropic-agent-sdk/claude-opus-4-8   # 툴 실행 서브태스크(chat로 기본값)
+  encoder:  ollama-cloud/devstral-small-2:24b     # 싸고+빠름 — 기억 압축, 매 턴
+  router:   ollama-cloud/devstral-small-2:24b     # 경량 의도 분류기(인코더 미러)
+</code></pre>
+<p>또는 에이전트 안에서 <strong><code>/model-setting</code></strong>으로 대화하듯 선택(chat/subagent/encoder; router는 인코더 자동 추종). OpenAI 호환 엔드포인트면 어떤 프로바이더든 됩니다 — <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a>.</p>
+<hr />
+<p><strong>다음:</strong> <a href="#concepts">concepts.md</a> (JHB·역할이 실제로 뭔지) · <a href="#overview">overview.md</a> (큰 그림) · <a href="https://jlc-codec.org/evidence/ko/">증거</a> (위 전부 검증).</p></section><section id="faq"><h1>FAQ</h1>
+<p>직설적인 답변, 불리한 것까지 포함. 전체 숫자와 원시 로그는 <a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a> 에.</p>
+<hr />
+<h3>두 모델? 더 비싸지, 더 싼 게 아니잖아?</h3>
+<p>짧은 대화면 살짝 — 맞습니다. 길게 가는 작업이면 아니고, 격차가 빠르게 벌어집니다. 비싼 <strong>chat</strong> 모델은 작고 고정된 컨텍스트만 보고, 싼 <strong>encoder</strong>가 매 턴의 기억 작업을 합니다 — 보통 에이전트가 <em>비싼</em> 모델한테 매 턴 시키는(트랜스크립트 재전송) 그 일을요. 메커니즘과 숫자: <strong><a href="#cost-model">cost-model.md</a></strong>.</p>
+<h3>그래서 진짜 싸?</h3>
+<p><strong>항상은 아니고 — 그런 척 안 합니다.</strong> 웜 캐시 짧은 세션(~10턴)이면 순정이 ~15% 쌀 수 있습니다. 손익분기는 15~20턴 부근; 그 뒤로 JLC가 앞서고, 긴/혼합 세션에서 ~2.5~3× 도달(모델 추정). 눈에 띄는 큰 비율(예: ~4,346:1)은 <em>순수 연산량</em>이지 달러가 아닙니다 — 캐시 할인이 돈 격차를 줄입니다. JLC는 <strong>길게 가는</strong> 작업용입니다.</p>
+<h3>무료/로컬 모델 써도 돼?</h3>
+<p>네. OpenAI 호환 엔드포인트면 다 됩니다(Ollama 로컬 모델 포함). 흔한 구성: <strong>chat</strong>에 프론티어, <strong>encoder</strong>에 작은 로컬/클라우드 모델. <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/providers.md">providers.md</a> 참고.</p>
+<h3>API 키 필요해?</h3>
+<p>프로바이더에 따라 다릅니다. Claude 구독은 별도 API 키 없이 되고, 다른 프로바이더는 키를 씁니다. 첫 실행에서 설정합니다 — <a href="#quickstart">quickstart.md</a>.</p>
+<h3>내 코드나 대화가 내가 모르는 데로 가?</h3>
+<p>기억(JHB·JARVIS.md)은 <strong>당신의 머신</strong>에 있습니다. 모델 호출은 당신이 설정한 프로바이더로 갑니다 — 다른 에이전트와 동일. 인코딩하는 sidecar는 로컬에서 돕니다(<a href="#concepts">concepts.md</a>).</p>
+<h3>인코더 모델 뭘 써야 해?</h3>
+<p>~24B급이 스윗스팟 — 예: <code>ollama-cloud/devstral-small-2:24b</code>. 인코더는 추론이 아니라 제한된 압축을 하므로, 작고 빠른 모델이 <em>타협이 아니라 정답</em>입니다. 너무 작으면(활성 ~10B 미만) 기억 품질이 떨어질 수 있습니다(<a href="#cost-model">cost-model.md</a>).</p>
+<h3>오프라인에서 돼?</h3>
+<p>에이전트와 기억은 로컬이지만, 모델 추론은 설정한 프로바이더가 필요합니다. 로컬 모델 서버(예: 로컬 Ollama)면 완전 오프라인으로 돌릴 수 있습니다.</p>
+<h3>10,000턴 런 진짜야?</h3>
+<p>네, 영수증까지 공개합니다: 턴별 원시 로그·최종 ~2KB 기억·무결성 해시·편집 없는 녹화 — <a href="https://jlc-codec.org/evidence/ko/">jlc-codec.org/evidence</a>. ~8,700턴에서 한 번 크래시했지만(JLC가 <strong>아니라</strong> 호스트 런타임 메모리 한계), 디스크 기억에서 복구해 완주했습니다. 크래시는 일부러 영상에 남겼습니다.</p>
+<h3>Claude Code / Cursor / Aider랑 뭐가 달라?</h3>
+<p>다 훌륭합니다 — 대화가 길어지기 전까진. 그것들은 트랜스크립트를 재전송(결국 컴팩트·클리어)해서 비용이 늘고 맥락이 버려집니다. JARVIS CODE는 기억을 윈도우 밖에 들고 가, 한 세션이 무한히 가고 재시작·모델 교체 후에도 이어집니다. statelessness를 숨기느냐 vs 그것에 맞춰 설계됐느냐의 차이입니다(<a href="#overview">overview.md</a>).</p>
+<h3>단점은?</h3>
+<p>아직 어리고, 현재 Windows가 1급 설치(macOS/Linux 인스톨러는 곧), 짧은 일회성 대화는 돈을 안 아낍니다. 길게 가는 다중 세션 코딩 작업에서 빛납니다 — 대부분의 실제 작업이 그렇죠.</p>
+<hr />
+<p><strong>더 보기:</strong> <a href="#overview">overview.md</a> · <a href="#cost-model">cost-model.md</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code/blob/main/docs/troubleshooting.md">troubleshooting.md</a> · <a href="https://jlc-codec.org/evidence/ko/">증거</a></p></section></main><script>
+var links=[].slice.call(document.querySelectorAll('#sidebar a.doc')),map={};
+links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('active')});if(map[e.target.id])map[e.target.id].classList.add('active');}})},{rootMargin:'-8% 0px -82% 0px'});
+[].slice.call(document.querySelectorAll('main section')).forEach(function(s){io.observe(s)});
+</script></body></html>
