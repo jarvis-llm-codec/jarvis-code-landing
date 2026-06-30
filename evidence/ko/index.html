@@ -126,6 +126,16 @@ Remind me: Meadowstoneeast the entry bench color Briarhavenquiet?</pre>
 </section>
 
 <section>
+  <h2>"짧은 대화는 싸다" <span class="grad">고들 하지</span></h2>
+  <p class="sub">흔한 반응: <i>"짧은 질문 8,000개, 그래봤자 얼마나 들겠어?"</i> 한 턴을 ~25토큰이라 치자. 단순 계산: 8,757 × 25 ≈ <b style="color:var(--txt)">22만 토큰</b>. 별거 아니지?</p>
+  <p class="sub">틀렸어 — 에이전트는 <b style="color:var(--txt)">매 턴 대화 전체를 다시 보내거든.</b> 8,000번째 턴의 25토큰 질문은 25토큰이 아니라 <i>그 앞 7,999턴 전부 + 25</i>야. 비용이 질문 크기가 아니라 턴 수에 비례해 늘어 — O(n)이 아니라 O(n²).</p>
+  <p class="sub">크래시 바로 그 순간(턴 8,757)의 우리 HUD:</p>
+  <figure style="margin:0"><img src="../10k-run/hud_jlc_vs_legacy.png" alt="턴 8757의 JLC HUD: jlc 58M vs legacy 251950M, 4346:1" style="width:100%;max-width:560px;border:1px solid var(--line);border-radius:10px;display:block" loading="lazy" /><figcaption style="font-size:12.5px;color:var(--muted);margin-top:6px">턴 8,757 — <code>jlc 58M vs legacy 251950M · 4346:1</code></figcaption></figure>
+  <p class="sub" style="margin-top:14px">JLC가 모델에 넣은 건 <b class="grad">5,800만</b> 토큰. 풀 리플레이 에이전트라면 같은 "짧은" 대화에 <b style="color:var(--txt)">251,950M — 약 2,519억</b> 토큰을 넣었을 거야. 측정된 O(n²) 격차: <b class="grad">~4,346 : 1</b>.</p>
+  <p class="disc" style="margin-top:14px">정직한 범위: 이건 <b style="color:var(--txt)">순수 연산량</b>(모델에 들어간 토큰)이지 달러가 아니야 — 레거시는 프롬프트 캐시 할인을 받아 <i>돈</i> 격차는 더 작아(실제 비용은 위 Ollama 미터: 주간 ~41%). JLC의 5,800만은 직접 검증 가능 — <a href="../10k-run/meter.paperlog">meter.paperlog</a>에서 <code>chat[in]</code> 합산. 251,950M은 HUD의 시뮬 풀-리플레이 베이스라인.</p>
+</section>
+
+<section>
   <h2>라이브로 보기</h2>
   <p class="sub">편집 없는 화면 녹화 — 호스트 장애와 복구 구간이 영상에 그대로 담겨 있습니다. 제3자 검증 가능.</p>
   <div class="yt">

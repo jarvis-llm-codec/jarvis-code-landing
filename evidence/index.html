@@ -126,6 +126,16 @@ Remind me: Meadowstoneeast the entry bench color Briarhavenquiet?</pre>
 </section>
 
 <section>
+  <h2>"Short chats are cheap," <span class="grad">they said</span></h2>
+  <p class="sub">A common reflex: <i>"8,000 tiny questions — how much could that cost?"</i> Call each turn ~25 tokens. Naive math: 8,757 × 25 ≈ <b style="color:var(--txt)">220,000 tokens</b>. Nothing, right?</p>
+  <p class="sub">Wrong — because an agent <b style="color:var(--txt)">replays the entire conversation every single turn.</b> A 25-token question at turn 8,000 doesn't cost 25 tokens; it costs 25 <i>plus all 7,999 turns before it.</i> The bill grows with the turn count, not the question — that's O(n²), not O(n).</p>
+  <p class="sub">Our HUD at the exact moment of the crash (turn 8,757):</p>
+  <figure style="margin:0"><img src="10k-run/hud_jlc_vs_legacy.png" alt="JLC HUD at turn 8757: jlc 58M vs legacy 251950M, ratio 4346:1" style="width:100%;max-width:560px;border:1px solid var(--line);border-radius:10px;display:block" loading="lazy" /><figcaption style="font-size:12.5px;color:var(--muted);margin-top:6px">Turn 8,757 — <code>jlc 58M vs legacy 251950M · 4346:1</code></figcaption></figure>
+  <p class="sub" style="margin-top:14px">JLC fed the model <b class="grad">58 million</b> tokens. A full-replay agent would have fed <b style="color:var(--txt)">251,950 million — ~252 billion</b> — for the same "short" chat. The O(n²) gap, measured: <b class="grad">~4,346 : 1</b>.</p>
+  <p class="disc" style="margin-top:14px">Honest scope: this is <b style="color:var(--txt)">raw compute</b> (tokens into the model), not dollars — a legacy agent gets prompt-cache discounts that shrink the <i>money</i> gap (the real-world cost is the Ollama meter above: ~41% of a week). JLC's 58M is yours to recompute — sum <code>chat[in]</code> across <a href="10k-run/meter.paperlog">meter.paperlog</a>. The 251,950M is the HUD's simulated full-replay baseline.</p>
+</section>
+
+<section>
   <h2>Watch it live</h2>
   <p class="sub">Unedited screen recording of the run — the host-failure-and-recovery is in the footage. Third-party verifiable.</p>
   <div class="yt">
