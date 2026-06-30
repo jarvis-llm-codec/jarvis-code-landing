@@ -246,6 +246,24 @@
   .stateless-resolve{text-align:center;max-width:680px;margin:30px auto 0;font-size:clamp(15px,2vw,17.5px);color:var(--txt);line-height:1.62}
   .stateless-resolve b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
 
+  /* MEMENTO — plain-words intro over the evidence-board image */
+  .memento{position:relative;max-width:1040px;margin:0 auto;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .memento>img{display:block;width:100%;height:auto}
+  .memento-copy{position:absolute;inset:0 0 0 auto;width:44%;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(22px,3.4vw,44px) 0 0;text-align:left}
+  .memento-copy .eyebrow{margin-bottom:13px}
+  .memento-copy p{color:var(--muted);font-size:clamp(12.5px,1.35vw,15px);line-height:1.6;margin:0 0 11px;max-width:420px}
+  .memento-copy .m-lead{color:var(--txt);font-size:clamp(15px,1.85vw,20px);font-weight:700;letter-spacing:-.01em;line-height:1.32;margin-bottom:13px}
+  .memento-copy .m-close{color:var(--txt);font-size:clamp(13.5px,1.5vw,16.5px);margin:3px 0 0;line-height:1.5}
+  .memento-copy b{color:var(--txt)}
+  .memento-copy .m-close .grad{font-weight:800}
+  .memento-copy i{font-style:italic}
+  @media(max-width:860px){
+    .memento{display:flex;flex-direction:column}
+    .memento>img{height:200px;object-fit:cover;object-position:center}
+    .memento-copy{position:static;width:100%;padding:clamp(22px,6vw,30px);background:rgba(8,8,13,.5);backdrop-filter:var(--blur)}
+    .memento-copy p,.memento-copy .m-lead{max-width:none}
+  }
+
   /* FOOTER */
   footer{border-top:1px solid var(--line);padding:46px 0;color:var(--muted-2);font-size:13.5px}
   .foot-in{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
@@ -267,14 +285,13 @@
 <nav><div class="nav-in">
   <a class="logo" href="#top"><svg class="mark" viewBox="0 0 200 80" fill="none" aria-hidden="true"><defs><linearGradient id="jcbridge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#jcbridge)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span class="wm"><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a>
   <div class="nav-links">
-    <a href="#core">JLC</a><a href="#zero">Workflow</a><a href="#memory">Memory</a>
+    <a href="#core">JLC</a><a href="#memory">Memory</a>
     <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a><a href="/ko/">한국어</a><a class="btn btn-primary" href="#install">Get Started</a>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div>
 <div class="mobile-menu" id="mobileMenu"><div class="mobile-in">
   <a href="#core">JLC</a>
-  <a href="#zero">Workflow</a>
   <a href="#memory">Memory</a>
   <a href="/ko/">한국어</a>
   <div class="mobile-icons">
@@ -326,6 +343,21 @@
     </div>
   </div>
 </header>
+
+<section class="block" style="padding:54px 0 40px">
+  <div class="wrap">
+    <figure class="memento reveal">
+      <img src="memento.webp" width="1672" height="941" alt="A detective's evidence board — Polaroid photos and handwritten notes pinned along a glowing thread on a dark wall. Memory kept outside the mind, the way JARVIS CODE keeps it outside the context window." loading="lazy" decoding="async" />
+      <figcaption class="memento-copy">
+        <span class="eyebrow">JLC in one breath</span>
+        <p class="m-lead">Every LLM forgets between turns — like Leonard in <i>Memento.</i></p>
+        <p>Other agents cope by re-reading the whole conversation every turn. Push it to the limit and it loses everything it had remembered, all at once.</p>
+        <p>JARVIS CODE just writes the memory down outside and reads it back — <b>like Leonard's notes.</b> It carries the notes, not the whole past, so it never forgets and never slows down.</p>
+        <p class="m-close"><span class="grad">JLC is the harness that keeps those notes sharp</span> — so Leonard never walks off in the wrong direction.</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
 
 <section class="block stateless">
   <div class="wrap">
@@ -392,59 +424,28 @@
   </div>
 </section>
 
-<section class="block">
+<section class="block" id="core">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow"><a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">FORGETTING IS ALL YOU NEED ↗</a></span>
-      <h2>Engineered to bypass<br><span class="grad">the Transformer's curse.</span></h2>
-      <p>Attention is O(n²) in length.<br>The longer the conversation, the more cost and load balloon — until <code>/compact</code>·<code>/clear</code> throw memory away. The Transformer's curse.</p>
+      <span class="eyebrow"><a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">① JLC CORE · FORGETTING IS ALL YOU NEED ↗</a></span>
+      <h2>The <span class="grad">JARVIS LLM Codec</span><br>bypasses the Transformer's curse.</h2>
+      <p>Attention is O(n²) — the longer the chat, the more cost balloons, until <code>/compact</code>·<code>/clear</code> throw memory away. JLC carries the memory <b style="color:var(--txt)">outside the window</b>, so the curve bends back to linear.</p>
       <p style="font-size:clamp(17px,2.2vw,21px);color:var(--txt);font-weight:700;margin-top:20px;letter-spacing:-.01em">It forgets — <span class="grad">so you never have to.</span></p>
     </div>
-    <div class="thesis reveal">
-      <p class="curse">Instead of <b>piling</b> memory into the context, the JLC codec <b>carries it outside.</b><br>With no giant prefix to drag, the cost curve bends from quadratic to linear.</p>
-      <div class="arrow">↓ With that codec built in, JARVIS CODE ↓</div>
-      <p class="bridge">unlocks what was trapped inside the context window.</p>
-      <div class="enables">
-        <div class="enable"><div class="ec">Model&#8209;Agnostic</div><h4>Memory that isn't tied to a model</h4><p>Memory lives in the codec, not the model.<br>Swap models, or drop to a smaller one — your project context stays.</p></div>
-        <div class="enable"><div class="ec">Flat Cost</div><h4>Constant cost, however long</h4><p>The curve goes from O(n²) to O(n).<br>Endless long-running work finishes without a cost blowup.</p></div>
-        <div class="enable"><div class="ec">No Ceiling</div><h4>No more context ceiling</h4><p>You don't have to fit everything in one window.<br>Your work isn't capped by the model's window size.</p></div>
-      </div>
+    <div class="cards">
+      <div class="card reveal"><span class="idx">01</span><div class="kw">Linear&#8209;Cost</div><h3>Linear cost, however long</h3><p>No giant conversation prefix dragged along.<br>Cost per turn stays linear — O(n), not O(n²) — so long runs finish without a blowup.</p><div class="edge grad">No context blowup, however far it runs</div></div>
+      <div class="card reveal"><span class="idx">02</span><div class="kw">Model&#8209;Agnostic</div><h3>Memory, not tied to a model</h3><p>It lives in the codec, not the model.<br>Restart, swap models, or drop to a smaller one — your project context stays put.</p><div class="edge grad">Cut off? Pick right back up</div></div>
+      <div class="card reveal"><span class="idx">03</span><div class="kw">No&#8209;Ceiling</div><h3>No context ceiling</h3><p>No compact, no clear. Spread across state and memory, there's no window left to fill — infinite conversation and coding in one session.</p><div class="edge grad">Proven over 10,000 public turns · citable on Zenodo</div></div>
     </div>
     <div class="depth reveal">
       <h3>Light on chat. <span class="grad">Deep on code.</span></h3>
-      <p>Plain reasoning for everyday chat.<br>For coding, push reasoning to the limit and pull out <b>the model's very best.</b><br>Backed by JLC's massive token savings — dive deep, <b>with no fear of burning context.</b></p>
+      <p>Plain reasoning for everyday chat.<br>For coding it pushes reasoning to the limit to pull out <b>the model's very best</b> — and with memory carried outside, it does that <b>without ever burning down the context.</b></p>
     </div>
   </div>
 </section>
-
-<section class="block" id="core">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="eyebrow">① JLC Core</span><h2><span class="grad">JARVIS LLM Codec</span></h2><p>Why it survives long work — and how.</p></div>
-    <div class="cards">
-      <div class="card reveal"><span class="idx">01</span><div class="kw">No&#8209;Prefix</div><h3>No Prefix</h3><p>It doesn't drag a giant conversation prefix.<br>Cost per turn is linear, not O(n²).</p><div class="edge grad">Massive token savings vs. the old way</div></div>
-      <div class="card reveal"><span class="idx">02</span><div class="kw">Free KV</div><h3>Free KV</h3><p>A bloated KV cache devours memory until computation stalls — and history gets compacted or cleared.<br>Carry memory outside, the cache stays lean, and the model keeps reasoning without ever hitting the memory wall.</p><div class="edge grad">No memory wall · reasoning never stalls</div></div>
-      <div class="card reveal"><span class="idx">03</span><div class="kw">Persistent Memory</div><h3>Persistent Memory</h3><p>Context persists across shutdown, restart, and model swaps.</p><div class="edge grad">Cut off? Pick right back up</div></div>
-      <div class="card reveal"><span class="idx">04</span><div class="kw">Infinite&#8209;Session</div><h3>Infinite Session</h3><p>No compact, no clear — infinite conversation and coding in one session.<br>No turn ceiling by design, proven over 10,000 public turns.</p><div class="edge grad">When others cut off with <code>/compact</code>·<code>/clear</code>, we don't</div></div>
-      <div class="card reveal"><span class="idx">05</span><div class="kw">Unbounded</div><h3>Unbounded</h3><p>Information is spread across state and memory — no context ceiling.</p><div class="edge grad">Bypasses the Transformer's limit</div></div>
-      <div class="card reveal"><span class="idx">06</span><div class="kw">Battle&#8209;Proven</div><h3>Battle-Proven</h3><p>Validated by a public 10,000-turn run and artifacts.<br>Published on Zenodo with a citable DOI.</p><div class="edge grad">Evidence, not claims</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="zero">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="eyebrow">② Zero Series</span><h2>The promise you feel</h2><p>Three things the engine delivers — zero.</p></div>
-    <div class="zero-row">
-      <div class="zero reveal"><div class="z">ZERO HANDOFF</div><h3>Zero Handoff</h3><p>Pick up the work context seamlessly.<br>Across sessions, machines, models, interruptions.</p></div>
-      <div class="zero reveal"><div class="z">ZERO SWITCHING</div><h3>Zero Switching</h3><p>Jump between projects instantly.<br>No path setup, re-registration, or re-explaining.</p></div>
-      <div class="zero reveal"><div class="z">ZERO ONBOARDING</div><h3>Zero Onboarding</h3><p>Understand a new project right away.<br>Start on an unfamiliar codebase instantly.</p></div>
-    </div>
-  </div>
-</section>
-
 <section class="block" id="memory">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="eyebrow">③ JARVIS.md Memory</span><h2>The more you use it,<br><span class="grad">the smarter it gets about your codebase.</span></h2></div>
+    <div class="sec-head reveal"><span class="eyebrow">② JARVIS.md Memory</span><h2>The more you use it,<br><span class="grad">the smarter it gets about your codebase.</span></h2></div>
     <div class="mem-layout">
       <div class="mem-stack reveal">
         <div><b>NOW</b><span>Current work state</span></div>
@@ -478,9 +479,8 @@
         </div>
         <div class="os-install">
           <span class="os-label">macOS · Linux</span>
-          <div class="install">
-            <span class="cmd"><span class="pfx">$</span> curl -fsSL https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.sh | sh</span>
-            <button class="cpy" onclick="navigator.clipboard&&navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/jarvis-llm-codec/jarvis-code/main/install.sh | sh');this.textContent='Copied'">Copy</button>
+          <div class="install" style="opacity:.6">
+            <span class="cmd" style="color:var(--muted)">Coming soon</span>
           </div>
         </div>
       </div>
