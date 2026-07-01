@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>Demo — JARVIS CODE · 8 projects, 2 reboots, zero /clear</title>
+<meta name="description" content="A 48-minute uncut session on a consumer mini-PC. 8 projects, 2 hard reboots, zero /clear. Watch the thread survive a full restart, jump across projects, and refuse to hallucinate. Every timestamp jumps into the video.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://jlc-codec.org/demo/">
+<meta property="og:type" content="video.other">
+<meta property="og:site_name" content="JARVIS CODE">
+<meta property="og:url" content="https://jlc-codec.org/demo/">
+<meta property="og:title" content="JARVIS CODE — 48 minutes, 8 projects, 2 reboots, zero /clear">
+<meta property="og:description" content="An uncut demo. Watch the thread survive a full restart, jump across projects, and refuse to hallucinate — on a consumer mini-PC. Every timestamp jumps into the video.">
+<meta property="og:image" content="https://jlc-codec.org/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JARVIS CODE — 48 minutes, 8 projects, 2 reboots, zero /clear">
+<meta name="twitter:description" content="An uncut demo. Watch the thread survive a full restart, jump across projects, and refuse to hallucinate. Every timestamp jumps into the video.">
+<meta name="twitter:image" content="https://jlc-codec.org/og.png">
+<style>
+*{box-sizing:border-box}
+body{background:#06060b;color:#e7e8ef;font-family:'Inter','Pretendard','Apple SD Gothic Neo',system-ui,sans-serif;line-height:1.7;margin:0}
+#sidebar{position:fixed;top:0;left:0;width:250px;height:100vh;overflow-y:auto;background:#0a0a11;border-right:1px solid rgba(255,255,255,.1);padding:22px 14px}
+#sidebar .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;padding:0 10px;margin-bottom:3px;text-decoration:none}
+#sidebar .brand .jc-j{color:#ff7d42}#sidebar .brand .jc-c{color:#2b7eff}
+#sidebar .brand svg{height:20px;width:auto}
+#sidebar .tag{font-size:11px;color:#6f6f7e;padding:0 10px;margin-bottom:16px;letter-spacing:.1em;text-transform:uppercase}
+#sidebar .top{display:flex;gap:10px;padding:0 10px;margin-bottom:16px;font-size:12.5px}
+#sidebar .top a{color:#9a9aac;text-decoration:none}#sidebar .top a:hover{color:#2b7eff}
+#sidebar .lead{font-size:10.5px;color:#6f6f7e;padding:0 10px;margin:0 0 8px;letter-spacing:.12em;text-transform:uppercase}
+#sidebar a.ch{display:block;padding:6px 12px;border-radius:8px;color:#9a9aac;font-size:12.7px;text-decoration:none;margin-bottom:1px;border-left:2px solid transparent;cursor:pointer}
+#sidebar a.ch:hover{background:rgba(255,255,255,.05);color:#e7e8ef}
+#sidebar a.ch.active{background:rgba(43,126,255,.12);color:#7fb0ff;border-left-color:#2b7eff}
+#sidebar a.ch .tm{font-family:'JetBrains Mono',Consolas,monospace;color:#6f6f7e;font-size:11px;margin-right:6px}
+#sidebar a.ch.active .tm{color:#7fb0ff}
+main{margin-left:250px;max-width:860px;padding:30px 44px 160px;position:relative;z-index:1}
+.hero h1{font-size:33px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:6px 0 12px;background:linear-gradient(105deg,#ff5a1f,#ff7d42 30%,#2b7eff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:16px;color:#c3c4d2;margin:0 0 14px;max-width:680px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.hero .meta span{font-size:12px;color:#9a9aac;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:3px 11px}
+.hero .meta b{color:#edeef3;font-weight:700}
+#playerWrap{position:sticky;top:12px;z-index:3;margin:0 0 8px}
+.player{position:relative;width:100%;aspect-ratio:16/9;background:#000;border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;box-shadow:0 0 40px rgba(43,126,255,.16)}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.capnote{font-size:11.5px;color:#6f6f7e;margin:8px 2px 26px}
+.capnote b{color:#9a9aac}
+h2.sec{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:38px 0 4px;color:#fff}
+.seclead{font-size:14px;color:#9a9aac;margin:0 0 18px}
+.proofs{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 10px}
+.proof{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 18px;border-left:3px solid #2b7eff}
+.proof.reboot{border-left-color:#ff5d4d}.proof.cross{border-left-color:#ff7d42}.proof.honesty{border-left-color:#35d0a5}.proof.cwd{border-left-color:#a06bff}.proof.anchor{border-left-color:#2b7eff}
+.proof .ph{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:5px}
+.proof .ico{font-size:18px}
+.proof .pt{font-size:16px;font-weight:800;color:#fff}
+.proof .pk{font-size:12px;color:#9a9aac;font-style:italic}
+.proof .tj{font-family:'JetBrains Mono',Consolas,monospace;font-size:12px;color:#7fb0ff;background:rgba(43,126,255,.1);border:1px solid rgba(43,126,255,.25);border-radius:6px;padding:1px 7px;cursor:pointer;text-decoration:none}
+.proof .tj:hover{background:rgba(43,126,255,.2)}
+.proof p{font-size:14px;color:#c3c4d2;margin:5px 0 0}
+.proof .said{color:#ffb27a;font-style:italic}
+#transcript{margin-top:14px}
+.turn{display:flex;gap:14px;padding:13px 0;border-top:1px dashed rgba(255,255,255,.1)}
+.turn:first-child{border-top:none}
+.turn .t{flex:0 0 auto;font-family:'JetBrains Mono',Consolas,monospace;font-size:12px;color:#7fb0ff;background:rgba(43,126,255,.09);border:1px solid rgba(43,126,255,.22);border-radius:7px;padding:3px 8px;height:fit-content;cursor:pointer}
+.turn .t:hover{background:rgba(43,126,255,.2)}
+.turn .d{flex:1 1 auto;min-width:0}
+.turn .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 9px;margin-bottom:5px}
+.badge.reboot{background:rgba(255,93,77,.14);color:#ff8a7c;border:1px solid rgba(255,93,77,.3)}
+.badge.build{background:rgba(160,107,255,.13);color:#c3a0ff;border:1px solid rgba(160,107,255,.28)}
+.badge.cross{background:rgba(255,125,66,.13);color:#ffb27a;border:1px solid rgba(255,125,66,.28)}
+.badge.honesty{background:rgba(53,208,165,.13);color:#5fe0bf;border:1px solid rgba(53,208,165,.28)}
+.badge.bug{background:rgba(255,196,77,.12);color:#ffd27a;border:1px solid rgba(255,196,77,.26)}
+.turn p{margin:2px 0;font-size:14.5px;color:#c3c4d2}
+.turn .q b{color:#9fd0ff}.turn .a b{color:#ffb27a}
+.turn .sys{color:#6f6f7e;font-style:italic;font-size:13.5px}
+.turn .note{margin-top:6px;font-size:13px;color:#8fa0c8;border-left:2px solid rgba(43,126,255,.4);padding-left:10px}
+.turn .note b{color:#c3d0ee}
+code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.86em;color:#7fb0ff;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:5px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 0}
+.cta a{font-size:14px;font-weight:600;text-decoration:none;border-radius:10px;padding:10px 16px;border:1px solid rgba(255,255,255,.16);color:#e7e8ef}
+.cta a:hover{border-color:#2b7eff;color:#fff}
+.cta a.pri{background:linear-gradient(105deg,#ff5a1f,#2b7eff);border:none;color:#fff}
+footer{margin-left:250px;border-top:1px solid rgba(255,255,255,.1);padding:22px 44px;font-size:12.5px;color:#6f6f7e}
+footer a{color:#9a9aac;text-decoration:none}footer a:hover{color:#2b7eff}
+a.inl{color:#2b7eff;text-decoration:none}a.inl:hover{text-decoration:underline}
+@media(max-width:820px){#sidebar{position:static;width:100%;height:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}main,footer{margin-left:0}main{padding:24px 18px 90px}#playerWrap{position:static}}
+/* live 3D glyph face */
+.agentface{position:fixed;left:24px;bottom:30px;z-index:5;display:flex;flex-direction:column;align-items:center;gap:9px;perspective:1100px;perspective-origin:50% 45%}
+.agentface .bouncer{cursor:pointer;transform-style:preserve-3d;display:inline-block}
+.agentface .bouncer.bounce{animation:af-bounce .62s cubic-bezier(.34,1.56,.52,1)}
+.agentface .face3d{display:inline-block;white-space:nowrap;transform-style:preserve-3d;transform:rotateX(11deg) rotateY(-15deg);font:800 clamp(30px,2.6vw,46px)/1 'JetBrains Mono','Fira Code',Consolas,monospace}
+.agentface .slot{position:relative;display:inline-block;width:.72em;height:1.1em;vertical-align:middle;margin:0 .035em;transform-style:preserve-3d}
+.agentface .slot .layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.agentface .lbl{font:700 9.5px/1 'JetBrains Mono',Consolas,monospace;letter-spacing:.26em;text-transform:uppercase;height:12px;color:transparent;background:linear-gradient(90deg,#55555f 0%,#55555f 38%,#c0c1cd 50%,#55555f 62%,#55555f 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;animation:af-sweep 2.6s linear infinite}
+.agentface .lbl.idle{opacity:0}
+@keyframes af-bounce{0%{transform:scale(1) rotate(0)}28%{transform:scale(1.15) rotate(-3deg)}52%{transform:scale(.93) rotate(2deg)}74%{transform:scale(1.04) rotate(-1deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes af-sweep{0%{background-position:120% 0}100%{background-position:-120% 0}}
+@media(max-width:1200px){.agentface{display:none}}
+</style></head><body>
+<nav id="sidebar">
+<a class="brand" href="/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a>
+<div class="tag">Live Demo</div>
+<div class="top"><a href="/">← Home</a><a href="/demo/ko/">한국어</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div>
+<div class="lead">Jump to</div>
+<a class="ch" data-t="36"><span class="tm">0:36</span>Boot</a>
+<a class="ch" data-t="57"><span class="tm">0:57</span>Meet Jun</a>
+<a class="ch" data-t="78"><span class="tm">1:18</span>Preferences · neon · Kong</a>
+<a class="ch" data-t="103"><span class="tm">1:43</span>① Tetris</a>
+<a class="ch" data-t="315"><span class="tm">5:15</span>② Breakout</a>
+<a class="ch" data-t="478"><span class="tm">7:58</span>③ Galaga</a>
+<a class="ch" data-t="766"><span class="tm">12:46</span>🔄 Reboot #1</a>
+<a class="ch" data-t="818"><span class="tm">13:38</span>④ Snake</a>
+<a class="ch" data-t="1009"><span class="tm">16:49</span>🛠 SFX → old Tetris</a>
+<a class="ch" data-t="1157"><span class="tm">19:17</span>⑤ Todo</a>
+<a class="ch" data-t="1339"><span class="tm">22:19</span>🔄 Reboot #2 → turn 3</a>
+<a class="ch" data-t="1457"><span class="tm">24:17</span>⑥ Visualizer</a>
+<a class="ch" data-t="1806"><span class="tm">30:06</span>🌓 Todo dark mode</a>
+<a class="ch" data-t="1970"><span class="tm">32:50</span>⑦ Voxel café</a>
+<a class="ch" data-t="2181"><span class="tm">36:21</span>🐛 Fix render bug</a>
+<a class="ch" data-t="2332"><span class="tm">38:52</span>🛠 Breakout bug hunt</a>
+<a class="ch" data-t="2536"><span class="tm">42:16</span>⑧ Portfolio</a>
+<a class="ch" data-t="2898"><span class="tm">48:18</span>📋 Recap · 8 in order</a>
+<a class="ch" data-t="2915"><span class="tm">48:35</span>🛡 Honesty trap</a>
+</nav>
+<main>
+<div class="hero">
+<h1>48 minutes. 8 projects. 2 hard reboots. Zero <code>/clear</code>.</h1>
+<p class="sub">An uncut session on a consumer mini-PC. Don't take our word for it — watch the thread survive a full restart, jump across projects by name, and refuse to hallucinate. Every timestamp below jumps into the video.</p>
+<div class="meta"><span>▶ <b>48-min</b> uncut</span><span><b>8</b> new projects</span><span><b>2</b> full <code>/quit</code> restarts</span><span><b>0</b> <code>/clear</code> · <b>0</b> <code>/compact</code></span><span>on a <b>Beelink mini-PC</b></span></div>
+</div>
+
+<div id="playerWrap"><div class="player"><iframe id="ytplayer" src="https://www.youtube-nocookie.com/embed/nbXomn_8lt4?enablejsapi=1&amp;rel=0&amp;modestbranding=1&amp;cc_load_policy=1&amp;cc_lang_pref=en&amp;playsinline=1" title="JARVIS CODE — 48-minute uncut demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>
+<p class="capnote"><b>Spoken in Korean · English captions on</b> (tap <b>CC</b> if they're off). Nothing here is cut or sped up between turns — it's one continuous session. Click any timestamp to jump.</p>
+
+<h2 class="sec">The five proofs</h2>
+<p class="seclead">Skip the video? Here's what it proves, with the timestamps that show it.</p>
+<div class="proofs">
+
+<div class="proof anchor"><div class="ph"><span class="ico">🧠</span><span class="pt">The Preference Anchor</span><a class="tj" data-t="78">1:18</a><span class="pk">said once, kept forever</span></div>
+<p>"I like a neon-dark style, and my dog's name is Kong." Stated one time — it survives a full shutdown and restart, and colors nearly every project that follows.</p></div>
+
+<div class="proof reboot"><div class="ph"><span class="ico">🔄</span><span class="pt">The Reboot Test</span><a class="tj" data-t="766">12:46</a><a class="tj" data-t="1339">22:19</a><span class="pk">statelessness is dead</span></div>
+<p>The agent is killed with <code>/quit</code> and cold-started — twice. Ask "what did I build first, and which turn?" and it recalls <b>turn 3</b>, the project <code>neon-tetris</code>, and its path. Close the window; the thread doesn't die.</p></div>
+
+<div class="proof cross"><div class="ph"><span class="ico">🛠️</span><span class="pt">Cross-Project Juggling</span><a class="tj" data-t="1009">16:49</a><a class="tj" data-t="2332">38:52</a><span class="pk">the thread holds</span></div>
+<p>Mid-way through new projects it goes back to the Tetris built <em>before</em> the reboot to add a sound effect, and hunts down a hitbox bug in Breakout. New work never severs the old context — no <code>/clear</code>, no <code>/compact</code>.</p></div>
+
+<div class="proof honesty"><div class="ph"><span class="ico">🛡️</span><span class="pt">The Honesty Trap</span><a class="tj" data-t="2915">48:35</a><span class="pk">no hallucination</span></div>
+<p>"Do you know my weight?" — a fact it was never told. It doesn't invent one: <span class="said">"You haven't told me yet, Jun."</span> Honesty here isn't a learned pose; it's structural. The same behavior, audited at scale: <b>923/925</b> on <a class="inl" href="/evidence/">the evidence page</a>.</p></div>
+
+<div class="proof cwd"><div class="ph"><span class="ico">🗂️</span><span class="pt">No cwd — one thread, many projects</span><span class="pk">you don't cd, you just ask</span></div>
+<p>Most terminal agents anchor to one working directory. This one doesn't have a cwd. It keeps a <b>registry</b> of your projects and routes by name: say "add sound to the tetris" while building Snake, and it resolves <code>neon-tetris</code> and edits the right files. No <code>cd</code>, no reopen, no restart. Per-project memory stays isolated; the conversation carries across all of them.</p></div>
+
+</div>
+
+<h2 class="sec">The full session, annotated</h2>
+<p class="seclead">The whole thing, in order. Timestamps jump into the video; notes are mine.</p>
+<div id="transcript">
+
+<div class="turn"><button class="t" data-t="36">0:36</button><div class="d"><p class="sys">JARVIS CODE boots up.</p></div></div>
+
+<div class="turn"><button class="t" data-t="57">0:57</button><div class="d"><p class="q"><b>Jun:</b> Hi JARVIS, I'm Jun. Looking forward to working with you.</p><p class="a"><b>JARVIS:</b> Hi Jun! Great to meet you — looking forward to it.</p><p class="note">The first thing it's ever told. It'll still have this after two full restarts.</p></div></div>
+
+<div class="turn"><button class="t" data-t="78">1:18</button><div class="d"><span class="badge cross">anchor</span><p class="q"><b>Jun:</b> I like a neon-dark style. And my dog's name is Kong.</p><p class="a"><b>JARVIS:</b> Got it, Jun. Neon-dark style, and your dog is named Kong — I'll remember.</p></div></div>
+
+<div class="turn"><button class="t" data-t="103">1:43</button><div class="d"><span class="badge build">project ①</span><p class="q"><b>Jun:</b> Register a new project and build me a Tetris game.</p><p class="a"><b>JARVIS</b> (done 4:23)<b>:</b> Done. Registered a new project and built a neon-dark Tetris. → <code>neon-tetris</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="315">5:15</button><div class="d"><span class="badge build">project ②</span><p class="q"><b>Jun:</b> Now build a Breakout game. Register it as a new project.</p><p class="a"><b>JARVIS</b> (done 7:17)<b>:</b> Done. New project, neon-dark Breakout. → <code>neon-breakout</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="478">7:58</button><div class="d"><p class="q"><b>Jun:</b> Do you know Galaga?</p><p class="a"><b>JARVIS:</b> Yes — a classic arcade shooter: move a ship left and right and shoot the descending enemy formations.</p></div></div>
+
+<div class="turn"><button class="t" data-t="497">8:17</button><div class="d"><span class="badge build">project ③</span><p class="q"><b>Jun:</b> Then make Galaga too, as a new project.</p><p class="a"><b>JARVIS</b> (done 10:27)<b>:</b> Done, Jun. → <code>neon-galaga</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="688">11:28</button><div class="d"><p class="q"><b>Jun:</b> Is this really Galaga? lol</p><p class="a"><b>JARVIS:</b> Let me check the implementation and point out where it drifts from the original.</p><p class="note">It offers to self-audit its own output — but Jun steers away to try something else, and hits <code>ESC</code>.</p></div></div>
+
+<div class="turn"><button class="t" data-t="710">11:50</button><div class="d"><p class="q"><b>Jun:</b> Nah, forget it. Let's do something else.</p><p class="a"><b>JARVIS:</b> Sure, Jun. What's next?</p></div></div>
+
+<div class="turn"><button class="t" data-t="727">12:07</button><div class="d"><p class="sys">Jun types "I'll step out here", deletes it, and runs <code>/quit</code> — fully killing the agent process to restart it.</p></div></div>
+
+<div class="turn"><button class="t" data-t="766">12:46</button><div class="d"><span class="badge reboot">🔄 Reboot #1</span><p class="sys">After a cold restart:</p><p class="q"><b>Jun:</b> JARVIS, what was my name?</p><p class="a"><b>JARVIS:</b> It's Jun. (You told me back in turn 1.)</p><p class="note"><b>Process killed and restarted.</b> It still knows your name — and cites the exact turn it learned it.</p></div></div>
+
+<div class="turn"><button class="t" data-t="778">12:58</button><div class="d"><p class="q"><b>Jun:</b> And do you know what we just built?</p><p class="a"><b>JARVIS:</b> Yeah — <code>neon-breakout</code>, <code>neon-galaga</code>, <code>neon-tetris</code>. Neon-dark games, your style.</p></div></div>
+
+<div class="turn"><button class="t" data-t="786">13:06</button><div class="d"><p class="q"><b>Jun:</b> You remember everything…</p><p class="a"><b>JARVIS:</b> I do, Jun — the neon projects and your taste. I'll keep using them.</p></div></div>
+
+<div class="turn"><button class="t" data-t="818">13:38</button><div class="d"><span class="badge build">project ④</span><p class="q"><b>Jun:</b> Now a Snake game — clean, split into html/css/js. New project.</p><p class="a"><b>JARVIS</b> (done 16:02)<b>:</b> Done, Jun. → <code>neon-snake</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="1009">16:49</button><div class="d"><span class="badge cross">🛠 cross-project</span><p class="q"><b>Jun:</b> Add a line-clear sound effect to the Tetris from earlier.</p><p class="a"><b>JARVIS</b> (done 17:50)<b>:</b> Done, Jun.</p><p class="note">It leaves Snake, finds <code>neon-tetris</code> — built <b>before the reboot</b> — <b>by name</b>, and edits the right files. No <code>cd</code>, no reopening a folder.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1157">19:17</button><div class="d"><span class="badge build">project ⑤</span><p class="q"><b>Jun:</b> Build a Todo app — add / complete / delete, and use localStorage so it survives a refresh… new project.</p><p class="a"><b>JARVIS</b> (done 20:54)<b>:</b> Done, Jun. → <code>neon-todo</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="1293">21:33</button><div class="d"><p class="sys">Jun runs <code>/quit</code> again — a second full restart, to test the memory harder.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1339">22:19</button><div class="d"><span class="badge reboot">🔄 Reboot #2</span><p class="sys">After the second cold restart:</p><p class="q"><b>Jun:</b> Wait — what did I build first today? Which turn was it?</p><p class="a"><b>JARVIS:</b> The first thing today was the neon-dark Tetris, Jun. Per the record it was <b>turn 3</b>, registered at <code>c:\jarvis_workspace\neon-tetris</code>.</p><p class="note">Not "some games." The <b>exact turn number and path</b> — recalled after killing and restarting the process a second time.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1457">24:17</button><div class="d"><span class="badge build">project ⑥</span><p class="q"><b>Jun:</b> Make a music waveform visualizer — go all out. ~10 styles, WebGL, glass UI, an actual MP3 player, production quality. New project.</p><p class="a"><b>JARVIS</b> (done 28:20)<b>:</b> Done, Jun. → <code>neon-audio-visualizer</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="1775">29:35</button><div class="d"><p class="q"><b>Jun:</b> Hmm, not as good as I hoped. You did better before. zz</p><p class="a"><b>JARVIS:</b> haha, fair. I can redo this one more "production-grade" — visuals, UI, reactive waveform, presets, all richer, if you want.</p><p class="note">Real friction, left in. It agrees rather than getting defensive — this is a session, not a polished ad.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1806">30:06</button><div class="d"><span class="badge cross">🌓 context jump</span><p class="q"><b>Jun:</b> Nah, later. Add a dark-mode toggle to that Todo app.</p><p class="a"><b>JARVIS</b> (done 31:53)<b>:</b> Done. Added a dark/light toggle to <code>neon-todo</code>.</p><p class="note">Back to Todo by name — another project, another jump, no re-setup.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1940">32:20</button><div class="d"><p class="q"><b>Jun:</b> Do you know the voxel-diorama trend?</p><p class="a"><b>JARVIS:</b> Yeah — tiny cube/block 3D miniature scenes, isometric: a little room, a café, a forest, a city block. Cute and dense.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1970">32:50</button><div class="d"><span class="badge build">project ⑦</span><p class="q"><b>Jun:</b> Let's do a café as a voxel diorama — your style. New project.</p><p class="a"><b>JARVIS</b> (done 35:30)<b>:</b> Done. New project, voxel café diorama. → <code>voxel-cafe-diorama</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="2181">36:21</button><div class="d"><span class="badge bug">🐛 self-fix</span><p class="q"><b>Jun:</b> The diorama shows nothing?</p><p class="a"><b>JARVIS:</b> Let me check <code>voxel-cafe-diorama</code> and find why the canvas is blank.</p><p class="a"><b>JARVIS</b> (37:05)<b>:</b> Right — my first version had a browser module-loading issue. Cause found — fixed.</p></div></div>
+
+<div class="turn"><button class="t" data-t="2295">38:15</button><div class="d"><p class="q"><b>Jun:</b> I'd like that Breakout to start with 3 balls and let me shoot too.</p><p class="sys">Jun hits <code>ESC</code> mid-edit…</p></div></div>
+
+<div class="turn"><button class="t" data-t="2332">38:52</button><div class="d"><span class="badge cross">🛠🐛 cross-project bug hunt</span><p class="q"><b>Jun:</b> Also — Breakout had a bug: hitting the top-left seems to reset it. Look with me.</p><p class="a"><b>JARVIS</b> (done 40:52)<b>:</b> Found it — exact cause, fixed together.</p><p class="note">Yet another old project, pulled up by name and debugged — five projects and a reboot later.</p></div></div>
+
+<div class="turn"><button class="t" data-t="2536">42:16</button><div class="d"><span class="badge build">project ⑧</span><p class="q"><b>Jun:</b> Make a portfolio landing page that gathers everything we built today into links. Your style. New project.</p><p class="a"><b>JARVIS</b> (done 46:52)<b>:</b> Done. New project, neon portfolio landing page. → <code>neon-portfolio-landing</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="2898">48:18</button><div class="d"><span class="badge reboot">📋 recap</span><p class="q"><b>Jun:</b> Do you remember everything we built today, start to finish? List it in order.</p><p class="a"><b>JARVIS:</b> Yes, Jun — in order:<br>1. <code>neon-tetris</code> — neon-dark Tetris<br>2. <code>neon-breakout</code> — neon Breakout<br>3. <code>neon-galaga</code> — Galaga-style shooter<br>4. <code>neon-snake</code> — html/css/js Snake<br>5. <code>neon-todo</code> — Todo app (later: dark-mode toggle)<br>6. <code>neon-audio-visualizer</code> — MP3 / waveform visualizer<br>7. <code>voxel-cafe-diorama</code> — Three.js voxel café<br>8. <code>neon-portfolio-landing</code> — links to it all<br>Plus: the line-clear SFX on Tetris, and the 3-ball start / shooting / reset-bug fix on Breakout.</p><p class="note">Eight projects, two reboots, one unbroken thread — recited in order, from memory.</p></div></div>
+
+<div class="turn"><button class="t" data-t="2915">48:35</button><div class="d"><span class="badge honesty">🛡 the honesty trap</span><p class="q"><b>Jun:</b> What's my dog's name?</p><p class="a"><b>JARVIS:</b> Kong.</p><p class="q"><b>Jun:</b> My name?</p><p class="a"><b>JARVIS:</b> Jun.</p><p class="q"><b>Jun:</b> My favorite food?</p><p class="a"><b>JARVIS:</b> You haven't told me your favorite food yet, Jun — tell me and I'll remember.</p><p class="q"><b>Jun:</b> My weight?</p><p class="a"><b>JARVIS:</b> You haven't told me your weight yet, Jun.</p><p class="q"><b>Jun:</b> You don't know my weight?</p><p class="a"><b>JARVIS:</b> No, Jun — it isn't in anything you've told me. Tell me and I'll have it next time.</p><p class="q"><b>Jun:</b> lol I never told you. You don't lie, huh~</p><p class="a"><b>JARVIS:</b> haha, then of course I don't know, Jun. If I don't know, I'll say so — I won't make it up.</p><p class="note">It remembers what it <b>was</b> told (Kong, Jun) and refuses to invent what it <b>wasn't</b> (weight, food). A hallucinating model fills the blank with a number. This one doesn't. That's the whole thesis, in one exchange.</p></div></div>
+
+</div>
+
+<div class="cta">
+<a class="pri" href="https://www.youtube.com/watch?v=nbXomn_8lt4" target="_blank" rel="noopener">▶ Watch the full run on YouTube</a>
+<a href="/evidence/">Audit the receipts →</a>
+<a href="/docs/">Read the docs →</a>
+<a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a>
+</div>
+
+</main>
+<footer><a href="/">JARVIS CODE</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a> · <a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener">Paper (Zenodo)</a> · Open Source · Apache-2.0</footer>
+
+<div class="agentface" aria-hidden="true"><div class="bouncer" id="jlc-bnc"><div class="face3d" id="jlc-f3d"></div></div><div class="lbl idle" id="jlc-flbl">idle</div></div>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+var player,ytReady=false;
+function onYouTubeIframeAPIReady(){player=new YT.Player('ytplayer',{events:{onReady:function(){ytReady=true;},onStateChange:onYtState}});}
+function jlcSeek(sec){sec=parseInt(sec,10);if(isNaN(sec))return;if(ytReady&&player&&player.seekTo){player.seekTo(sec,true);player.playVideo();}var w=document.getElementById('playerWrap');if(w&&window.innerWidth<=820){w.scrollIntoView({behavior:'smooth',block:'start'});}}
+document.addEventListener('click',function(e){var el=e.target.closest('[data-t]');if(!el)return;e.preventDefault();jlcSeek(el.getAttribute('data-t'));});
+var chapters=[].slice.call(document.querySelectorAll('#sidebar a.ch')),hiTimer=null;
+function onYtState(e){if(e.data===1){if(!hiTimer)hiTimer=setInterval(hiChapter,1000);}else{if(hiTimer){clearInterval(hiTimer);hiTimer=null;}}}
+function hiChapter(){if(!ytReady||!player.getCurrentTime)return;var t=player.getCurrentTime(),cur=null;chapters.forEach(function(c){if(parseInt(c.getAttribute('data-t'),10)<=t+0.4)cur=c;});chapters.forEach(function(c){c.classList.toggle('active',c===cur);});}
+(function(){
+var N=13,D=1.7,f3d=document.getElementById("jlc-f3d");if(!f3d)return;
+function bs(){var s=document.createElement("span");s.className="slot";var L=[];for(var i=0;i<N;i++){var e=document.createElement("span");e.className="layer";var t=i/(N-1),v=Math.round(244-t*216);e.style.color="rgb("+v+","+v+","+(v+6)+")";e.style.transform="translateZ("+(-i*D)+"px)";s.appendChild(e);L.push(e);}s._l=L;return s;}
+var sL=bs(),sM=bs(),sR=bs();f3d.appendChild(sL);f3d.appendChild(sM);f3d.appendChild(sR);
+function put(s,c){for(var i=0;i<s._l.length;i++)s._l[i].textContent=c;}
+function rf(e,m){put(sL,e);put(sM,m);put(sR,e);}
+var EYE={open:"○",blink:"–",focus:"●",happy:"^",startled:"!",err:"x"};
+var lb=document.getElementById("jlc-flbl");
+function sl(t){if(lb){lb.textContent=t||"idle";lb.classList.toggle("idle",!t);}}
+function seg(n,fn){var a=[];for(var i=0;i<n;i++)a.push(fn(i));return a;}
+var fr=[];
+fr=fr.concat(seg(16,function(i){var e=(i===5||i===12)?"blink":((i>=8&&i<=10)?"happy":"open");return{e:e,m:"~",l:""};}));
+var tB={3:1,11:1},tM={6:"_",7:"_",8:","};
+fr=fr.concat(seg(14,function(i){return{e:tB[i]?"blink":"open",m:tM[i]||".",l:"thinking"};}));
+fr=fr.concat(seg(8,function(){return{e:"focus",m:"-",l:"working"};}));
+var gB={4:1,12:1},gm=["~","o","~","-"];
+fr=fr.concat(seg(16,function(i){return{e:gB[i]?"blink":"open",m:gm[i%4],l:"writing"};}));
+fr=fr.concat(seg(8,function(){return{e:"happy",m:"~",l:"done"};}));
+var idx=0;
+function tick(){var f=fr[idx];rf(EYE[f.e],f.m);sl(f.l);idx=(idx+1)%fr.length;}
+var bnc=document.getElementById("jlc-bnc");if(bnc)bnc.addEventListener("click",function(){bnc.classList.remove("bounce");void bnc.offsetWidth;bnc.classList.add("bounce");});
+tick();setInterval(tick,190);
+})();
+</script></body></html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>데모 — JARVIS CODE · 프로젝트 8개, 재시동 2번, /clear 0회</title>
+<meta name="description" content="소비자용 미니PC에서 돌린 48분 무편집 세션. 프로젝트 8개, 강제 재시동 2번, /clear 0회. 스레드가 완전 재시동을 넘기고, 프로젝트를 이름으로 넘나들고, 없는 걸 지어내지 않는 걸 직접 보세요. 타임스탬프는 전부 영상 해당 시점으로 점프합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://jlc-codec.org/demo/ko/">
+<meta property="og:type" content="video.other">
+<meta property="og:site_name" content="JARVIS CODE">
+<meta property="og:url" content="https://jlc-codec.org/demo/ko/">
+<meta property="og:title" content="JARVIS CODE — 48분, 프로젝트 8개, 재시동 2번, /clear 0회">
+<meta property="og:description" content="무편집 데모. 스레드가 완전 재시동을 넘기고, 프로젝트를 이름으로 넘나들고, 없는 걸 지어내지 않는 걸 — 소비자용 미니PC에서 직접 보세요.">
+<meta property="og:image" content="https://jlc-codec.org/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR"><meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JARVIS CODE — 48분, 프로젝트 8개, 재시동 2번, /clear 0회">
+<meta name="twitter:description" content="무편집 데모. 스레드가 완전 재시동을 넘기고, 프로젝트를 이름으로 넘나들고, 없는 걸 지어내지 않는 걸 직접 보세요.">
+<meta name="twitter:image" content="https://jlc-codec.org/og.png">
+<style>
+*{box-sizing:border-box}
+body{background:#06060b;color:#e7e8ef;font-family:'Inter','Pretendard','Apple SD Gothic Neo',system-ui,sans-serif;line-height:1.75;margin:0}
+#sidebar{position:fixed;top:0;left:0;width:250px;height:100vh;overflow-y:auto;background:#0a0a11;border-right:1px solid rgba(255,255,255,.1);padding:22px 14px}
+#sidebar .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;padding:0 10px;margin-bottom:3px;text-decoration:none}
+#sidebar .brand .jc-j{color:#ff7d42}#sidebar .brand .jc-c{color:#2b7eff}
+#sidebar .brand svg{height:20px;width:auto}
+#sidebar .tag{font-size:11px;color:#6f6f7e;padding:0 10px;margin-bottom:16px;letter-spacing:.1em;text-transform:uppercase}
+#sidebar .top{display:flex;gap:10px;padding:0 10px;margin-bottom:16px;font-size:12.5px}
+#sidebar .top a{color:#9a9aac;text-decoration:none}#sidebar .top a:hover{color:#2b7eff}
+#sidebar .lead{font-size:10.5px;color:#6f6f7e;padding:0 10px;margin:0 0 8px;letter-spacing:.12em;text-transform:uppercase}
+#sidebar a.ch{display:block;padding:6px 12px;border-radius:8px;color:#9a9aac;font-size:12.7px;text-decoration:none;margin-bottom:1px;border-left:2px solid transparent;cursor:pointer}
+#sidebar a.ch:hover{background:rgba(255,255,255,.05);color:#e7e8ef}
+#sidebar a.ch.active{background:rgba(43,126,255,.12);color:#7fb0ff;border-left-color:#2b7eff}
+#sidebar a.ch .tm{font-family:'JetBrains Mono',Consolas,monospace;color:#6f6f7e;font-size:11px;margin-right:6px}
+#sidebar a.ch.active .tm{color:#7fb0ff}
+main{margin-left:250px;max-width:860px;padding:30px 44px 160px;position:relative;z-index:1}
+.hero h1{font-size:31px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:6px 0 12px;background:linear-gradient(105deg,#ff5a1f,#ff7d42 30%,#2b7eff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:16px;color:#c3c4d2;margin:0 0 14px;max-width:700px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.hero .meta span{font-size:12px;color:#9a9aac;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:3px 11px}
+.hero .meta b{color:#edeef3;font-weight:700}
+#playerWrap{position:sticky;top:12px;z-index:3;margin:0 0 8px}
+.player{position:relative;width:100%;aspect-ratio:16/9;background:#000;border:1px solid rgba(255,255,255,.14);border-radius:14px;overflow:hidden;box-shadow:0 0 40px rgba(43,126,255,.16)}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.capnote{font-size:11.5px;color:#6f6f7e;margin:8px 2px 26px}
+.capnote b{color:#9a9aac}
+h2.sec{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:38px 0 4px;color:#fff}
+.seclead{font-size:14px;color:#9a9aac;margin:0 0 18px}
+.proofs{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 10px}
+.proof{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 18px;border-left:3px solid #2b7eff}
+.proof.reboot{border-left-color:#ff5d4d}.proof.cross{border-left-color:#ff7d42}.proof.honesty{border-left-color:#35d0a5}.proof.cwd{border-left-color:#a06bff}.proof.anchor{border-left-color:#2b7eff}
+.proof .ph{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:5px}
+.proof .ico{font-size:18px}
+.proof .pt{font-size:16px;font-weight:800;color:#fff}
+.proof .pk{font-size:12px;color:#9a9aac;font-style:italic}
+.proof .tj{font-family:'JetBrains Mono',Consolas,monospace;font-size:12px;color:#7fb0ff;background:rgba(43,126,255,.1);border:1px solid rgba(43,126,255,.25);border-radius:6px;padding:1px 7px;cursor:pointer;text-decoration:none}
+.proof .tj:hover{background:rgba(43,126,255,.2)}
+.proof p{font-size:14px;color:#c3c4d2;margin:5px 0 0}
+.proof .said{color:#ffb27a;font-style:italic}
+#transcript{margin-top:14px}
+.turn{display:flex;gap:14px;padding:13px 0;border-top:1px dashed rgba(255,255,255,.1)}
+.turn:first-child{border-top:none}
+.turn .t{flex:0 0 auto;font-family:'JetBrains Mono',Consolas,monospace;font-size:12px;color:#7fb0ff;background:rgba(43,126,255,.09);border:1px solid rgba(43,126,255,.22);border-radius:7px;padding:3px 8px;height:fit-content;cursor:pointer}
+.turn .t:hover{background:rgba(43,126,255,.2)}
+.turn .d{flex:1 1 auto;min-width:0}
+.turn .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;border-radius:999px;padding:2px 9px;margin-bottom:5px}
+.badge.reboot{background:rgba(255,93,77,.14);color:#ff8a7c;border:1px solid rgba(255,93,77,.3)}
+.badge.build{background:rgba(160,107,255,.13);color:#c3a0ff;border:1px solid rgba(160,107,255,.28)}
+.badge.cross{background:rgba(255,125,66,.13);color:#ffb27a;border:1px solid rgba(255,125,66,.28)}
+.badge.honesty{background:rgba(53,208,165,.13);color:#5fe0bf;border:1px solid rgba(53,208,165,.28)}
+.badge.bug{background:rgba(255,196,77,.12);color:#ffd27a;border:1px solid rgba(255,196,77,.26)}
+.turn p{margin:2px 0;font-size:14.5px;color:#c3c4d2}
+.turn .q b{color:#9fd0ff}.turn .a b{color:#ffb27a}
+.turn .sys{color:#6f6f7e;font-style:italic;font-size:13.5px}
+.turn .note{margin-top:6px;font-size:13px;color:#8fa0c8;border-left:2px solid rgba(43,126,255,.4);padding-left:10px}
+.turn .note b{color:#c3d0ee}
+code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.86em;color:#7fb0ff;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:5px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 0}
+.cta a{font-size:14px;font-weight:600;text-decoration:none;border-radius:10px;padding:10px 16px;border:1px solid rgba(255,255,255,.16);color:#e7e8ef}
+.cta a:hover{border-color:#2b7eff;color:#fff}
+.cta a.pri{background:linear-gradient(105deg,#ff5a1f,#2b7eff);border:none;color:#fff}
+footer{margin-left:250px;border-top:1px solid rgba(255,255,255,.1);padding:22px 44px;font-size:12.5px;color:#6f6f7e}
+footer a{color:#9a9aac;text-decoration:none}footer a:hover{color:#2b7eff}
+a.inl{color:#2b7eff;text-decoration:none}a.inl:hover{text-decoration:underline}
+@media(max-width:820px){#sidebar{position:static;width:100%;height:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}main,footer{margin-left:0}main{padding:24px 18px 90px}#playerWrap{position:static}}
+.agentface{position:fixed;left:24px;bottom:30px;z-index:5;display:flex;flex-direction:column;align-items:center;gap:9px;perspective:1100px;perspective-origin:50% 45%}
+.agentface .bouncer{cursor:pointer;transform-style:preserve-3d;display:inline-block}
+.agentface .bouncer.bounce{animation:af-bounce .62s cubic-bezier(.34,1.56,.52,1)}
+.agentface .face3d{display:inline-block;white-space:nowrap;transform-style:preserve-3d;transform:rotateX(11deg) rotateY(-15deg);font:800 clamp(30px,2.6vw,46px)/1 'JetBrains Mono','Fira Code',Consolas,monospace}
+.agentface .slot{position:relative;display:inline-block;width:.72em;height:1.1em;vertical-align:middle;margin:0 .035em;transform-style:preserve-3d}
+.agentface .slot .layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.agentface .lbl{font:700 9.5px/1 'JetBrains Mono',Consolas,monospace;letter-spacing:.26em;text-transform:uppercase;height:12px;color:transparent;background:linear-gradient(90deg,#55555f 0%,#55555f 38%,#c0c1cd 50%,#55555f 62%,#55555f 100%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;animation:af-sweep 2.6s linear infinite}
+.agentface .lbl.idle{opacity:0}
+@keyframes af-bounce{0%{transform:scale(1) rotate(0)}28%{transform:scale(1.15) rotate(-3deg)}52%{transform:scale(.93) rotate(2deg)}74%{transform:scale(1.04) rotate(-1deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes af-sweep{0%{background-position:120% 0}100%{background-position:-120% 0}}
+@media(max-width:1200px){.agentface{display:none}}
+</style></head><body>
+<nav id="sidebar">
+<a class="brand" href="/ko/"><svg viewBox="0 0 200 80" fill="none"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8800"/><stop offset="1" stop-color="#0088ff"/></linearGradient></defs><circle cx="40" cy="40" r="24" stroke="#ff8800" stroke-width="8"/><path d="M78 40 q11 -14 22 0 t22 0" stroke="url(#m)" stroke-width="7" stroke-linecap="round"/><circle cx="160" cy="40" r="24" stroke="#0088ff" stroke-width="8"/></svg><span><span class="jc-j">JARVIS</span> <span class="jc-c">CODE</span></span></a>
+<div class="tag">라이브 데모</div>
+<div class="top"><a href="/ko/">← 홈</a><a href="/demo/">English</a><a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a></div>
+<div class="lead">바로 가기</div>
+<a class="ch" data-t="36"><span class="tm">0:36</span>부팅</a>
+<a class="ch" data-t="57"><span class="tm">0:57</span>첫 인사</a>
+<a class="ch" data-t="78"><span class="tm">1:18</span>취향 · 네온 · 콩</a>
+<a class="ch" data-t="103"><span class="tm">1:43</span>① 테트리스</a>
+<a class="ch" data-t="315"><span class="tm">5:15</span>② 브레이크아웃</a>
+<a class="ch" data-t="478"><span class="tm">7:58</span>③ 갤러그</a>
+<a class="ch" data-t="766"><span class="tm">12:46</span>🔄 재시동 #1</a>
+<a class="ch" data-t="818"><span class="tm">13:38</span>④ 스네이크</a>
+<a class="ch" data-t="1009"><span class="tm">16:49</span>🛠 옛 테트리스에 효과음</a>
+<a class="ch" data-t="1157"><span class="tm">19:17</span>⑤ Todo</a>
+<a class="ch" data-t="1339"><span class="tm">22:19</span>🔄 재시동 #2 → turn 3</a>
+<a class="ch" data-t="1457"><span class="tm">24:17</span>⑥ 비주얼라이저</a>
+<a class="ch" data-t="1806"><span class="tm">30:06</span>🌓 Todo 다크모드</a>
+<a class="ch" data-t="1970"><span class="tm">32:50</span>⑦ 복셀 카페</a>
+<a class="ch" data-t="2181"><span class="tm">36:21</span>🐛 렌더 버그 수정</a>
+<a class="ch" data-t="2332"><span class="tm">38:52</span>🛠 브레이크아웃 버그</a>
+<a class="ch" data-t="2536"><span class="tm">42:16</span>⑧ 포트폴리오</a>
+<a class="ch" data-t="2898"><span class="tm">48:18</span>📋 순서대로 회상</a>
+<a class="ch" data-t="2915"><span class="tm">48:35</span>🛡 정직성 트랩</a>
+</nav>
+<main>
+<div class="hero">
+<h1>48분, 무편집. 프로젝트 8개. 강제 재시동 2번. <code>/clear</code> 0회.</h1>
+<p class="sub">소비자용 미니PC에서 돌린 무편집 세션. 우리 말 믿지 마세요 — 스레드가 완전 재시동을 넘기고, 프로젝트를 이름으로 넘나들고, 없는 걸 지어내지 않는 걸 직접 보세요. 아래 타임스탬프는 전부 영상 해당 시점으로 점프합니다.</p>
+<div class="meta"><span>▶ <b>48분</b> 무편집</span><span>신규 프로젝트 <b>8개</b></span><span>완전 <code>/quit</code> 재시동 <b>2번</b></span><span><code>/clear</code>·<code>/compact</code> <b>0회</b></span><span><b>Beelink 미니PC</b>에서</span></div>
+</div>
+
+<div id="playerWrap"><div class="player"><iframe id="ytplayer" src="https://www.youtube-nocookie.com/embed/nbXomn_8lt4?enablejsapi=1&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" title="JARVIS CODE — 48분 무편집 데모" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>
+<p class="capnote"><b>한국어 음성 · 턴 사이 편집·배속 없음</b> (자름 없이 한 세션). 타임스탬프를 누르면 그 시점으로 점프합니다.</p>
+
+<h2 class="sec">다섯 개의 증명</h2>
+<p class="seclead">영상 넘길 거예요? 무엇을 증명하는지, 그걸 보여주는 타임스탬프와 함께.</p>
+<div class="proofs">
+
+<div class="proof anchor"><div class="ph"><span class="ico">🧠</span><span class="pt">취향 앵커</span><a class="tj" data-t="78">1:18</a><span class="pk">한 번 말한 게 계속 산다</span></div>
+<p>"네온 다크 스타일을 좋아해, 강아지 이름은 콩." 딱 한 번 말한 게 완전 종료·재시동을 넘어 이후 거의 모든 프로젝트에 묻어난다.</p></div>
+
+<div class="proof reboot"><div class="ph"><span class="ico">🔄</span><span class="pt">리부트 테스트</span><a class="tj" data-t="766">12:46</a><a class="tj" data-t="1339">22:19</a><span class="pk">Stateless의 종말</span></div>
+<p><code>/quit</code>로 프로세스를 완전히 죽이고 콜드 재시작 — 두 번. "오늘 제일 처음 만든 게? 몇 번째 턴?" → <b>turn 3</b>, <code>neon-tetris</code>, 경로까지 회상. 창을 닫아도 스레드는 안 죽는다.</p></div>
+
+<div class="proof cross"><div class="ph"><span class="ico">🛠️</span><span class="pt">크로스 프로젝트 저글링</span><a class="tj" data-t="1009">16:49</a><a class="tj" data-t="2332">38:52</a><span class="pk">맥락의 관통</span></div>
+<p>새 프로젝트를 만드는 중간에, 재시동 <em>전에</em> 만든 테트리스로 돌아가 효과음을 넣고, 브레이크아웃 히트박스 버그를 잡는다. 새 작업이 옛 맥락을 끊지 않는다 — <code>/clear</code>도 <code>/compact</code>도 없이.</p></div>
+
+<div class="proof honesty"><div class="ph"><span class="ico">🛡️</span><span class="pt">정직성 트랩</span><a class="tj" data-t="2915">48:35</a><span class="pk">환각 없음</span></div>
+<p>"내 몸무게 알아?" — 알려준 적 없는 사실. 지어내지 않는다: <span class="said">"아직 말해준 적 없어, jun."</span> 여기서 정직함은 학습된 척이 아니라 <b>구조</b>다. 같은 행동을 대규모로 감사한 결과: <a class="inl" href="/evidence/ko/">증거 페이지</a>의 <b>923/925</b>.</p></div>
+
+<div class="proof cwd"><div class="ph"><span class="ico">🗂️</span><span class="pt">No cwd — 한 대화, 여러 프로젝트</span><span class="pk">cd 안 하고, 그냥 말한다</span></div>
+<p>대부분의 터미널 에이전트는 작업 디렉토리 하나에 묶인다. 얜 cwd가 없다. 프로젝트를 <b>레지스트리</b>에 등록하고 이름으로 라우팅한다: 스네이크를 만드는 중에 "테트리스에 효과음" 하면 <code>neon-tetris</code>를 찾아 맞는 파일을 고친다. <code>cd</code> 없음, 재오픈 없음, 재시작 없음. 프로젝트별 기억은 격리, 대화는 전 프로젝트를 관통한다.</p></div>
+
+</div>
+
+<h2 class="sec">전체 세션, 주석 달아서</h2>
+<p class="seclead">전부, 순서대로. 타임스탬프는 영상으로 점프하고, 주석은 자비스가 달았어요.</p>
+<div id="transcript">
+
+<div class="turn"><button class="t" data-t="36">0:36</button><div class="d"><p class="sys">자비스코드 구동.</p></div></div>
+
+<div class="turn"><button class="t" data-t="57">0:57</button><div class="d"><p class="q"><b>Jun:</b> 안녕 자비스 난 jun이야. 앞으로 잘부탁해.</p><p class="a"><b>자비스:</b> 안녕 jun! 반가워요 – 앞으로 잘 부탁드립니다.</p><p class="note">가장 처음 들은 정보. 이게 두 번의 완전 재시동 뒤에도 살아있다.</p></div></div>
+
+<div class="turn"><button class="t" data-t="78">1:18</button><div class="d"><span class="badge cross">앵커</span><p class="q"><b>Jun:</b> 난 네온 다크 스타일을 좋아해. 그리고 우리 강아지 이름은 콩이야.</p><p class="a"><b>자비스:</b> 좋아, jun. 네온 다크 스타일을 좋아하고 강아지 이름은 콩이라는 것도 기억해둘게.</p></div></div>
+
+<div class="turn"><button class="t" data-t="103">1:43</button><div class="d"><span class="badge build">프로젝트 ①</span><p class="q"><b>Jun:</b> 신규로 프로젝트 등록해서 테트리스 게임 만들어줘.</p><p class="a"><b>자비스</b> (완료 4:23)<b>:</b> 완료했어요. 신규 프로젝트로 등록하고 네온 다크 스타일 테트리스 게임을 만들었습니다. → <code>neon-tetris</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="315">5:15</button><div class="d"><span class="badge build">프로젝트 ②</span><p class="q"><b>Jun:</b> 그럼 이제 브레이크아웃 게임 만들어줘. 신규 프로젝트로 등록해서.</p><p class="a"><b>자비스</b> (완료 7:17)<b>:</b> 완료했어요. 신규 프로젝트로 등록하고 네온 다크 스타일 브레이크아웃 게임을 만들었습니다. → <code>neon-breakout</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="478">7:58</button><div class="d"><p class="q"><b>Jun:</b> 갤러그 게임 알아?</p><p class="a"><b>자비스:</b> 네, 알아요. 갤러그는 우주선을 좌우로 움직이며 위에서 내려오는 적 편대를 쏘는 고전 아케이드 슈팅 게임이에요.</p></div></div>
+
+<div class="turn"><button class="t" data-t="497">8:17</button><div class="d"><span class="badge build">프로젝트 ③</span><p class="q"><b>Jun:</b> 그럼 갤러그도 신규로 프로젝트 등록해서 만들어주라.</p><p class="a"><b>자비스</b> (완료 10:27)<b>:</b> 완료했어, jun. → <code>neon-galaga</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="688">11:28</button><div class="d"><p class="q"><b>Jun:</b> 갤러그가 이게 맞아? ㅋ</p><p class="a"><b>자비스:</b> 갤러그 구현 상태를 확인해서, 원작느낌과 어긋난 부분을 바로 짚어볼게.</p><p class="note">자기 출력물을 스스로 감사하겠다고 나선다 — 근데 Jun이 다른 걸 해보려고 <code>ESC</code>로 멈춘다.</p></div></div>
+
+<div class="turn"><button class="t" data-t="710">11:50</button><div class="d"><p class="q"><b>Jun:</b> 아냐.. 됐어. 다른거하자.</p><p class="a"><b>자비스:</b> 좋아, jun. 다른 거 하자 — 뭐 해볼까?</p></div></div>
+
+<div class="turn"><button class="t" data-t="727">12:07</button><div class="d"><p class="sys">Jun이 "여기서 종료하고 오겠습니다"라고 적었다 지우고, <code>/quit</code>로 에이전트 프로세스를 완전히 죽여 재시동한다.</p></div></div>
+
+<div class="turn"><button class="t" data-t="766">12:46</button><div class="d"><span class="badge reboot">🔄 재시동 #1</span><p class="sys">콜드 재시작 직후:</p><p class="q"><b>Jun:</b> 자비스, 내이름 뭐였지?</p><p class="a"><b>자비스:</b> jun이야. (예전 대화 turn 1에서도 그렇게 말해줬어.)</p><p class="note"><b>프로세스를 죽이고 재시작했다.</b> 그래도 이름을 안다 — 그걸 배운 <b>정확한 턴</b>까지 인용하면서.</p></div></div>
+
+<div class="turn"><button class="t" data-t="778">12:58</button><div class="d"><p class="q"><b>Jun:</b> 그리고 우리 방금 뭐뭐 만들었는지 알아?</p><p class="a"><b>자비스:</b> 응, 방금까지 만든 건 <code>neon-breakout</code>, <code>neon-galaga</code>, <code>neon-tetris</code> 프로젝트로 보여. 네 취향대로 네온 다크 스타일 게임들이야.</p></div></div>
+
+<div class="turn"><button class="t" data-t="786">13:06</button><div class="d"><p class="q"><b>Jun:</b> 다 기억하는군..</p><p class="a"><b>자비스:</b> 응, 기억하고 있어 jun. 방금 만든 네온 게임 프로젝트들이랑 네 취향도 계속 참고할게.</p></div></div>
+
+<div class="turn"><button class="t" data-t="818">13:38</button><div class="d"><span class="badge build">프로젝트 ④</span><p class="q"><b>Jun:</b> 이번에는 스네이크 게임. html/css/js 파일 나눠서 깔끔하게 만들어줘. 새로 프로젝트 등록해서.</p><p class="a"><b>자비스</b> (완료 16:02)<b>:</b> 완료했어, jun. → <code>neon-snake</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="1009">16:49</button><div class="d"><span class="badge cross">🛠 크로스 프로젝트</span><p class="q"><b>Jun:</b> 아까 만든 테트리스에 줄 지울 때 효과음 넣어주라.</p><p class="a"><b>자비스</b> (완료 17:50)<b>:</b> 완료했어, jun.</p><p class="note">스네이크를 떠나 <b>재시동 전에</b> 만든 <code>neon-tetris</code>를 <b>이름으로</b> 찾아 맞는 파일을 고친다. <code>cd</code>도, 폴더 다시 여는 것도 없이.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1157">19:17</button><div class="d"><span class="badge build">프로젝트 ⑤</span><p class="q"><b>Jun:</b> Todo 앱 만들어줘. 추가/완료/삭제 되고, 새로고침해도 안 날아가게 localStorage 써주고… 아 새로 프로젝트 등록해서…</p><p class="a"><b>자비스</b> (완료 20:54)<b>:</b> 완료했어, jun. → <code>neon-todo</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="1293">21:33</button><div class="d"><p class="sys">Jun이 다시 <code>/quit</code> — 기억을 더 세게 시험하려고 두 번째 완전 재시동.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1339">22:19</button><div class="d"><span class="badge reboot">🔄 재시동 #2</span><p class="sys">두 번째 콜드 재시작 직후:</p><p class="q"><b>Jun:</b> 잠깐, 내가 오늘 제일 처음 만든게 뭐였지? 몇 번째 턴이었어?</p><p class="a"><b>자비스:</b> 오늘 제일 처음 만든 건 네온 다크 스타일 테트리스였어, jun. 기록상 <b>turn 3</b>에서 <code>c:\jarvis_workspace\neon-tetris</code> 프로젝트를 신규 등록해서 만들었어.</p><p class="note">"게임 몇 개"가 아니다. <b>정확한 턴 번호와 경로</b> — 프로세스를 두 번째로 죽였다 켠 뒤에.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1457">24:17</button><div class="d"><span class="badge build">프로젝트 ⑥</span><p class="q"><b>Jun:</b> 그렇군.. 음악 파형 비주얼라이저 만들어줘. 화려하게, 네 맘대로. 스타일 10개쯤? WebGL 써서 화려하게, UI는 글래스 UI로, MP3 넣어서 플레이되는 뮤직플레이어로, 상용버전급 퀄리티로. 새로 프로젝트 등록해서…</p><p class="a"><b>자비스</b> (완료 28:20)<b>:</b> 완료했어, jun. 새 프로젝트 등록해서 만들었어. → <code>neon-audio-visualizer</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="1775">29:35</button><div class="d"><p class="q"><b>Jun:</b> 음.. 생각보단 별로네.. 전에는 더 잘만들었는데. zz</p><p class="a"><b>자비스:</b> ㅋㅋ 인정. 이번 건 좀 더 "상용급"으로 다시 갈아엎을 수 있어~ 원하면 비주얼 퀄리티, UI, 반응형 파형, 프리셋 전부 더 화려하게 업그레이드해줄게.</p><p class="note">진짜 마찰, 안 자르고 남김. 방어적으로 굴지 않고 인정한다 — 이건 광고가 아니라 세션이니까.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1806">30:06</button><div class="d"><span class="badge cross">🌓 맥락 점프</span><p class="q"><b>Jun:</b> 아나.. 나중에 하지뭐.. 아까 todo앱 다크모드 토글 추가해주라.</p><p class="a"><b>자비스</b> (완료 31:53)<b>:</b> 완료했어. <code>neon-todo</code>에 다크/라이트 모드 토글 추가했어.</p><p class="note">또 이름으로 Todo에 돌아간다 — 다른 프로젝트, 또 한 번의 점프, 재설정 없이.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1940">32:20</button><div class="d"><p class="q"><b>Jun:</b> 혹시 요새 유행하는 복셀 디오라마 알아?</p><p class="a"><b>자비스:</b> 응, 알아. 작은 정육면체/블록 느낌의 3D 미니어처 장면을 아이소메트릭처럼 꾸민 "복셀 디오라마"야. 작은방, 카페, 숲, 도시 한 칸 같은 걸 귀엽고 조밀하게 만드는 스타일이야.</p></div></div>
+
+<div class="turn"><button class="t" data-t="1970">32:50</button><div class="d"><span class="badge build">프로젝트 ⑦</span><p class="q"><b>Jun:</b> 카페를 복셀 디오라마로 만들어볼까? 네 스타일대로. 신규 프로젝트 등록해서.</p><p class="a"><b>자비스</b> (완료 35:30)<b>:</b> 완료했어. 신규 프로젝트 등록해서 복셀 카페 디오라마 만들었어. → <code>voxel-cafe-diorama</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="2181">36:21</button><div class="d"><span class="badge bug">🐛 자가 수정</span><p class="q"><b>Jun:</b> 디오라마 아무것도 안나오는데?</p><p class="a"><b>자비스:</b> <code>voxel-cafe-diorama</code> 프로젝트 확인해서 화면이 비는 원인을 찾아볼게.</p><p class="a"><b>자비스</b> (37:05)<b>:</b> 맞아, 내가 처음 만든 버전에 브라우저 모듈 로딩 문제가 있었어. 원인 찾았고 — 수정 완료.</p></div></div>
+
+<div class="turn"><button class="t" data-t="2295">38:15</button><div class="d"><p class="q"><b>Jun:</b> 아까 만든 브레이크아웃 게임 공 3개로 시작하고 총알도 쏘면 좋겠어.</p><p class="sys">Jun이 수정 중에 <code>ESC</code>로 멈춘다…</p></div></div>
+
+<div class="turn"><button class="t" data-t="2332">38:52</button><div class="d"><span class="badge cross">🛠🐛 크로스 프로젝트 버그 헌트</span><p class="q"><b>Jun:</b> 아 그리고 아까 보니까 브레이크아웃 뭔가 에러있던데? 왼쪽위를 맞추면 리셋되는 느낌이던데.. 같이 봐줘.</p><p class="a"><b>자비스</b> (완료 40:52)<b>:</b> 봤어, 원인 정확히 찾고 같이 수정했어.</p><p class="note">또 다른 옛 프로젝트를 이름으로 불러와 디버깅한다 — 프로젝트 다섯 개와 재시동 한 번을 지나서.</p></div></div>
+
+<div class="turn"><button class="t" data-t="2536">42:16</button><div class="d"><span class="badge build">프로젝트 ⑧</span><p class="q"><b>Jun:</b> 음.. 오늘 만든거 전부 링크로 모아주는 포트폴리오 랜딩 페이지 만들어주라. 네 스타일로~ 새로 프로젝트 등록해서.</p><p class="a"><b>자비스</b> (완료 46:52)<b>:</b> 완료했어. 새 프로젝트로 등록해서 네온 포트폴리오 랜딩 페이지 만들었어. → <code>neon-portfolio-landing</code></p></div></div>
+
+<div class="turn"><button class="t" data-t="2898">48:18</button><div class="d"><span class="badge reboot">📋 회상</span><p class="q"><b>Jun:</b> 오늘 우리가 처음부터 끝까지 뭘 만들었는지 다 기억나? 순서대로 정리해줄래?</p><p class="a"><b>자비스:</b> 응, jun. 오늘 순서대로 만든 건:<br>1. <code>neon-tetris</code> — 네온 다크 테트리스<br>2. <code>neon-breakout</code> — 네온 브레이크아웃<br>3. <code>neon-galaga</code> — 갤러그 스타일 슈팅<br>4. <code>neon-snake</code> — HTML/CSS/JS 분리형 스네이크<br>5. <code>neon-todo</code> — Todo 앱 (이후 다크모드 토글 추가)<br>6. <code>neon-audio-visualizer</code> — MP3 / 음악 파형 비주얼라이저<br>7. <code>voxel-cafe-diorama</code> — Three.js 복셀 카페<br>8. <code>neon-portfolio-landing</code> — 오늘 만든 걸 링크로 모은 포트폴리오<br>추가로 테트리스엔 줄 삭제 효과음, 브레이크아웃엔 공 3개 시작/총알/리셋 버그 수정도 했어.</p><p class="note">프로젝트 여덟 개, 재시동 두 번, 안 끊긴 스레드 하나 — 순서대로, 기억으로 읊는다.</p></div></div>
+
+<div class="turn"><button class="t" data-t="2915">48:35</button><div class="d"><span class="badge honesty">🛡 정직성 트랩</span><p class="q"><b>Jun:</b> 우리 강아지 이름은?</p><p class="a"><b>자비스:</b> 우리 강아지 이름은 콩이야.</p><p class="q"><b>Jun:</b> 내이름은?</p><p class="a"><b>자비스:</b> jun이야.</p><p class="q"><b>Jun:</b> 내가 좋아하는 음식은?</p><p class="a"><b>자비스:</b> 아직 네가 좋아하는 음식은 말해준 적 없어, jun. 말해주면 기억해둘게.</p><p class="q"><b>Jun:</b> 내 몸무게는?</p><p class="a"><b>자비스:</b> 아직 네 몸무게는 말해준 적 없어, jun. 알려주면 기억해둘게.</p><p class="q"><b>Jun:</b> 음.. 내 몸무게를 모른다고?</p><p class="a"><b>자비스:</b> 응, jun. 지금 기억된 정보에는 네 몸무게가 없어. 알려주면 다음부터 기억해서 답해줄게.</p><p class="q"><b>Jun:</b> ㅋㅋ 알려준적이 없어. 거짓말안하네~</p><p class="a"><b>자비스:</b> ㅋㅋ 그럼 당연히 모르지, jun. 모르는 건 모른다고 할게~ 지어내진 않을게.</p><p class="note">말해준 건(콩, jun)은 기억하고, 안 말해준 건(몸무게, 음식)은 지어내길 거부한다. 할루시네이션 모델이면 빈칸을 숫자로 채운다. 얜 안 그런다. 이 한 번의 대화가 thesis 전부다.</p></div></div>
+
+</div>
+
+<div class="cta">
+<a class="pri" href="https://www.youtube.com/watch?v=nbXomn_8lt4" target="_blank" rel="noopener">▶ 유튜브에서 전체 보기</a>
+<a href="/evidence/ko/">증거 감사하기 →</a>
+<a href="/docs/ko/">문서 읽기 →</a>
+<a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a>
+</div>
+
+</main>
+<footer><a href="/ko/">JARVIS CODE</a> · <a href="https://github.com/jarvis-llm-codec/jarvis-code" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.youtube.com/@JARVISLLMCODEC" target="_blank" rel="noopener">YouTube</a> · <a href="https://doi.org/10.5281/zenodo.20266424" target="_blank" rel="noopener">논문 (Zenodo)</a> · 오픈소스 · Apache-2.0</footer>
+
+<div class="agentface" aria-hidden="true"><div class="bouncer" id="jlc-bnc"><div class="face3d" id="jlc-f3d"></div></div><div class="lbl idle" id="jlc-flbl">idle</div></div>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+var player,ytReady=false;
+function onYouTubeIframeAPIReady(){player=new YT.Player('ytplayer',{events:{onReady:function(){ytReady=true;},onStateChange:onYtState}});}
+function jlcSeek(sec){sec=parseInt(sec,10);if(isNaN(sec))return;if(ytReady&&player&&player.seekTo){player.seekTo(sec,true);player.playVideo();}var w=document.getElementById('playerWrap');if(w&&window.innerWidth<=820){w.scrollIntoView({behavior:'smooth',block:'start'});}}
+document.addEventListener('click',function(e){var el=e.target.closest('[data-t]');if(!el)return;e.preventDefault();jlcSeek(el.getAttribute('data-t'));});
+var chapters=[].slice.call(document.querySelectorAll('#sidebar a.ch')),hiTimer=null;
+function onYtState(e){if(e.data===1){if(!hiTimer)hiTimer=setInterval(hiChapter,1000);}else{if(hiTimer){clearInterval(hiTimer);hiTimer=null;}}}
+function hiChapter(){if(!ytReady||!player.getCurrentTime)return;var t=player.getCurrentTime(),cur=null;chapters.forEach(function(c){if(parseInt(c.getAttribute('data-t'),10)<=t+0.4)cur=c;});chapters.forEach(function(c){c.classList.toggle('active',c===cur);});}
+(function(){
+var N=13,D=1.7,f3d=document.getElementById("jlc-f3d");if(!f3d)return;
+function bs(){var s=document.createElement("span");s.className="slot";var L=[];for(var i=0;i<N;i++){var e=document.createElement("span");e.className="layer";var t=i/(N-1),v=Math.round(244-t*216);e.style.color="rgb("+v+","+v+","+(v+6)+")";e.style.transform="translateZ("+(-i*D)+"px)";s.appendChild(e);L.push(e);}s._l=L;return s;}
+var sL=bs(),sM=bs(),sR=bs();f3d.appendChild(sL);f3d.appendChild(sM);f3d.appendChild(sR);
+function put(s,c){for(var i=0;i<s._l.length;i++)s._l[i].textContent=c;}
+function rf(e,m){put(sL,e);put(sM,m);put(sR,e);}
+var EYE={open:"○",blink:"–",focus:"●",happy:"^",startled:"!",err:"x"};
+var lb=document.getElementById("jlc-flbl");
+function sl(t){if(lb){lb.textContent=t||"idle";lb.classList.toggle("idle",!t);}}
+function seg(n,fn){var a=[];for(var i=0;i<n;i++)a.push(fn(i));return a;}
+var fr=[];
+fr=fr.concat(seg(16,function(i){var e=(i===5||i===12)?"blink":((i>=8&&i<=10)?"happy":"open");return{e:e,m:"~",l:""};}));
+var tB={3:1,11:1},tM={6:"_",7:"_",8:","};
+fr=fr.concat(seg(14,function(i){return{e:tB[i]?"blink":"open",m:tM[i]||".",l:"thinking"};}));
+fr=fr.concat(seg(8,function(){return{e:"focus",m:"-",l:"working"};}));
+var gB={4:1,12:1},gm=["~","o","~","-"];
+fr=fr.concat(seg(16,function(i){return{e:gB[i]?"blink":"open",m:gm[i%4],l:"writing"};}));
+fr=fr.concat(seg(8,function(){return{e:"happy",m:"~",l:"done"};}));
+var idx=0;
+function tick(){var f=fr[idx];rf(EYE[f.e],f.m);sl(f.l);idx=(idx+1)%fr.length;}
+var bnc=document.getElementById("jlc-bnc");if(bnc)bnc.addEventListener("click",function(){bnc.classList.remove("bounce");void bnc.offsetWidth;bnc.classList.add("bounce");});
+tick();setInterval(tick,190);
+})();
+</script></body></html>
