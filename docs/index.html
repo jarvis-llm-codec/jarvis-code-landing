@@ -271,12 +271,12 @@ two free signups.</p>
 <li><strong>Explain, in plain language, why each step matters</strong> — especially the <em>encoder</em>,
    which the user has almost certainly never heard of and will not understand without
    you explaining it.</li>
-<li><strong>Set up two free API keys</strong> (web search + image generation). These are free and
-   make a large difference; treat them as part of a normal install. Strongly
-   encourage them — but if the user declines, or a signup is blocked or no longer
-   free, note it and <strong>continue: the base install works without them</strong> and the keys
-   can be added later.</li>
-<li><strong>Verify</strong> the install actually works before you declare success.</li>
+<li><strong>Set up two free API keys</strong> (web search + image generation). These are free for
+   normal use and make a large difference; treat them as part of a normal install.
+   Strongly encourage them — but if the user declines, or a signup is blocked, note it
+   and <strong>continue: the base install works without them</strong> and the keys can be added later.</li>
+<li><strong>Verify</strong> the install actually works — including that <strong>both</strong> model roles (chat
+   <em>and</em> encoder) are set — before you declare success.</li>
 </ol>
 <p>Behavioral contract: the user may not be technical. Some steps need a human (browser
 logins, website signups, picking from a menu) — for those, tell the user <em>exactly</em>
@@ -329,6 +329,11 @@ decides which models you pick and whether they need any API keys at all:</p>
 subscription, a Claude (Anthropic) subscription, GLM / Qwen via Alibaba DashScope,
 Ollama Cloud, or something else? It's fine to have more than one."</em></p>
 </blockquote>
+<p><strong>Default — GPT.</strong> The most common case by far is a <strong>ChatGPT / OpenAI subscription</strong>,
+and a fresh install already ships defaulting to that pairing: chat
+<code>openai-codex/gpt-5.5</code> + encoder <code>openai-codex/gpt-5.4-mini</code>. So if they have GPT,
+you're mostly confirming the default. If they have something else, switch <strong>both</strong> roles
+to match it using the table below.</p>
 <p>Map their answer with this table (the recommended pairing per plan):</p>
 <p>Model ids are shown as <code>provider-id/model-id</code> — the exact form used in <code>config.yaml</code>
 (Step 3b). When setting via the menu, you pick the provider and model separately.</p>
@@ -342,7 +347,7 @@ Ollama Cloud, or something else? It's fine to have more than one."</em></p>
 </thead>
 <tbody>
 <tr>
-<td><strong>OpenAI / GPT</strong> (subscription)</td>
+<td><strong>OpenAI / GPT</strong> (subscription) — <strong>default</strong></td>
 <td><code>openai-codex/gpt-5.5</code></td>
 <td><code>openai-codex/gpt-5.4-mini</code></td>
 </tr>
@@ -353,7 +358,7 @@ Ollama Cloud, or something else? It's fine to have more than one."</em></p>
 </tr>
 <tr>
 <td><strong>Ollama Cloud</strong></td>
-<td>a frontier model (e.g. GLM-class)</td>
+<td><code>ollama-cloud/glm-5-ollama</code> (or another frontier model)</td>
 <td><code>ollama-cloud/devstral-small-2-24b-cloud</code></td>
 </tr>
 <tr>
@@ -375,6 +380,11 @@ the smallest sensible pairing. (Don't block the install on this.)</p>
 <h3>3a. Authentication (one human step)</h3>
 <p>Pick the path that matches the user's plan. <strong>The Claude path is special</strong> — read it.</p>
 <ul>
+<li><strong>OpenAI / ChatGPT subscription (default) → OAuth login.</strong> Have the user run, in the
+  terminal:
+  <code>bash
+  jarvis gpt-login</code>
+  This opens a browser. If the browser can't complete it, use <code>jarvis gpt-login-device</code>.</li>
 <li><strong>Claude (Anthropic) subscription → no API key needed.</strong> jarvis-code reuses the
   user's <strong>Claude Code</strong> OAuth via the <code>anthropic-agent-sdk</code> provider — billed to their
   subscription, no separate key. Run:
@@ -385,22 +395,56 @@ the smallest sensible pairing. (Don't block the install on this.)</p>
   (you can force this with <code>jarvis claude-login --npx</code>). The encoder on this path is
   restricted to Haiku-class on purpose, so the every-turn encoder doesn't drain their
   subscription rate limit.</li>
-<li><strong>OpenAI / ChatGPT subscription → OAuth login.</strong> Have the user run, in the terminal:
-  <code>bash
-  jarvis gpt-login</code>
-  This opens a browser. If the browser can't complete it, use <code>jarvis gpt-login-device</code>.</li>
 <li><strong>Any API-key provider</strong> (OpenAI API, Anthropic API, Gemini, DashScope, Ollama
   Cloud, OpenRouter): run <code>jarvis api-key</code> and follow the prompts, <strong>or</strong> write the key
-  directly (see "Setting keys directly" below). Key env vars:
+  directly (see below). Key env vars:
   <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code>, <code>DASHSCOPE_CODING_API_KEY</code>,
   <code>OLLAMA_API_KEY</code>, <code>OPENROUTER_API_KEY</code>.</li>
 </ul>
-<h3>3b. Pick the models</h3>
-<p>Run the model selector:</p>
+<h3>3b. Set the models — BOTH roles (this is where installs go wrong)</h3>
+<blockquote>
+<p>⚠️ <strong>The #1 mistake: setting chat but not the encoder.</strong> Logging in (e.g.
+<code>jarvis gpt-login</code>) and picking a chat model does <strong>not</strong> set the encoder — it stays
+at whatever it was before. You <strong>must</strong> set the encoder role explicitly, or the user
+ends up with the right chat model and a mismatched encoder. Set <strong>both</strong>, then
+<strong>verify both</strong> in Step 6.</p>
+</blockquote>
+<p><strong>The reliable way — write <code>config.yaml</code> directly.</strong> The most dependable method (no
+half-finished menu) is to write the full role set to <code>~/.jarvis-code/config.yaml</code>. Pick
+the block that matches the user's plan — <strong>each sets all four roles, so the encoder
+can't be left behind:</strong></p>
+<p><strong>OpenAI / GPT subscription (default):</strong></p>
+<pre><code class="language-yaml">roles:
+  chat:     openai-codex/gpt-5.5
+  subagent: openai-codex/gpt-5.5
+  encoder:  openai-codex/gpt-5.4-mini
+  router:   openai-codex/gpt-5.4-mini
+</code></pre>
+<p><strong>Claude (Anthropic) subscription:</strong></p>
+<pre><code class="language-yaml">roles:
+  chat:     anthropic-agent-sdk/claude-opus-4-8
+  subagent: anthropic-agent-sdk/claude-opus-4-8
+  encoder:  anthropic-agent-sdk/claude-haiku-4-5-20251001
+  router:   anthropic-agent-sdk/claude-haiku-4-5-20251001
+</code></pre>
+<p><strong>Ollama Cloud:</strong></p>
+<pre><code class="language-yaml">roles:
+  chat:     ollama-cloud/glm-5-ollama
+  subagent: ollama-cloud/glm-5-ollama
+  encoder:  ollama-cloud/devstral-small-2-24b-cloud
+  router:   ollama-cloud/devstral-small-2-24b-cloud
+</code></pre>
+<p>(If the live selector shows different ids for their provider, use those exact ids.)
+API keys go in <code>~/.jarvis-code/credentials.yaml</code>:</p>
+<pre><code class="language-yaml">env:
+  BRAVE_SEARCH_API_KEY: &quot;the-key&quot;
+  NVIDIA_API_KEY: &quot;nvapi-...&quot;
+</code></pre>
+<p><strong>Or drive the menu interactively:</strong></p>
 <pre><code class="language-bash">jarvis model-setting
 </code></pre>
-<p>It fetches the <strong>live</strong> model list from the provider and lets you set each <strong>role</strong>.
-The roles are:</p>
+<p>It fetches the <strong>live</strong> model list and walks you through the roles in order — <strong>chat,
+then encoder, then router</strong> — so <em>don't stop after chat.</em> Roles:</p>
 <table>
 <thead>
 <tr>
@@ -423,58 +467,49 @@ The roles are:</p>
 </tr>
 <tr>
 <td><strong>subagent</strong></td>
-<td>Runs tool subtasks and parallel workers; defaults to chat.</td>
+<td>Runs tool subtasks and parallel workers; mirror chat.</td>
 </tr>
 </tbody>
 </table>
-<p>Set <strong>chat</strong> and <strong>encoder</strong> from the table in Step 2 (router can match the encoder).
-Explain to the user <em>why</em> there are two: <em>"The smart model talks to you. A second,
+<p>Explain to the user <em>why</em> there are two: <em>"The smart model talks to you. A second,
 cheap model quietly writes down the gist after every turn so the smart one never has
 to re-read the whole conversation — that's what keeps jarvis fast and affordable in
 long sessions."</em></p>
-<blockquote>
-<p><strong>Setting keys/models directly (autonomous fallback).</strong> If you can't drive the
-interactive menus, you can edit two files under <code>~/.jarvis-code/</code>:
-- <strong>Models</strong> → <code>config.yaml</code>, using <code>provider-id/model-id</code>:
-  <code>yaml
-  roles:
-    chat:     anthropic-agent-sdk/claude-opus-4-8
-    subagent: anthropic-agent-sdk/claude-opus-4-8
-    encoder:  anthropic-agent-sdk/claude-haiku-4-5-20251001
-    router:   anthropic-agent-sdk/claude-haiku-4-5-20251001</code>
-  (GPT example: <code>openai-codex/gpt-5.5</code> + <code>openai-codex/gpt-5.4-mini</code>. Ollama-Cloud
-  encoder: <code>ollama-cloud/devstral-small-2-24b-cloud</code>.) Use the exact ids the live
-  selector shows for that provider.
-- <strong>API keys</strong> → <code>credentials.yaml</code>:
-  <code>yaml
-  env:
-    BRAVE_SEARCH_API_KEY: "the-key"
-    NVIDIA_API_KEY: "nvapi-..."</code></p>
-</blockquote>
 <hr />
-<h2>Step 4 — Web search (Brave) — free, and you really want it</h2>
-<p><strong>Set this up as a normal part of the install — really, push for it.</strong> A coding agent
-that can't search the web is badly handicapped: it can't check current docs, package
-versions, error messages, or APIs. The Brave Search API has a <strong>free tier — about
-1,000 searches per month at no charge</strong>, far more than enough for normal coding.</p>
-<p>Be upfront about the one catch: <strong>the free plan requires registering a credit/debit
-card</strong> to activate (it is not charged while you stay within the free monthly quota).
-That's the only friction. Strongly encourage the user to do it anyway — web search
-while coding is genuinely worth it. If they're not comfortable adding a card, respect
-that: note it and continue (everything else still works; the key can be added later).</p>
-<p>Tell the user, then walk them through it together:</p>
+<h2>Step 4 — Web search (Brave) — free for normal use, and you really want it</h2>
+<p><strong>Set this up as a normal part of the install — push for it.</strong> A coding agent that
+can't search the web is badly handicapped: it can't check current docs, package
+versions, error messages, or APIs.</p>
+<p><strong>Be crystal clear with the user about the cost, because it's easy to misread and
+bail.</strong> Brave's Search API gives you <strong>$5 of free search credits every month — about
+1,000 searches — at no charge.</strong> Normal coding stays well under that, so <strong>for a
+typical user it is effectively free.</strong> Two honest caveats, neither a real blocker:</p>
+<ul>
+<li><strong>A card is required to activate</strong> — for identity verification only. It is <strong>not
+  charged</strong> while you stay within the monthly free credit.</li>
+<li>You are billed <strong>only if you exceed ~1,000 searches in a month</strong> (you almost
+  certainly won't), and Brave asks for a small <strong>attribution</strong> on the free tier.</li>
+</ul>
+<blockquote>
+<p><strong>Do NOT tell the user "it costs $5."</strong> That's the common misunderstanding that makes
+people skip it. It's <strong>$5 of <em>free</em> credit</strong> — i.e. free for normal use — and the card
+is just verification, not a charge. Say it plainly so they don't bail on a cost that
+isn't there.</p>
+</blockquote>
+<p>Walk them through it together:</p>
 <ol>
 <li>Go to the <strong>Brave Search API</strong> portal: <a href="https://brave.com/search/api/">https://brave.com/search/api/</a></li>
-<li>Sign up, choose the <strong>free plan</strong> (it asks for a card to activate — free within the
-   monthly quota), and create an API key. (If the page layout has changed, search
-   "Brave Search API free tier" and find the key page.)</li>
+<li>Sign up, pick the <strong>free plan</strong> (the one with the monthly free credit — <em>not</em> a paid
+   tier), add a card to activate (not charged within the free credit), and create an
+   API key. (If the layout changed, search "Brave Search API free plan".)</li>
 <li>Give the key to jarvis-code as <code>BRAVE_SEARCH_API_KEY</code> — via <code>jarvis api-key</code>, or by
    adding it to <code>~/.jarvis-code/credentials.yaml</code> (see Step 3b).</li>
 </ol>
 <blockquote>
-<p>Why: <em>"This lets jarvis look things up on the live web while it codes — current
-versions, real docs, the exact error you're hitting. The free tier covers normal use;
-it just needs a card to activate, and won't charge you within the monthly quota."</em></p>
+<p>Say it like this: <em>"This lets jarvis search the live web while it codes — current
+versions, real docs, the exact error you're hitting. It's free for normal use: about
+1,000 searches a month at no charge, and the card is just to verify you, not to bill
+you."</em></p>
 </blockquote>
 <hr />
 <h2>Step 5 — Image generation (NVIDIA NIM) — free, worth it</h2>
@@ -502,6 +537,12 @@ exit, so a plain <code>jarvis doctor</code> would warn that it's down (expected,
 </code></pre>
 <p>It checks Python, Node, the embedding model, the provider catalog, and auth. <strong>This is
 your primary proof the install is sound.</strong></p>
+<p><strong>Verify BOTH model roles are set</strong> — this is where the common encoder bug shows up.
+Open <code>~/.jarvis-code/config.yaml</code> (or run <code>jarvis model-setting</code> and read the current
+values) and confirm <strong>chat AND encoder</strong> are both what you intended for their plan —
+e.g. for GPT, chat <code>openai-codex/gpt-5.5</code> and encoder <code>openai-codex/gpt-5.4-mini</code>. If
+the encoder is still on a default that doesn't match their plan, <strong>fix it now</strong> before
+declaring success.</p>
 <p>Then launch jarvis — this starts the agent <em>and</em> its background sidecar:</p>
 <pre><code class="language-bash">jarvis
 </code></pre>
@@ -509,20 +550,23 @@ your primary proof the install is sound.</strong></p>
 <pre><code class="language-powershell">Invoke-RestMethod http://127.0.0.1:8765/status | ConvertTo-Json -Depth 6
 </code></pre>
 <p>(The sidecar listens on port <strong>8765</strong> by default; <code>GET /health</code> returns <code>{"ok": true}</code>.)</p>
-<p><strong>Report honestly to the user:</strong> what installed, which chat + encoder models you set,
-whether web search and image keys are configured, and the result of <code>jarvis doctor</code>.
-If anything failed, say so and what you'll try next — do not report success you didn't
-verify.</p>
+<p><strong>Report honestly to the user:</strong> what installed, <strong>which chat and encoder models are
+set</strong> (name both), whether web search and image keys are configured, and the result of
+<code>jarvis doctor</code>. If anything failed, say so and what you'll try next — do not report
+success you didn't verify.</p>
 <hr />
 <h2>If something goes wrong</h2>
 <ul>
 <li>Embedding model didn't download → <code>jarvis doctor --preload-embedder</code>.</li>
 <li>A provider shows "unavailable, retry" → its live <code>/models</code> fetch failed; check the
   key and network, then reopen <code>jarvis model-setting</code>.</li>
+<li>Chat works but memory seems off → the encoder is probably still on the wrong model;
+  re-check <code>roles.encoder</code> in <code>config.yaml</code> (Step 3b / Step 6).</li>
 <li>General diagnosis → <code>jarvis doctor</code> first; deeper notes are in the project's
   <code>troubleshooting</code> doc on GitHub.</li>
 </ul>
-<p>When all six steps are done and <code>jarvis doctor</code> passes, the install is complete.</p></section><section id="concepts"><h1>Core concepts</h1>
+<p>When all six steps are done, <code>jarvis doctor</code> passes, and <strong>both chat and encoder</strong> are
+set for the user's plan, the install is complete.</p></section><section id="concepts"><h1>Core concepts</h1>
 <p>The vocabulary JARVIS CODE uses, defined once. If a term in another doc is unclear, it's probably here.</p>
 <hr />
 <h2>Two kinds of memory</h2>
